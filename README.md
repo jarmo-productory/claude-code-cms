@@ -47,6 +47,24 @@ npm run dev
 
 You'll see a working SaaS landing page with placeholder content. Replace `[PLACEHOLDER]` values with your own content.
 
+### Need Help? Just Ask Claude Code!
+
+Once you've cloned the repo, open it with Claude Code and ask anything. The `CLAUDE.md` file teaches Claude about this project's structure, agents, and workflows.
+
+**Example questions to get started:**
+
+```
+"Explain this project structure to me"
+"How do I change the brand colors?"
+"Help me add a new blog post"
+"I want to add a contact form - let's start a sprint"
+"How does the i18n routing work?"
+"Show me the available UI components"
+"What agents are available and what do they do?"
+```
+
+Claude Code reads the project context and gives you tailored guidance - no need to dig through docs yourself.
+
 ## Claude Code Agents
 
 When you use Claude Code in this project, specialized agents activate based on your request:
