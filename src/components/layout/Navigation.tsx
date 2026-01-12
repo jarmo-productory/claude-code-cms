@@ -12,6 +12,7 @@ export function Navigation() {
     { href: `/${lang}/#features`, label: t('Teenused', 'Features') },
     { href: `/${lang}/#pricing`, label: t('Hinnad', 'Pricing') },
     { href: `/${lang}/blog`, label: t('Blogi', 'Blog') },
+    { href: '/styleguide', label: 'Styleguide' },
   ]
 
   return (
