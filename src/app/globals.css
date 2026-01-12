@@ -1,0 +1,45 @@
+@import "tailwindcss";
+
+@theme {
+  /* Brand colors - CUSTOMIZE THESE */
+  --color-brand-dark: #1e1b4b;
+  --color-brand-primary: #4338ca;
+  --color-brand-secondary: #2dd4bf;
+  --color-brand-accent: #d946ef;
+  --color-brand-surface: #f8fafc;
+
+  /* Typography */
+  --font-sans: var(--font-sofia), system-ui, sans-serif;
+  --font-display: var(--font-space), system-ui, sans-serif;
+
+  /* Gradients */
+  --background-image-brand-gradient: linear-gradient(135deg, var(--color-brand-secondary), var(--color-brand-primary), var(--color-brand-accent));
+  --background-image-brand-mesh: radial-gradient(at 40% 20%, var(--color-brand-secondary) 0px, transparent 50%), radial-gradient(at 80% 0%, var(--color-brand-primary) 0px, transparent 50%), radial-gradient(at 0% 50%, var(--color-brand-accent) 0px, transparent 50%);
+
+  /* Shadows */
+  --shadow-brand: 0 4px 14px 0 rgba(67, 56, 202, 0.25);
+
+  /* Animations */
+  --animate-fade-in: fade-in 0.5s ease-out forwards;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Base styles */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
