@@ -1,21 +1,39 @@
 # Claude Code CMS
 
-A Next.js 15 starter kit with Claude Code integration, multilingual support, and markdown-based content management.
+A Next.js 15 starter kit designed for **AI-assisted web development** with Claude Code. Build marketing websites, blogs, and landing pages with expert AI agents guiding your workflow.
+
+**Production example:** [productory.ai](https://www.productory.ai) - Built and maintained using this starter kit.
+
+## Why This Starter?
+
+Modern web development with AI assistance requires more than just code completion. This starter provides:
+
+- **Expert AI Agents** - Specialized agents for sprint planning, SEO, frontend development, and quality assurance
+- **Domain Knowledge (Skills)** - Pre-configured knowledge about your brand system, component patterns, and homepage structures
+- **Approval Workflows** - Built-in gates to ensure AI follows your process before writing code
+- **Markdown Content** - Write blog posts in markdown, get SEO-optimized pages automatically
+
+### Works Best With
+
+**[Ritemark](https://ritemark.app)** - A native markdown editor for macOS that pairs perfectly with this workflow. Write your blog content in Ritemark, save to `src/content/blog/`, and watch your site update instantly.
 
 ## Features
 
-- **Next.js 15** with App Router and React 19
-- **Tailwind CSS v4** with customizable brand tokens
-- **Claude Code integration** with expert agents and skills
-- **File-based i18n** (/et/, /en/) for SEO-friendly URLs
-- **Markdown blog** with frontmatter and TOC extraction
-- **Sprint workflow** with approval gates
+| Feature | Description |
+|---------|-------------|
+| **Next.js 15** | App Router, React 19, static export for any host |
+| **Tailwind CSS v4** | Brand tokens, custom theme, modern styling |
+| **Claude Code Integration** | 6 expert agents + 4 skills + 3 commands |
+| **Multilingual (i18n)** | File-based routing (`/et/`, `/en/`) for SEO |
+| **Markdown Blog** | Frontmatter, TOC extraction, reading time |
+| **Component Library** | Buttons, cards, badges, section headers |
+| **Landing Page Sections** | Hero, features, pricing, testimonials, CTA |
 
 ## Quick Start
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/claude-code-cms.git my-project
+git clone https://github.com/jarmo-productory/claude-code-cms.git my-project
 cd my-project
 
 # Install dependencies
@@ -27,107 +45,138 @@ npm run dev
 # Open http://localhost:3000
 ```
 
+You'll see a working SaaS landing page with placeholder content. Replace `[PLACEHOLDER]` values with your own content.
+
+## Claude Code Agents
+
+When you use Claude Code in this project, specialized agents activate based on your request:
+
+| Agent | Triggers | Purpose |
+|-------|----------|---------|
+| `sprint-manager` | "sprint", "phase", "approved" | 6-phase workflow with approval gates |
+| `frontend-expert` | "build", "create", "component" | UI implementation |
+| `seo-specialist` | "SEO", "keywords", "meta tags" | Search optimization |
+| `qa-validator` | "commit", "push", "done" | Quality checks before commits |
+| `blog-writer` | "blog post", "write article" | Content creation |
+| `strategic-advisor` | "strategy", "plan content" | Business guidance |
+
+### Example Workflow
+
+```
+You: "Let's start a sprint to add a contact form"
+
+Claude: [sprint-manager activates]
+        "I'll create a sprint plan. Here's Phase 1: Research..."
+
+You: "approved"
+
+Claude: [frontend-expert activates]
+        "Creating the ContactForm component..."
+
+You: "commit this"
+
+Claude: [qa-validator activates]
+        "Running quality checks before commit..."
+```
+
 ## Customization
 
-### 1. Brand Colors
+### Brand Colors
 
 Edit `src/app/globals.css`:
 
 ```css
 @theme {
-  --color-brand-dark: #1e1b4b;      /* Your dark color */
-  --color-brand-primary: #4338ca;   /* Your primary color */
-  --color-brand-secondary: #2dd4bf; /* Your accent color */
-  --color-brand-accent: #d946ef;    /* Your CTA color */
-  --color-brand-surface: #f8fafc;   /* Your light surface */
+  --color-brand-dark: #1e1b4b;      /* Dark backgrounds */
+  --color-brand-primary: #4338ca;   /* Primary actions */
+  --color-brand-secondary: #2dd4bf; /* Accents */
+  --color-brand-accent: #d946ef;    /* CTAs */
+  --color-brand-surface: #f8fafc;   /* Light surfaces */
 }
 ```
 
-### 2. Project Configuration
+### Project Configuration
 
-Update `CLAUDE.md` with your project details:
-- Replace `[PROJECT_NAME]` placeholders
-- Add your team members
-- Update URLs and repository links
+Update `CLAUDE.md` with your project details - this file tells Claude Code about your project, team, and workflows.
 
-### 3. Content
+### Content
 
-- **Homepage sections**: Edit components in `src/components/sections/`
-- **Blog posts**: Add markdown files to `src/content/blog/`
-- **Navigation**: Update `src/components/layout/Navigation.tsx`
+| What | Where |
+|------|-------|
+| Homepage sections | `src/components/sections/` |
+| Blog posts | `src/content/blog/` |
+| Navigation | `src/components/layout/Navigation.tsx` |
+| Footer | `src/components/layout/Footer.tsx` |
 
 ## Project Structure
 
 ```
-├── .claude/                 # Claude Code configuration
-│   ├── agents/             # Expert agents (sprint-manager, qa-validator, etc.)
-│   ├── skills/             # Domain knowledge (CVI, homepage patterns)
-│   └── commands/           # Slash commands (/rundev, /publish)
+├── .claude/
+│   ├── agents/         # AI expert agents
+│   ├── skills/         # Domain knowledge
+│   └── commands/       # Slash commands
 ├── src/
-│   ├── app/                # Next.js App Router pages
-│   │   ├── [locale]/       # Locale-specific routes
-│   │   └── styleguide/     # Component showcase
+│   ├── app/
+│   │   ├── [locale]/   # Locale routes (/et/, /en/)
+│   │   └── styleguide/ # Component showcase
 │   ├── components/
-│   │   ├── ui/             # Base components (Button, Card, etc.)
-│   │   ├── sections/       # Homepage sections
-│   │   └── layout/         # Navigation, Footer
-│   ├── content/            # Markdown content
-│   │   └── blog/           # Blog posts
-│   ├── context/            # React context (LanguageContext)
-│   └── lib/                # Utilities (content, SEO, markdown)
-├── CLAUDE.md               # Project instructions for Claude
+│   │   ├── ui/         # Base components
+│   │   ├── sections/   # Landing page sections
+│   │   └── layout/     # Navigation, Footer
+│   ├── content/blog/   # Markdown blog posts
+│   └── lib/            # Utilities
+├── CLAUDE.md           # AI instructions
 └── package.json
 ```
 
-## Available Scripts
+## Commands
+
+### npm Scripts
 
 ```bash
-npm run dev          # Start development server
-npm run build        # Production build
-npm run lint         # Run ESLint
-npm run start        # Start production server
+npm run dev      # Development server
+npm run build    # Production build (static export)
+npm run lint     # ESLint
 ```
 
-## Claude Code Commands
+### Claude Code Commands
 
-When using Claude Code in this project:
+```
+/rundev          # Restart dev server (kills port 3000 first)
+/publish         # Commit and push changes
+/new-section     # Create new homepage section
+```
 
-- `/rundev` - Kill port 3000 and restart dev server
-- `/publish` - Commit and push changes
-- `/new-section [name]` - Create new homepage section
+## Blog Posts
 
-## Adding Blog Posts
-
-Create a markdown file in `src/content/blog/`:
+Create markdown files in `src/content/blog/`:
 
 ```yaml
 ---
 title: Your Post Title
 slug: your-post-slug
-description: A brief description for SEO
+description: SEO description
 date: '2026-01-12'
-category: news
-image: /images/blog/your-image.jpg
 author: your-name
 lang: en
-tags:
-  - tag1
-  - tag2
+tags: [tag1, tag2]
 ---
 
-# Your content here...
+Your content here...
 ```
 
-## i18n
+## Deployment
 
-Routes are locale-prefixed:
-- `/et/` - Estonian
-- `/en/` - English
+Built for static export - deploy anywhere:
 
-The `LanguageContext` provides:
-- `lang` - Current language
-- `setLang` - Change language
-- `t(et, en)` - Translation helper
+- **Netlify** - `npm run build`, publish `out/`
+- **Vercel** - Works out of the box
+- **Cloudflare Pages** - Static hosting
+- **GitHub Pages** - Free hosting
+
+## Contributing
+
+This starter evolved from building [productory.ai](https://www.productory.ai). Contributions welcome!
 
 ## License
 
