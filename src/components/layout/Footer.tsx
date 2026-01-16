@@ -1,100 +1,246 @@
+'use client'
+
 import Link from 'next/link'
+import Image from 'next/image'
+import { usePathname } from 'next/navigation'
 
-interface FooterProps {
-  lang?: 'et' | 'en'
-}
-
-export function Footer({ lang = 'et' }: FooterProps) {
-  const t = (et: string, en: string) => (lang === 'et' ? et : en)
-
+export function Footer() {
+  const pathname = usePathname()
   const currentYear = new Date().getFullYear()
 
+  // Languages config
+  const languages = [
+    { code: 'en', label: 'English' },
+    { code: 'et', label: 'Eesti' },
+    { code: 'lv', label: 'Latviešu' },
+    { code: 'uk', label: 'Українська' },
+  ]
+
+  // Determine current language
+  const currentLangCode = languages.find(l => pathname?.startsWith(`/${l.code}`))?.code || 'en'
+
+  // Translations
+  const dictionary = {
+    en: {
+      madeIn: 'Made in Estonia',
+      home: 'HOME',
+      pricing: 'PRICING',
+      contact: 'CONTACT US',
+      resources: 'Resources',
+      gettingStarted: 'Getting started',
+      knowledgeBase: 'Knowledge base',
+      blog: 'Blog',
+      caseStudies: 'Case studies',
+      signingGuide: 'Electronic signing guide',
+      automationGuide: 'Document and process automation guide',
+      articles: 'Articles',
+      language: 'Language',
+      copyright: 'All rights reserved.',
+      terms: 'Terms and conditions',
+      privacy: 'Privacy policy',
+    },
+    et: {
+      madeIn: 'Tehtud Eestis',
+      home: 'AVALEHT',
+      pricing: 'HINNAD',
+      contact: 'VÕTA ÜHENDUST',
+      resources: 'Ressursid',
+      gettingStarted: 'Alustamine',
+      knowledgeBase: 'Teadmistebaas',
+      blog: 'Blogi',
+      caseStudies: 'Edulood',
+      signingGuide: 'Elektroonilise allkirjastamise juhend',
+      automationGuide: 'Dokumentide ja protsesside automatiseerimise juhend',
+      articles: 'Artiklid',
+      language: 'Keel',
+      copyright: 'Kõik õigused kaitstud.',
+      terms: 'Kasutustingimused',
+      privacy: 'Privaatsuspoliitika',
+    },
+    lv: {
+      madeIn: 'Ražots Igaunijā',
+      home: 'SĀKUMS',
+      pricing: 'CENAS',
+      contact: 'SAZINĀTIES',
+      resources: 'Resursi',
+      gettingStarted: 'Darba sākšana',
+      knowledgeBase: 'Zināšanu bāze',
+      blog: 'Blogs',
+      caseStudies: 'Veiksmes stāsti',
+      signingGuide: 'Elektroniskās parakstīšanas ceļvedis',
+      automationGuide: 'Dokumentu un procesu automatizācijas ceļvedis',
+      articles: 'Raksti',
+      language: 'Valoda',
+      copyright: 'Visas tiesības aizsargātas.',
+      terms: 'Lietošanas noteikumi',
+      privacy: 'Privātuma politika',
+    },
+    uk: {
+      madeIn: 'Зроблено в Естонії',
+      home: 'ГОЛОВНА',
+      pricing: 'ЦІНИ',
+      contact: 'КОНТАКТИ',
+      resources: 'Ресурси',
+      gettingStarted: 'Початок роботи',
+      knowledgeBase: 'База знань',
+      blog: 'Блог',
+      caseStudies: 'Історії успіху',
+      signingGuide: 'Посібник з електронного підпису',
+      automationGuide: 'Посібник з автоматизації документів',
+      articles: 'Статті',
+      language: 'Мова',
+      copyright: 'Всі права захищені.',
+      terms: 'Умови використання',
+      privacy: 'Політика конфіденційності',
+    },
+  }[currentLangCode as keyof typeof dictionary] || dictionary['en']
+
+  // Social Links
+  const socialLinks = [
+    { name: 'Facebook', href: '#', icon: '/images/footer/facebook.svg' },
+    { name: 'Twitter', href: '#', icon: '/images/footer/twitter.svg' },
+    { name: 'LinkedIn', href: '#', icon: '/images/footer/linkedin.svg' },
+  ]
+
+  // Navigation Columns
+  const navigation = {
+    company: [
+      { name: dictionary.home, href: `/${currentLangCode}` },
+      { name: dictionary.pricing, href: `/${currentLangCode}/pricing` },
+      { name: dictionary.contact, href: `/${currentLangCode}/contact` },
+      { name: dictionary.blog, href: `/${currentLangCode}/blog` },
+    ],
+    resources: [
+      { name: dictionary.gettingStarted, href: `/${currentLangCode}/resources/getting-started` },
+      { name: dictionary.knowledgeBase, href: `/${currentLangCode}/help` },
+      { name: dictionary.caseStudies, href: `/${currentLangCode}/case-studies` },
+      { name: dictionary.signingGuide, href: `/${currentLangCode}/guides/signing` },
+      { name: dictionary.automationGuide, href: `/${currentLangCode}/guides/automation` },
+      { name: dictionary.articles, href: `/${currentLangCode}/articles` },
+    ],
+  }
+
   return (
-    <footer className="bg-brand-dark border-t border-white/10 py-12">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid md:grid-cols-4 gap-8">
-          {/* Logo & Description */}
-          <div className="md:col-span-2">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-8 h-8 bg-brand-gradient rounded-lg flex items-center justify-center text-white font-bold">
-                C
+    <footer className="bg-gray-900 pt-16 pb-8">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-8 mb-16">
+          {/* Column 1: Brand, Social, Trust */}
+          <div className="space-y-8">
+            <div className="flex items-center gap-4">
+              <Link href={`/${currentLangCode}`}>
+                <Image
+                  src="/logo-white.svg"
+                  alt="Agrello"
+                  width={120}
+                  height={32}
+                  className="h-8 w-auto"
+                />
+              </Link>
+              <Image
+                src="/images/footer/heart.svg"
+                alt="Made in Estonia"
+                width={24}
+                height={24}
+                className="h-6 w-auto"
+              />
+              <span className="text-white text-base">{dictionary.madeIn}</span>
+            </div>
+
+            <div className="flex gap-4">
+              {socialLinks.map((item) => (
+                <a
+                  key={item.name}
+                  href={item.href}
+                  className="w-10 h-10 rounded-full bg-gray-500 flex items-center justify-center hover:bg-white transition-colors group"
+                  aria-label={item.name}
+                >
+                  <Image
+                    src={item.icon}
+                    alt={item.name}
+                    width={20}
+                    height={20}
+                    className="opacity-80 group-hover:opacity-100 group-hover:brightness-0" 
+                  />
+                </a>
+              ))}
+            </div>
+
+            <div className="flex flex-wrap items-center gap-6">
+              <div className="inline-block">
+                 <Image 
+                   src="/images/footer/eidas.png"
+                   alt="eIDAS compliant e-signatures"
+                   width={160}
+                   height={60}
+                   className="h-12 w-auto"
+                 />
               </div>
-              <span className="text-white font-display font-semibold text-lg">
-                [YOUR_BRAND]
-              </span>
+              <Image
+                src="/images/footer/commerce.svg"
+                alt="Eesti Kaubandus-Tööstuskoda"
+                width={100}
+                height={100}
+                className="h-20 w-auto opacity-80 hover:opacity-100 transition-opacity"
+              />
             </div>
-            <p className="text-white/60 max-w-md">
-              [YOUR_COMPANY_DESCRIPTION] - A brief description of what your
-              company does and the value you provide to customers.
-            </p>
           </div>
 
-          {/* Links */}
+          {/* Column 2: Company */}
           <div>
-            <h4 className="text-white font-semibold mb-4">
-              {t('Teenused', 'Services')}
-            </h4>
-            <ul className="space-y-2">
-              <li>
-                <Link href={`/${lang}/#features`} className="text-white/60 hover:text-white transition-colors">
-                  {t('Funktsioonid', 'Features')}
-                </Link>
-              </li>
-              <li>
-                <Link href={`/${lang}/#pricing`} className="text-white/60 hover:text-white transition-colors">
-                  {t('Hinnad', 'Pricing')}
-                </Link>
-              </li>
-              <li>
-                <Link href={`/${lang}/blog`} className="text-white/60 hover:text-white transition-colors">
-                  {t('Blogi', 'Blog')}
-                </Link>
-              </li>
+             <h3 className="text-white/80 font-bold uppercase tracking-wide text-sm mb-6">Company</h3>
+            <ul className="space-y-4">
+              {navigation.company.map((item) => (
+                <li key={item.name}>
+                  <Link 
+                    href={item.href} 
+                    className="text-white/80 font-bold uppercase tracking-wide hover:text-brand-primary transition-colors text-sm"
+                  >
+                    {item.name}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
-          {/* Contact */}
+          {/* Column 3: Resources */}
           <div>
-            <h4 className="text-white font-semibold mb-4">
-              {t('Kontakt', 'Contact')}
-            </h4>
-            <ul className="space-y-2 text-white/60">
-              <li>hello@example.com</li>
-              <li>[Your City, Country]</li>
+            <h3 className="text-white/80 font-bold uppercase tracking-wide text-sm mb-6">{dictionary.resources}</h3>
+            <ul className="space-y-3">
+              {navigation.resources.map((item) => (
+                <li key={item.name}>
+                  <Link 
+                    href={item.href} 
+                    className="text-gray-400 hover:text-white transition-colors"
+                  >
+                    {item.name}
+                  </Link>
+                </li>
+              ))}
             </ul>
-            <div className="flex gap-4 mt-4">
-              {/* Social Links - Replace with your actual links */}
-              <a href="#" className="text-white/60 hover:text-white transition-colors" aria-label="Twitter">
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-                </svg>
-              </a>
-              <a href="#" className="text-white/60 hover:text-white transition-colors" aria-label="LinkedIn">
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-                </svg>
-              </a>
-              <a href="#" className="text-white/60 hover:text-white transition-colors" aria-label="GitHub">
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                  <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
-                </svg>
-              </a>
-            </div>
           </div>
         </div>
 
-        {/* Bottom */}
-        <div className="border-t border-white/10 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-white/40 text-sm">
-            © {currentYear} [YOUR_COMPANY]. {t('Kõik õigused kaitstud.', 'All rights reserved.')}
+        {/* Bottom Bar */}
+        <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-500">
+          <p>
+            Copyright © Agrello {currentYear}. {dictionary.copyright} <Link href={`/${currentLangCode}/terms`} className="underline hover:text-gray-300">{dictionary.terms}</Link>. <Link href={`/${currentLangCode}/privacy`} className="underline hover:text-gray-300">{dictionary.privacy}</Link>.
           </p>
-          <div className="flex gap-6">
-            <Link href={`/${lang}/privacy`} className="text-white/40 hover:text-white transition-colors text-sm">
-              {t('Privaatsuspoliitika', 'Privacy Policy')}
-            </Link>
-            <Link href={`/${lang}/terms`} className="text-white/40 hover:text-white transition-colors text-sm">
-              {t('Tingimused', 'Terms')}
-            </Link>
+          
+          {/* Language Switcher */}
+          <div className="flex items-center gap-4">
+            {languages.map((lang, index) => (
+              <div key={lang.code} className="flex items-center">
+                {index > 0 && <span className="text-gray-700 mr-4">|</span>}
+                <Link
+                  href={`/${lang.code}`}
+                  className={`uppercase hover:text-white transition-colors ${
+                    lang.code === currentLangCode ? 'text-white font-bold' : 'text-gray-500'
+                  }`}
+                >
+                  {lang.label}
+                </Link>
+              </div>
+            ))}
           </div>
         </div>
       </div>

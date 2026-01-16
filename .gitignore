@@ -44,3 +44,5 @@ public/images/generated/*
 *.docx
 *.xlsx
 *.pptx
+
+.early.coverage

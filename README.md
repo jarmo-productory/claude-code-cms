@@ -1,130 +1,51 @@
-# Claude Code CMS
+# Agrello Website
 
-A Next.js 15 starter kit designed for **AI-assisted web development** with Claude Code. Build marketing websites, blogs, and landing pages with expert AI agents guiding your workflow.
+Marketing website for **Agrello** - a secure e-signature and contract management platform for SMEs. Built with Next.js 15 and managed via Claude Code.
 
-**Production example:** [productory.ai](https://www.productory.ai) - Built and maintained using this starter kit.
+**Live site:** [www.agrello.io](https://www.agrello.io) (currently on Webflow - migrating here)
 
-## Why This Starter?
+## About Agrello
 
-Modern web development with AI assistance requires more than just code completion. This starter provides:
+Agrello is a web-based contract management and e-signature platform that digitizes the entire contract lifecycle. The platform enables businesses to create, sign, and manage legally-binding agreements with automation and security.
 
-- **Expert AI Agents** - Specialized agents for sprint planning, SEO, frontend development, and quality assurance
-- **Domain Knowledge (Skills)** - Pre-configured knowledge about your brand system, component patterns, and homepage structures
-- **Approval Workflows** - Built-in gates to ensure AI follows your process before writing code
-- **Markdown Content** - Write blog posts in markdown, get SEO-optimized pages automatically
+### Target Audience
+- Small and medium-sized enterprises (SMEs)
+- Companies handling high volumes of standardized contracts
+- Businesses moving away from manual Word/Excel/email workflows
 
-### Works Best With
+### Key Features
+- **Contract Creation & Automation** - Bulk generation with Word templates + Excel data
+- **Contract Management** - Centralized storage, Kanban views, renewal tracking
+- **E-Signatures** - UK/EU compliant, audit trails, bulk signing
+- **Integrations** - Zapier, API, SharePoint, Google Drive, HubSpot
 
-**[Ritemark](https://ritemark.app)** - A native markdown editor for macOS that pairs perfectly with this workflow. Write your blog content in Ritemark, save to `src/content/blog/`, and watch your site update instantly.
+### Value Proposition
+- 60% reduction in contract signing time
+- Eliminates printing, scanning, posting
+- Enterprise-grade security with eIDAS compliance
 
-## Features
+## Tech Stack
 
-| Feature | Description |
-|---------|-------------|
-| **Next.js 15** | App Router, React 19, static export for any host |
-| **Tailwind CSS v4** | Brand tokens, custom theme, modern styling |
-| **Claude Code Integration** | 6 expert agents + 4 skills + 3 commands |
-| **Multilingual (i18n)** | File-based routing (`/et/`, `/en/`) for SEO |
-| **Markdown Blog** | Frontmatter, TOC extraction, reading time |
-| **Component Library** | Buttons, cards, badges, section headers |
-| **Landing Page Sections** | Hero, features, pricing, testimonials, CTA |
+| Component | Choice |
+|-----------|--------|
+| Framework | Next.js 15 (App Router) |
+| Components | React 19 |
+| Styling | Tailwind CSS v4 |
+| Content | Markdown + frontmatter |
+| i18n | File-based (`/et/`, `/en/`) |
 
-## Quick Start
+## Development
 
 ```bash
-# Clone the repository
-git clone https://github.com/jarmo-productory/claude-code-cms.git my-project
-cd my-project
-
 # Install dependencies
 npm install
 
-# Start development server
-npm run dev
+# Start dev server (port 3001)
+PORT=3001 npm run dev
 
-# Open http://localhost:3000
+# Build for production
+npm run build
 ```
-
-You'll see a working SaaS landing page with placeholder content. Replace `[PLACEHOLDER]` values with your own content.
-
-### Need Help? Just Ask Claude Code!
-
-Once you've cloned the repo, open it with Claude Code and ask anything. The `CLAUDE.md` file teaches Claude about this project's structure, agents, and workflows.
-
-**Example questions to get started:**
-
-```
-"Explain this project structure to me"
-"How do I change the brand colors?"
-"Help me add a new blog post"
-"I want to add a contact form - let's start a sprint"
-"How does the i18n routing work?"
-"Show me the available UI components"
-"What agents are available and what do they do?"
-```
-
-Claude Code reads the project context and gives you tailored guidance - no need to dig through docs yourself.
-
-## Claude Code Agents
-
-When you use Claude Code in this project, specialized agents activate based on your request:
-
-| Agent | Triggers | Purpose |
-|-------|----------|---------|
-| `sprint-manager` | "sprint", "phase", "approved" | 6-phase workflow with approval gates |
-| `frontend-expert` | "build", "create", "component" | UI implementation |
-| `seo-specialist` | "SEO", "keywords", "meta tags" | Search optimization |
-| `qa-validator` | "commit", "push", "done" | Quality checks before commits |
-| `blog-writer` | "blog post", "write article" | Content creation |
-| `strategic-advisor` | "strategy", "plan content" | Business guidance |
-
-### Example Workflow
-
-```
-You: "Let's start a sprint to add a contact form"
-
-Claude: [sprint-manager activates]
-        "I'll create a sprint plan. Here's Phase 1: Research..."
-
-You: "approved"
-
-Claude: [frontend-expert activates]
-        "Creating the ContactForm component..."
-
-You: "commit this"
-
-Claude: [qa-validator activates]
-        "Running quality checks before commit..."
-```
-
-## Customization
-
-### Brand Colors
-
-Edit `src/app/globals.css`:
-
-```css
-@theme {
-  --color-brand-dark: #1e1b4b;      /* Dark backgrounds */
-  --color-brand-primary: #4338ca;   /* Primary actions */
-  --color-brand-secondary: #2dd4bf; /* Accents */
-  --color-brand-accent: #d946ef;    /* CTAs */
-  --color-brand-surface: #f8fafc;   /* Light surfaces */
-}
-```
-
-### Project Configuration
-
-Update `CLAUDE.md` with your project details - this file tells Claude Code about your project, team, and workflows.
-
-### Content
-
-| What | Where |
-|------|-------|
-| Homepage sections | `src/components/sections/` |
-| Blog posts | `src/content/blog/` |
-| Navigation | `src/components/layout/Navigation.tsx` |
-| Footer | `src/components/layout/Footer.tsx` |
 
 ## Project Structure
 
@@ -134,68 +55,25 @@ Update `CLAUDE.md` with your project details - this file tells Claude Code about
 │   ├── skills/         # Domain knowledge
 │   └── commands/       # Slash commands
 ├── src/
-│   ├── app/
-│   │   ├── [locale]/   # Locale routes (/et/, /en/)
-│   │   └── styleguide/ # Component showcase
-│   ├── components/
-│   │   ├── ui/         # Base components
-│   │   ├── sections/   # Landing page sections
-│   │   └── layout/     # Navigation, Footer
-│   ├── content/blog/   # Markdown blog posts
+│   ├── app/            # Next.js pages
+│   ├── components/     # React components
+│   ├── content/        # Markdown content
 │   └── lib/            # Utilities
-├── CLAUDE.md           # AI instructions
-└── package.json
+├── docs/
+│   └── roadmap.md      # Migration roadmap
+└── CLAUDE.md           # AI instructions
 ```
 
-## Commands
+## Documentation
 
-### npm Scripts
+- [Migration Roadmap](docs/roadmap.md) - Plan for Webflow to Next.js migration
+- [CLAUDE.md](CLAUDE.md) - AI agent instructions and workflows
 
-```bash
-npm run dev      # Development server
-npm run build    # Production build (static export)
-npm run lint     # ESLint
-```
+## Team
 
-### Claude Code Commands
-
-```
-/rundev          # Restart dev server (kills port 3000 first)
-/publish         # Commit and push changes
-/new-section     # Create new homepage section
-```
-
-## Blog Posts
-
-Create markdown files in `src/content/blog/`:
-
-```yaml
----
-title: Your Post Title
-slug: your-post-slug
-description: SEO description
-date: '2026-01-12'
-author: your-name
-lang: en
-tags: [tag1, tag2]
----
-
-Your content here...
-```
-
-## Deployment
-
-Built for static export - deploy anywhere:
-
-- **Netlify** - `npm run build`, publish `out/`
-- **Vercel** - Works out of the box
-- **Cloudflare Pages** - Static hosting
-- **GitHub Pages** - Free hosting
-
-## Contributing
-
-This starter evolved from building [productory.ai](https://www.productory.ai). Contributions welcome!
+- **Jarmo** - Product Owner
+- **Claude Code** - Engineering (via expert agents)
 
 ## License
 
-MIT
+Proprietary - Agrello
