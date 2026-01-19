@@ -24,7 +24,20 @@ export function Navigation({ isStatic = false }: { isStatic?: boolean }) {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [isStatic])
 
-  const languages = [
+  type Lang = 'en' | 'et' | 'lv' | 'uk'
+  type Dictionary = {
+    features: string
+    pricing: string
+    resources: string
+    blog: string
+    help: string
+    api: string
+    contact: string
+    login: string
+    signup: string
+  }
+
+  const languages: Array<{ code: Lang; flag: string; label: string }> = [
     { code: 'en', flag: '/flags/gb.svg', label: 'English' },
     { code: 'et', flag: '/flags/ee.svg', label: 'Eesti' },
     { code: 'lv', flag: '/flags/lv.svg', label: 'Latviešu' },
@@ -32,10 +45,10 @@ export function Navigation({ isStatic = false }: { isStatic?: boolean }) {
   ]
 
   // Determine current language from path or default to English
-  const currentLangCode = languages.find(l => pathname?.startsWith(`/${l.code}`))?.code || 'en'
+  const currentLangCode: Lang = languages.find(l => pathname?.startsWith(`/${l.code}`))?.code ?? 'en'
   const currentLang = languages.find(l => l.code === currentLangCode) || languages[0]
 
-  const dictionary = {
+  const dictionaries: Record<Lang, Dictionary> = {
     en: {
       features: 'Features',
       pricing: 'Pricing',
@@ -80,7 +93,9 @@ export function Navigation({ isStatic = false }: { isStatic?: boolean }) {
       login: 'Увійти',
       signup: 'Спробувати',
     },
-  }[currentLangCode as keyof typeof dictionary] || dictionary['en']
+  }
+
+  const dictionary = dictionaries[currentLangCode] ?? dictionaries.en
 
   const navItems = [
     { href: `/${currentLangCode}/features`, label: dictionary.features },
@@ -130,7 +145,10 @@ export function Navigation({ isStatic = false }: { isStatic?: boolean }) {
             {/* Resources Dropdown */}
             <div className="relative">
               <button
-                onClick={() => setLanguageMenuOpen(false) || setResourcesOpen(!resourcesOpen)}
+                onClick={() => {
+                  setLanguageMenuOpen(false)
+                  setResourcesOpen(!resourcesOpen)
+                }}
                 onBlur={() => setTimeout(() => setResourcesOpen(false), 150)}
                 className="flex items-center gap-1 text-gray-700 hover:text-brand-primary transition-colors text-sm font-medium cursor-pointer"
               >
@@ -173,7 +191,10 @@ export function Navigation({ isStatic = false }: { isStatic?: boolean }) {
             {/* Language Dropdown */}
             <div className="relative">
               <button
-                onClick={() => setResourcesOpen(false) || setLanguageMenuOpen(!languageMenuOpen)}
+                onClick={() => {
+                  setResourcesOpen(false)
+                  setLanguageMenuOpen(!languageMenuOpen)
+                }}
                 onBlur={() => setTimeout(() => setLanguageMenuOpen(false), 150)}
                 className="flex items-center gap-2 py-1.5 px-2 rounded-lg hover:bg-gray-100 transition-colors cursor-pointer"
               >

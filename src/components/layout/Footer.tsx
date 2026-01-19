@@ -9,7 +9,27 @@ export function Footer() {
   const currentYear = new Date().getFullYear()
 
   // Languages config
-  const languages = [
+  type Lang = 'en' | 'et' | 'lv' | 'uk'
+  type Dictionary = {
+    madeIn: string
+    home: string
+    pricing: string
+    contact: string
+    resources: string
+    gettingStarted: string
+    knowledgeBase: string
+    blog: string
+    caseStudies: string
+    signingGuide: string
+    automationGuide: string
+    articles: string
+    language: string
+    copyright: string
+    terms: string
+    privacy: string
+  }
+
+  const languages: Array<{ code: Lang; label: string }> = [
     { code: 'en', label: 'English' },
     { code: 'et', label: 'Eesti' },
     { code: 'lv', label: 'Latviešu' },
@@ -17,10 +37,10 @@ export function Footer() {
   ]
 
   // Determine current language
-  const currentLangCode = languages.find(l => pathname?.startsWith(`/${l.code}`))?.code || 'en'
+  const currentLangCode: Lang = languages.find(l => pathname?.startsWith(`/${l.code}`))?.code ?? 'en'
 
   // Translations
-  const dictionary = {
+  const dictionaries: Record<Lang, Dictionary> = {
     en: {
       madeIn: 'Made in Estonia',
       home: 'HOME',
@@ -93,7 +113,9 @@ export function Footer() {
       terms: 'Умови використання',
       privacy: 'Політика конфіденційності',
     },
-  }[currentLangCode as keyof typeof dictionary] || dictionary['en']
+  }
+
+  const dictionary = dictionaries[currentLangCode] ?? dictionaries.en
 
   // Social Links
   const socialLinks = [
