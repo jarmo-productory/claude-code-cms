@@ -165,7 +165,7 @@ For detailed brand system → See `.claude/skills/generic-cvi/SKILL.md`
 import { Button, Badge, Card, Input, Icon, SectionHeader, FadeInView } from '@/components/ui'
 ```
 
-**Styleguide:** `npm run dev` then visit `http://localhost:3000/styleguide`
+**Styleguide:** `npm run dev` then visit `http://localhost:3001/styleguide`
 
 ### Skills Available
 

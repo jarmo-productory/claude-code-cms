@@ -87,6 +87,8 @@ interface ImportOptions {
   csvPath: string
   locales: string[]
   limit?: number
+  includeDrafts?: boolean
+  slugs?: string[]
 }
 
 interface ImportStats {
@@ -131,6 +133,10 @@ function parseArgs(): ImportOptions {
       options.locales = args[i].substring(9).split(',')
     } else if (args[i].startsWith('--limit=')) {
       options.limit = parseInt(args[i].substring(8), 10)
+    } else if (args[i] === '--include-drafts') {
+      options.includeDrafts = true
+    } else if (args[i].startsWith('--slugs=')) {
+      options.slugs = args[i].substring(8).split(',')
     }
   }
 
@@ -447,8 +453,18 @@ async function importArticles(options: ImportOptions): Promise<void> {
 
   // Filter articles
   let articles = records.filter((article) => {
-    // Skip archived and draft posts
-    if (parseBoolean(article.Archived) || parseBoolean(article.Draft)) {
+    // If specific slugs requested, only include those
+    if (options.slugs && options.slugs.length > 0) {
+      return options.slugs.includes(article.Slug)
+    }
+
+    // Skip archived posts (always skip archived)
+    if (parseBoolean(article.Archived)) {
+      return false
+    }
+
+    // Skip draft posts unless --include-drafts is set
+    if (parseBoolean(article.Draft) && !options.includeDrafts) {
       return false
     }
 

@@ -196,7 +196,7 @@ export async function getRelatedPosts(
     .filter((p) => p.slug !== currentSlug)
     .map((p) => ({
       post: p,
-      score: p.tags.filter((t) => currentTags.includes(t)).length,
+      score: (p.tags || []).filter((t) => currentTags.includes(t)).length,
     }))
     .filter((item) => item.score > 0)
     .sort((a, b) => b.score - a.score)

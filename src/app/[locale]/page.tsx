@@ -11,6 +11,8 @@ import {
   FAQ,
 } from '@/components/sections'
 import { getBlogPosts } from '@/lib/content'
+import { resolveAuthor } from '@/lib/authors'
+import { calculateReadingTime, formatReadingTime } from '@/lib/reading-time'
 import { Zap, FileText, PenTool } from 'lucide-react'
 
 export const metadata: Metadata = {
@@ -879,26 +881,39 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   const rawPosts = await getBlogPosts(blogLang)
 
   // Transform to LatestPosts format and take first 3
-  const blogPosts = rawPosts.slice(0, 3).map((post) => ({
-    id: post.slug,
-    title: post.title,
-    excerpt: post.description,
-    imageSrc: post.image || '/images/blog/placeholder.jpg',
-    href: `/${lang}/blog/${post.slug}`,
-    author: {
-      name: post.author === 'team' ? 'Agrello Team' : post.author,
-      avatarSrc: '/images/team/default-avatar.jpg',
-      date: new Date(post.date).toLocaleDateString(
-        lang === 'et' ? 'et-EE' : lang === 'lv' ? 'lv-LV' : lang === 'uk' ? 'uk-UA' : 'en-US',
-        {
-          year: 'numeric',
-          month: 'long',
-          day: 'numeric',
-        }
-      ),
-      readTime: '5 min read',
-    },
-  }))
+  const blogPosts = rawPosts.slice(0, 3).map((post) => {
+    const author = resolveAuthor(post.author)
+    const minutes = calculateReadingTime(post.content)
+    const readTime = formatReadingTime(minutes, blogLang)
+    let imageSrc = post.image || ''
+    if (imageSrc.startsWith('./images/')) {
+      imageSrc = imageSrc
+        .replace('./images/', '/images/blog-content/')
+        .replace(/%CC%[0-9a-fA-F]{2}/g, '')
+        .replace(/%25[0-9a-fA-F]{2}|%20/g, '-')
+    }
+
+    return {
+      id: post.slug,
+      title: post.title,
+      excerpt: post.description,
+      imageSrc,
+      href: `/${lang}/blog/${post.slug}`,
+      author: {
+        name: author.name,
+        avatarSrc: author.avatarSrc || '',
+        date: new Date(post.date).toLocaleDateString(
+          lang === 'et' ? 'et-EE' : lang === 'lv' ? 'lv-LV' : lang === 'uk' ? 'uk-UA' : 'en-US',
+          {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+          }
+        ),
+        readTime,
+      },
+    }
+  })
 
   // Prepare tabs data with icons
   const featuresTabsData = t.featuresTabs.tabs.map((tab, index) => ({

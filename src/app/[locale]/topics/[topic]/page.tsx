@@ -1,7 +1,9 @@
 import type { Metadata } from 'next'
 import { getTopicSlugs, getTopicIndex, getTopicArticles } from '@/lib/content'
 import { notFound } from 'next/navigation'
-import { ArticleListPage } from '@/components/content/ArticleListPage'
+import { mapTopicArticleToContentItem } from '@/lib/content-mappers'
+import { ContentIndexLayout } from '@/components/content/ContentIndexLayout'
+import { buildContentTabs, buildContentSidebar } from '@/lib/content-nav'
 
 const SUPPORTED_LOCALES = ['en', 'et', 'lv', 'ua']
 
@@ -50,20 +52,37 @@ export default async function TopicPage({
   }
 
   const articles = await getTopicArticles(topic, locale)
+  const items = articles.map((article) => mapTopicArticleToContentItem(article, topic, locale))
+
+  const tabs = buildContentTabs(locale, topic)
+  const sidebar = buildContentSidebar(locale, topic)
+
+  const subtitles: Record<string, string> = {
+    en: 'Resources and Insights',
+    et: 'Ressursid ja ülevaated',
+    lv: 'Resursi un ieskati',
+    ua: 'Ресурси та огляди',
+  }
+
+  const emptyMessages: Record<string, string> = {
+    en: 'No articles available for this topic yet.',
+    et: 'Selle teema kohta pole veel artikleid.',
+    lv: 'Šai tēmai vēl nav rakstu.',
+    ua: 'Для цієї теми ще немає статей.',
+  }
 
   return (
-    <ArticleListPage
+    <ContentIndexLayout
+      items={items}
+      locale={locale}
+      featuredStrategy="rank"
+      tabs={tabs}
+      activeTab={topic}
+      sidebar={sidebar}
+      subtitle={subtitles[locale] || subtitles.en}
       title={index.visualTitle}
       description={index.seoDescription}
-      locale={locale}
-      basePath={`/${locale}/topics/${topic}`}
-      articles={articles.map((article) => ({
-        slug: article.slug,
-        title: article.title,
-        date: article.date,
-        description: article.summary,
-      }))}
-      emptyMessage="No articles available for this topic yet."
+      emptyMessage={emptyMessages[locale] || emptyMessages.en}
     />
   )
 }

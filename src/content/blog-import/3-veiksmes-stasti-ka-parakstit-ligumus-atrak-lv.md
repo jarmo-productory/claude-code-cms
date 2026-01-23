@@ -1,21 +1,16 @@
 ---
 title: '3 veiksmes stāsti: kā parakstīt līgumus ātrāk?'
-slug: 3-veiksmes-stasti-ka-parakstit-ligumus-atrak
-metaTitle: 3 veiksmes stāsti par ātrāku līgumu parakstīšanu
-description: >-
-  Atklājiet, kā 3 uzņēmumi izmantojuši digitālā paraksta tehnoloģiju, lai
-  paātrinātu līgumu parakstīšanu.
+slug: '3-veiksmes-stasti-ka-parakstit-ligumus-atrak'
+metaTitle: '3 veiksmes stāsti par ātrāku līgumu parakstīšanu'
+description: 'Atklājiet, kā 3 uzņēmumi izmantojuši digitālā paraksta tehnoloģiju, lai paātrinātu līgumu parakstīšanu.'
 keyword: 'digitālā paraksta tehnoloģija, līgumi, parakstīšana, Agrello, ātrāk'
-image: ./images/67234800ed289f6f78a2f5ce_63490211cca3e6cc28af1538_fast_signing.png
-thumbnail: ./images/67234800ed289f6f78a2f5d1_63490211cca3e6cc28af1538_fast_signing.png
-lang: lv
+image: './images/67234800ed289f6f78a2f5ce_63490211cca3e6cc28af1538_fast_signing.png'
+thumbnail: './images/67234800ed289f6f78a2f5d1_63490211cca3e6cc28af1538_fast_signing.png'
+lang: 'lv'
 date: '2022-10-14'
-excerpt: >-
-  Šajā rakstā mēs prezentējam trīs unikālus veiksmes stāstus no dažādām
-  perspektīvām, kas parāda, kā Igaunijas uzņēmumi ir uzlabojuši savus ar
-  līgumiem saistītos procesus.
+excerpt: 'Šajā rakstā mēs prezentējam trīs unikālus veiksmes stāstus no dažādām perspektīvām, kas parāda, kā Igaunijas uzņēmumi ir uzlabojuši savus ar līgumiem saistītos procesus.'
 readingTime: '10'
-author: paula-sepp
+author: 'paula-sepp'
 supportOnly: false
 featured: false
 categories:

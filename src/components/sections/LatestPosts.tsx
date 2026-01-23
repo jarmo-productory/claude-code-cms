@@ -93,13 +93,24 @@ export function LatestPosts({
 
                 {/* Meta */}
                 <div className="flex items-center gap-3 mt-auto">
-                  <div className="relative w-10 h-10 rounded-full overflow-hidden bg-gray-200 shrink-0">
-                    <Image
-                      src={post.author.avatarSrc}
-                      alt={post.author.name}
-                      fill
-                      className="object-cover"
-                    />
+                  <div className="relative w-10 h-10 rounded-full overflow-hidden bg-brand-dark/10 shrink-0 flex items-center justify-center">
+                    {post.author.avatarSrc ? (
+                      <Image
+                        src={post.author.avatarSrc}
+                        alt={post.author.name}
+                        fill
+                        className="object-cover"
+                      />
+                    ) : (
+                      <span className="text-sm font-semibold text-brand-dark">
+                        {post.author.name
+                          .split(' ')
+                          .map((w) => w[0])
+                          .join('')
+                          .slice(0, 2)
+                          .toUpperCase()}
+                      </span>
+                    )}
                   </div>
                   <div className="text-sm">
                     <p className="font-semibold text-gray-900 leading-none mb-1">
