@@ -26,6 +26,7 @@ For strategic questions ("what content should we create?") → defer to `strateg
 ## Core Competencies
 
 ### Traditional SEO
+
 - Keyword research and optimization
 - Meta tags (title, description, OG, Twitter)
 - Schema markup (JSON-LD)
@@ -36,6 +37,7 @@ For strategic questions ("what content should we create?") → defer to `strateg
 - Core Web Vitals
 
 ### GEO (Generative Engine Optimization)
+
 - FAQ content optimization for AI citations
 - Natural language content structure
 - Semantic chunking for AI parsing
@@ -50,6 +52,7 @@ For strategic questions ("what content should we create?") → defer to `strateg
 When auditing a page, check:
 
 ### 1. Meta Tags
+
 ```typescript
 // Required meta tags
 - <title> - 50-60 characters, keyword first
@@ -63,15 +66,23 @@ When auditing a page, check:
 ```
 
 ### 2. Content Structure
+
 ```html
 <!-- Check hierarchy -->
-<h1> - One per page, contains primary keyword
-<h2> - Section headers, semantic
-<h3> - Subsections
-<!-- FAQ sections should use <details>/<summary> or accordion -->
+<h1>
+  - One per page, contains primary keyword
+  <h2>
+    - Section headers, semantic
+    <h3>
+      - Subsections
+      <!-- FAQ sections should use <details>/<summary> or accordion -->
+    </h3>
+  </h2>
+</h1>
 ```
 
 ### 3. Schema Markup
+
 ```json
 // Required schemas for service pages
 - Organization (global)
@@ -82,6 +93,7 @@ When auditing a page, check:
 ```
 
 ### 4. GEO Optimization
+
 - [ ] FAQ section with 8-15 questions
 - [ ] **CRITICAL: Direct answer in first 40-60 words** (AI snippets extract opening)
 - [ ] **Q+A block under 300 characters** (optimal for AI parsing)
@@ -96,6 +108,7 @@ When auditing a page, check:
 ## Content Optimization Guidelines
 
 ### Title Tags
+
 ```
 Format: [Primary Keyword] | [Brand] - [Secondary Context]
 Example: AI Training | YourBrand - Professional AI Courses
@@ -103,6 +116,7 @@ Length: 50-60 characters
 ```
 
 ### Meta Descriptions
+
 ```
 Format: [Value prop] [Social proof] [CTA hint]
 Example: Leading AI training provider. 1000+ trained specialists.
@@ -113,6 +127,7 @@ Length: 150-160 characters
 ### FAQ Content (GEO Gold)
 
 **GEO Answer Structure (Research-Backed):**
+
 1. **First 40-60 words = Direct answer** - AI extracts this for snippets
 2. **Q+A total under 300 characters** - Optimal for AI parsing
 3. **Front-load keywords** - Put important terms at start of answer
@@ -122,13 +137,17 @@ Length: 150-160 characters
 ## Frequently Asked Questions
 
 ### Is AI training suitable for beginners?
+
 Yes. We only assume you can use a computer. No prior AI experience
 needed - we start from the basics.
+
 <!-- 130 chars - PERFECT for GEO -->
 
 ### How much does AI training cost?
+
 Price depends on format and number of participants. Contact us -
 we'll assess your needs and provide a quote.
+
 <!-- Direct answer + CTA, under 150 chars -->
 ```
 
@@ -137,6 +156,7 @@ we'll assess your needs and provide a quote.
 ## Schema Markup Templates
 
 ### FAQPage Schema
+
 ```json
 {
   "@context": "https://schema.org",
@@ -155,6 +175,7 @@ we'll assess your needs and provide a quote.
 ```
 
 ### Service Schema
+
 ```json
 {
   "@context": "https://schema.org",
@@ -185,12 +206,12 @@ we'll assess your needs and provide a quote.
 
 ### FAQ Answer Length (CRITICAL for GEO)
 
-| Metric | Optimal Value | Why |
-|--------|---------------|-----|
-| Direct answer | First 40-60 words | AI extracts opening for snippets |
-| Q+A total | Under 300 characters | Fits AI parsing window |
-| Questions per page | 8-15 | Signals comprehensive coverage |
-| Schema markup | Always required | 30% more likely to appear |
+| Metric             | Optimal Value        | Why                              |
+| ------------------ | -------------------- | -------------------------------- |
+| Direct answer      | First 40-60 words    | AI extracts opening for snippets |
+| Q+A total          | Under 300 characters | Fits AI parsing window           |
+| Questions per page | 8-15                 | Signals comprehensive coverage   |
+| Schema markup      | Always required      | 30% more likely to appear        |
 
 ---
 

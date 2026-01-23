@@ -37,7 +37,7 @@ export function StyleguideSubnav() {
       }
       if (currentSection) setActiveSection(currentSection)
     }
-    
+
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
@@ -63,10 +63,10 @@ export function StyleguideSubnav() {
                   const headerOffset = 180
                   const elementPosition = element.getBoundingClientRect().top
                   const offsetPosition = elementPosition + window.pageYOffset - headerOffset
-                  
+
                   window.scrollTo({
                     top: offsetPosition,
-                    behavior: 'smooth'
+                    behavior: 'smooth',
                   })
                 }
                 setActiveSection(section.id)

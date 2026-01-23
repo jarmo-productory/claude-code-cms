@@ -7,7 +7,10 @@ export function calculateReadingTime(htmlContent: string, wordsPerMinute: number
   const text = htmlContent.replace(/<[^>]*>/g, '')
 
   // Count words (split by whitespace)
-  const words = text.trim().split(/\s+/).filter(word => word.length > 0)
+  const words = text
+    .trim()
+    .split(/\s+/)
+    .filter((word) => word.length > 0)
   const wordCount = words.length
 
   // Calculate minutes (minimum 1)

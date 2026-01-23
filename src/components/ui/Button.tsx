@@ -68,7 +68,8 @@ export function Button({
   className = '',
   ...props
 }: ButtonProps) {
-  const baseClasses = 'inline-flex items-center justify-center gap-2 rounded-xl font-semibold cursor-pointer active:scale-[0.98] transition-all duration-150'
+  const baseClasses =
+    'inline-flex items-center justify-center gap-2 rounded-xl font-semibold cursor-pointer active:scale-[0.98] transition-all duration-150'
   const variantClasses = getVariantClasses(variant, onDark)
   const sizeClass = sizeClasses[size]
   const combinedClasses = `${baseClasses} ${variantClasses} ${sizeClass} ${className}`.trim()

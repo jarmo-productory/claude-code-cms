@@ -1,0 +1,19 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+.next/
+out/
+dist/
+
+# Cache
+.cache/
+
+# Generated
+*.generated.*
+public/sitemap*.xml
+public/robots.txt
+
+# Misc
+.DS_Store
+*.log

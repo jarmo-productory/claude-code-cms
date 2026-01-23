@@ -16,13 +16,13 @@ All colors are defined in `src/app/globals.css` using Tailwind CSS v4's `@theme`
 
 ### Default Palette (Customize These!)
 
-| Token | Default | Usage |
-|-------|---------|-------|
-| `brand-dark` | #1e1b4b | Dark backgrounds, text |
-| `brand-primary` | #4338ca | Primary actions, links |
+| Token             | Default | Usage                   |
+| ----------------- | ------- | ----------------------- |
+| `brand-dark`      | #1e1b4b | Dark backgrounds, text  |
+| `brand-primary`   | #4338ca | Primary actions, links  |
 | `brand-secondary` | #2dd4bf | Accents, success states |
-| `brand-accent` | #d946ef | CTAs, highlights |
-| `brand-surface` | #f8fafc | Light backgrounds |
+| `brand-accent`    | #d946ef | CTAs, highlights        |
+| `brand-surface`   | #f8fafc | Light backgrounds       |
 
 ### How to Customize
 
@@ -31,11 +31,11 @@ Edit `src/app/globals.css`:
 ```css
 @theme {
   /* Replace these with your brand colors */
-  --color-brand-dark: #1e1b4b;      /* Your dark color */
-  --color-brand-primary: #4338ca;   /* Your primary color */
+  --color-brand-dark: #1e1b4b; /* Your dark color */
+  --color-brand-primary: #4338ca; /* Your primary color */
   --color-brand-secondary: #2dd4bf; /* Your secondary color */
-  --color-brand-accent: #d946ef;    /* Your accent color */
-  --color-brand-surface: #f8fafc;   /* Your surface color */
+  --color-brand-accent: #d946ef; /* Your accent color */
+  --color-brand-surface: #f8fafc; /* Your surface color */
 }
 ```
 
@@ -45,10 +45,10 @@ Edit `src/app/globals.css`:
 
 ### Font Stack
 
-| Token | Default | Usage |
-|-------|---------|-------|
+| Token          | Default       | Usage             |
+| -------------- | ------------- | ----------------- |
 | `font-display` | Space Grotesk | Headlines, titles |
-| `font-sans` | Sofia Sans | Body text, UI |
+| `font-sans`    | Sofia Sans    | Body text, UI     |
 
 ### How to Customize
 
@@ -73,8 +73,8 @@ const bodyFont = Sofia_Sans({
 
 ```css
 @theme {
-  --font-sans: "Your Body Font", sans-serif;
-  --font-display: "Your Display Font", sans-serif;
+  --font-sans: 'Your Body Font', sans-serif;
+  --font-display: 'Your Display Font', sans-serif;
 }
 ```
 
@@ -103,21 +103,10 @@ Used for hero sections and dark backgrounds:
 
 ```css
 @theme {
-  --background-image-brand-mesh: radial-gradient(
-    at 40% 20%,
-    var(--color-brand-secondary) 0px,
-    transparent 50%
-  ),
-  radial-gradient(
-    at 80% 0%,
-    var(--color-brand-primary) 0px,
-    transparent 50%
-  ),
-  radial-gradient(
-    at 0% 50%,
-    var(--color-brand-accent) 0px,
-    transparent 50%
-  );
+  --background-image-brand-mesh:
+    radial-gradient(at 40% 20%, var(--color-brand-secondary) 0px, transparent 50%),
+    radial-gradient(at 80% 0%, var(--color-brand-primary) 0px, transparent 50%),
+    radial-gradient(at 0% 50%, var(--color-brand-accent) 0px, transparent 50%);
 }
 ```
 
@@ -199,8 +188,8 @@ When setting up a new project:
 
 ## File Locations
 
-| File | Purpose |
-|------|---------|
+| File                  | Purpose                        |
+| --------------------- | ------------------------------ |
 | `src/app/globals.css` | Color and gradient definitions |
-| `src/app/layout.tsx` | Font imports and configuration |
-| `src/components/ui/*` | Components using brand tokens |
+| `src/app/layout.tsx`  | Font imports and configuration |
+| `src/components/ui/*` | Components using brand tokens  |

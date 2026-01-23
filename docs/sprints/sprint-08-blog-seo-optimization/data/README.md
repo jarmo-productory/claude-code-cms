@@ -13,6 +13,7 @@ Place the following CSV exports in this folder:
 **File name:** `gsc-performance-pages-12m.csv`
 
 **How to export:**
+
 1. Go to https://search.google.com/search-console
 2. Select property: agrello.io (or agrello.ee)
 3. Click "Performance" in left sidebar
@@ -22,6 +23,7 @@ Place the following CSV exports in this folder:
 7. Save to this folder
 
 **Expected columns:**
+
 - Page URL
 - Clicks
 - Impressions
@@ -35,15 +37,18 @@ Place the following CSV exports in this folder:
 If you want country-level analysis, export 3 additional files:
 
 **Estonia:** `gsc-estonia-12m.csv`
+
 1. In Performance view, click "+ NEW" filter
 2. Select "Country" → Choose "Estonia"
 3. Click "Pages" tab
 4. Export CSV
 
 **Latvia:** `gsc-latvia-12m.csv`
+
 - Repeat above steps for Latvia
 
 **UK:** `gsc-uk-12m.csv`
+
 - Repeat above steps for United Kingdom
 
 ---
@@ -67,10 +72,11 @@ Once you place the files here:
 ## Questions?
 
 If you have trouble accessing GSC or exporting data, let me know. We can:
+
 - Use a shorter time period (6 months instead of 12)
 - Focus on specific domains if you have multiple properties
 - Work with whatever data is available
 
 ---
 
-*Ready for data upload*
+_Ready for data upload_

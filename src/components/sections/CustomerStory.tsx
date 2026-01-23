@@ -37,7 +37,6 @@ export function CustomerStory({
     <section className={`py-16 lg:py-24 bg-gray-50 ${className || ''}`}>
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-
           {/* Image Column - Left */}
           <div className="relative">
             <div className="relative overflow-hidden rounded-lg">
@@ -56,10 +55,7 @@ export function CustomerStory({
             {/* Star Rating */}
             <div className="flex gap-1 mb-6">
               {[...Array(rating)].map((_, i) => (
-                <Star
-                  key={i}
-                  className="w-5 h-5 fill-amber-400 text-amber-400"
-                />
+                <Star key={i} className="w-5 h-5 fill-amber-400 text-amber-400" />
               ))}
             </div>
 
@@ -69,20 +65,14 @@ export function CustomerStory({
             </h2>
 
             {/* Description */}
-            <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-              {description}
-            </p>
+            <p className="text-lg text-gray-600 mb-8 leading-relaxed">{description}</p>
 
             {/* Attribution Row */}
             <div className="flex items-center gap-6 mb-8">
               {/* Author Info */}
               <div className="flex flex-col">
-                <span className="font-semibold text-gray-900">
-                  {authorName}
-                </span>
-                <span className="text-gray-500 text-sm">
-                  {authorTitle}
-                </span>
+                <span className="font-semibold text-gray-900">{authorName}</span>
+                <span className="text-gray-500 text-sm">{authorTitle}</span>
               </div>
 
               {/* Divider */}
@@ -112,7 +102,6 @@ export function CustomerStory({
               </div>
             )}
           </div>
-
         </div>
       </div>
     </section>

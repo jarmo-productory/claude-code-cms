@@ -29,6 +29,7 @@ Import blog articles from Webflow CMS into the Next.js site using CSV export, in
 **Decision:** CSV Import for Sprint 07 (API can be added later if needed)
 
 See detailed research:
+
 - `/docs/sprints/sprint-07-webflow-content-integration/research/webflow-api-research.md`
 - `/docs/sprints/sprint-07-webflow-content-integration/research/csv-import-research.md`
 - `/docs/sprints/sprint-07-webflow-content-integration/research/recommendation.md`
@@ -49,21 +50,22 @@ See detailed research:
 
 ## Deliverables
 
-| Deliverable | Description | Output Path |
-|-------------|-------------|-------------|
-| Import Script | TypeScript script to parse CSV and generate markdown | `scripts/import-webflow-csv.ts` |
-| Image Downloader | Downloads images from Webflow CDN URLs | (included in script) |
-| HTML Converter | Converts Webflow rich text to markdown | (uses `turndown` package) |
-| Content Output | Imported blog posts (markdown + frontmatter) | `src/content/blog-import/` |
-| Image Output | Downloaded blog images | `public/images/blog-import/` |
-| Usage Docs | Instructions for running import | `scripts/README-import.md` |
-| Example CSV | Sample CSV structure for reference | `scripts/example-webflow-export.csv` |
+| Deliverable      | Description                                          | Output Path                          |
+| ---------------- | ---------------------------------------------------- | ------------------------------------ |
+| Import Script    | TypeScript script to parse CSV and generate markdown | `scripts/import-webflow-csv.ts`      |
+| Image Downloader | Downloads images from Webflow CDN URLs               | (included in script)                 |
+| HTML Converter   | Converts Webflow rich text to markdown               | (uses `turndown` package)            |
+| Content Output   | Imported blog posts (markdown + frontmatter)         | `src/content/blog-import/`           |
+| Image Output     | Downloaded blog images                               | `public/images/blog-import/`         |
+| Usage Docs       | Instructions for running import                      | `scripts/README-import.md`           |
+| Example CSV      | Sample CSV structure for reference                   | `scripts/example-webflow-export.csv` |
 
 ---
 
 ## Implementation Checklist
 
 ### Phase 1: Research ✅
+
 - [x] Research Webflow API capabilities
 - [x] Research Webflow CSV export format
 - [x] Evaluate both approaches
@@ -71,18 +73,21 @@ See detailed research:
 - [x] Document findings
 
 ### Phase 2: Planning ✅
+
 - [x] Create sprint plan
 - [x] **Owner approval received** ✅
 - [x] Define exact CSV field mappings
 - [x] Confirm output directory structure
 
 ### Phase 3: Setup ✅
+
 - [x] Install dependencies (`csv-parse`, `turndown`)
 - [x] Create script file structure
 - [x] Create output directories (in script)
 - [x] Add npm script command
 
 ### Phase 4: Core Implementation ✅
+
 - [x] CSV parsing logic
 - [x] Image download function with error handling
 - [x] HTML to Markdown converter setup
@@ -90,11 +95,13 @@ See detailed research:
 - [x] Main import orchestration function
 
 ### Phase 5: Multi-Language Support ✅
+
 - [x] Language parameter handling (en, et, lv)
 - [x] Language-specific filename generation
 - [x] Locale validation
 
 ### Phase 6: Error Handling ✅
+
 - [x] Image download retry logic (with deduplication)
 - [x] Missing field handling (fallbacks)
 - [x] Invalid date handling
@@ -102,6 +109,7 @@ See detailed research:
 - [x] Progress logging
 
 ### Phase 7: Testing
+
 - [ ] Create sample CSV with test data
 - [ ] Test import with 3+ sample posts
 - [ ] Verify markdown output quality
@@ -110,6 +118,7 @@ See detailed research:
 - [ ] Test multi-language posts
 
 ### Phase 8: Documentation
+
 - [ ] Write usage instructions
 - [ ] Document CSV format requirements
 - [ ] Add troubleshooting guide
@@ -117,12 +126,14 @@ See detailed research:
 - [ ] Document npm command usage
 
 ### Phase 9: Cleanup
+
 - [ ] Remove debug logging
 - [ ] Add TypeScript types
 - [ ] Code review and refactoring
 - [ ] Update package.json scripts
 
 ### Phase 10: Validation
+
 - [ ] Run qa-validator checks
 - [ ] Test production build
 - [ ] Verify no broken imports
@@ -133,6 +144,7 @@ See detailed research:
 ## Technical Approach
 
 ### Dependencies
+
 ```json
 {
   "devDependencies": {
@@ -147,6 +159,7 @@ See detailed research:
 ```
 
 ### Script Architecture
+
 ```
 scripts/
 ├── import-webflow-csv.ts      # Main import script
@@ -155,6 +168,7 @@ scripts/
 ```
 
 ### Data Flow
+
 ```
 Webflow Export CSV
        ↓
@@ -175,28 +189,28 @@ Write to file system:
 **Source:** `Agrello Web Master - Articles (1).csv`
 **Total:** 274 articles | **en:** 137 | **et:** 84 | **lv:** 53
 
-| CSV Column | Frontmatter Field | Transform |
-|------------|-------------------|-----------|
-| Name | title | Direct copy |
-| Slug | slug | Direct copy |
-| Meta Title | metaTitle | Direct copy (SEO) |
-| Meta Description | description | Direct copy |
-| Keyword | keyword | Direct copy |
-| Main Image (1200x630) | image | Download CDN → local path |
-| Thumbnail image (520x273) | thumbnail | Download CDN → local path |
-| Locale | lang | Direct (en, et, lv) |
-| Topic | topic | Direct copy |
-| Sub-topic | subTopic | Direct copy |
-| Publish date | date | Parse JS date → YYYY-MM-DD |
-| Post Summary | excerpt | Direct copy |
-| Reading time | readingTime | Direct copy |
-| Post Body | *content* | HTML → Markdown |
-| Author | author | Direct copy (slug: paula-sepp) |
-| Support only | supportOnly | Boolean |
-| Featured on category page | featured | Boolean |
-| Keyword cluster | keywordCluster | Direct copy |
-| Tag | tags | Split by `;` → array |
-| Categories | categories | Split by `;` → array |
+| CSV Column                | Frontmatter Field | Transform                      |
+| ------------------------- | ----------------- | ------------------------------ |
+| Name                      | title             | Direct copy                    |
+| Slug                      | slug              | Direct copy                    |
+| Meta Title                | metaTitle         | Direct copy (SEO)              |
+| Meta Description          | description       | Direct copy                    |
+| Keyword                   | keyword           | Direct copy                    |
+| Main Image (1200x630)     | image             | Download CDN → local path      |
+| Thumbnail image (520x273) | thumbnail         | Download CDN → local path      |
+| Locale                    | lang              | Direct (en, et, lv)            |
+| Topic                     | topic             | Direct copy                    |
+| Sub-topic                 | subTopic          | Direct copy                    |
+| Publish date              | date              | Parse JS date → YYYY-MM-DD     |
+| Post Summary              | excerpt           | Direct copy                    |
+| Reading time              | readingTime       | Direct copy                    |
+| Post Body                 | _content_         | HTML → Markdown                |
+| Author                    | author            | Direct copy (slug: paula-sepp) |
+| Support only              | supportOnly       | Boolean                        |
+| Featured on category page | featured          | Boolean                        |
+| Keyword cluster           | keywordCluster    | Direct copy                    |
+| Tag                       | tags              | Split by `;` → array           |
+| Categories                | categories        | Split by `;` → array           |
 
 **Skipped:** Collection ID, Item ID, Created On, Updated On, Published On
 **Filtered out:** Archived=true, Draft=true
@@ -213,25 +227,30 @@ Write to file system:
 ### Image Handling
 
 Images are hosted on Webflow CDN:
+
 - `cdn.prod.website-files.com/...`
 - `uploads-ssl.webflow.com/...`
 
 **Two types of images to handle:**
 
 #### 1. Featured Images (CSV columns)
+
 - `Main Image (1200x630)` → frontmatter `image`
 - `Thumbnail image (520x273)` → frontmatter `thumbnail`
 
 **Strategy:**
+
 1. Extract URL from CSV column
 2. Download to `public/images/blog-import/{filename}`
 3. Reference in frontmatter as `/images/blog-import/{filename}`
 
 #### 2. Inline Images (inside Post Body HTML)
+
 - Images embedded in article content: `<img src="https://cdn...">`
 - Must be extracted, downloaded, and URLs replaced
 
 **Strategy:**
+
 1. Scan Post Body HTML for all `<img src="...">` tags
 2. Download each image to `public/images/blog-import/`
 3. Replace CDN URLs with local paths in HTML
@@ -239,15 +258,16 @@ Images are hosted on Webflow CDN:
 
 ```typescript
 // Example: Inline image extraction
-const imgRegex = /<img[^>]+src="([^"]+)"[^>]*>/g;
+const imgRegex = /<img[^>]+src="([^"]+)"[^>]*>/g
 for (const match of postBody.matchAll(imgRegex)) {
-  const cdnUrl = match[1];
-  const localPath = await downloadImage(cdnUrl);
-  postBody = postBody.replace(cdnUrl, localPath);
+  const cdnUrl = match[1]
+  const localPath = await downloadImage(cdnUrl)
+  postBody = postBody.replace(cdnUrl, localPath)
 }
 ```
 
 #### Deduplication
+
 - Track downloaded URLs to avoid re-downloading
 - Same image used in multiple articles → download once
 - Use URL hash or filename as unique key
@@ -279,6 +299,7 @@ public/images/blog-import/        ← STAGING images
 ### Publishing Workflow
 
 After review, move approved content to production:
+
 ```bash
 # Move all approved articles
 mv src/content/blog-import/* src/content/blog/
@@ -324,26 +345,26 @@ mv public/images/blog-import/* public/images/blog/
 
 ## Error Handling Strategy
 
-| Error Type | Handling |
-|------------|----------|
-| Image download fails | Log warning, use placeholder image |
-| Missing required field (Name/Slug) | Skip row, log warning |
-| Invalid date format | Use current date as fallback |
-| HTML conversion fails | Keep as raw HTML, log warning |
-| File write fails | Throw error and stop (prevents partial import) |
-| Duplicate slugs | Append `-2`, `-3` to filename |
+| Error Type                         | Handling                                       |
+| ---------------------------------- | ---------------------------------------------- |
+| Image download fails               | Log warning, use placeholder image             |
+| Missing required field (Name/Slug) | Skip row, log warning                          |
+| Invalid date format                | Use current date as fallback                   |
+| HTML conversion fails              | Keep as raw HTML, log warning                  |
+| File write fails                   | Throw error and stop (prevents partial import) |
+| Duplicate slugs                    | Append `-2`, `-3` to filename                  |
 
 ---
 
 ## Risks & Mitigations
 
-| Risk | Impact | Mitigation |
-|------|--------|------------|
+| Risk                                      | Impact | Mitigation                                        |
+| ----------------------------------------- | ------ | ------------------------------------------------- |
 | Complex rich text doesn't convert cleanly | Medium | Manual review after import, document known issues |
-| Large number of posts (>100) | Low | Batch processing with progress logs |
-| Webflow CSV format changes | Low | Flexible field mapping, validate columns |
-| Network failures during image download | Medium | Retry logic, resume capability |
-| Duplicate content on re-runs | Medium | Clear output directory before import |
+| Large number of posts (>100)              | Low    | Batch processing with progress logs               |
+| Webflow CSV format changes                | Low    | Flexible field mapping, validate columns          |
+| Network failures during image download    | Medium | Retry logic, resume capability                    |
+| Duplicate content on re-runs              | Medium | Clear output directory before import              |
 
 ---
 
@@ -361,18 +382,21 @@ mv public/images/blog-import/* public/images/blog/
 ## Testing Checklist
 
 ### Unit Tests (Manual)
+
 - [ ] Parse sample CSV with 3 rows
 - [ ] Download 1 test image
 - [ ] Convert sample HTML to markdown
 - [ ] Generate frontmatter for 1 post
 
 ### Integration Tests
+
 - [ ] Import 5 posts (mixed EN/ET)
 - [ ] Verify all images downloaded
 - [ ] Check markdown syntax validity
 - [ ] Validate frontmatter YAML
 
 ### End-to-End Tests
+
 - [ ] Import full CSV export
 - [ ] View posts in Next.js dev server
 - [ ] Test blog listing page
@@ -387,6 +411,7 @@ mv public/images/blog-import/* public/images/blog/
 **Phase 2 → 3 Gate:** Owner must approve this sprint plan
 
 **Approval confirms:**
+
 1. CSV import approach is acceptable (vs API integration)
 2. Output directory structure is correct
 3. Frontmatter schema mapping is accurate
@@ -394,6 +419,7 @@ mv public/images/blog-import/* public/images/blog/
 5. Testing scope is adequate
 
 **Owner Questions:**
+
 1. Do you have access to export CSV from Webflow CMS?
 2. Which languages should we prioritize for testing?
 3. Approximately how many blog posts need to be imported?
@@ -404,17 +430,17 @@ mv public/images/blog-import/* public/images/blog/
 
 ## Timeline Estimate
 
-| Phase | Tasks | Estimated Time |
-|-------|-------|----------------|
-| Setup | Dependencies, file structure | 30 min |
-| Core Implementation | CSV parsing, image download, markdown conversion | 2 hours |
-| Multi-language | Language handling | 30 min |
-| Error Handling | Retries, fallbacks, logging | 1 hour |
-| Testing | Sample imports, validation | 1 hour |
-| Documentation | Usage guide, examples | 1 hour |
-| **Total** | | **6 hours (1 day)** |
-| Buffer | Testing & fixes | 0.5 day |
-| **Grand Total** | | **1.5 days** |
+| Phase               | Tasks                                            | Estimated Time      |
+| ------------------- | ------------------------------------------------ | ------------------- |
+| Setup               | Dependencies, file structure                     | 30 min              |
+| Core Implementation | CSV parsing, image download, markdown conversion | 2 hours             |
+| Multi-language      | Language handling                                | 30 min              |
+| Error Handling      | Retries, fallbacks, logging                      | 1 hour              |
+| Testing             | Sample imports, validation                       | 1 hour              |
+| Documentation       | Usage guide, examples                            | 1 hour              |
+| **Total**           |                                                  | **6 hours (1 day)** |
+| Buffer              | Testing & fixes                                  | 0.5 day             |
+| **Grand Total**     |                                                  | **1.5 days**        |
 
 ---
 
@@ -429,6 +455,7 @@ mv public/images/blog-import/* public/images/blog/
 **Articles Count:** 274 total (en: 137, et: 84, lv: 53)
 
 **Next Actions:**
+
 1. ✅ Install dependencies
 2. ✅ Create script structure
 3. Implement CSV parsing
@@ -447,4 +474,4 @@ mv public/images/blog-import/* public/images/blog/
 
 ---
 
-*Phase 3: Development - In Progress*
+_Phase 3: Development - In Progress_

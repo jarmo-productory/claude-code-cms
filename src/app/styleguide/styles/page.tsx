@@ -10,9 +10,7 @@ export default function StylesPage() {
     <div className="space-y-16">
       <header>
         <h1 className="text-4xl font-bold text-brand-dark mb-2">Styles</h1>
-        <p className="text-lg text-gray-600">
-          Brand colors, typography, spacing, and shadows
-        </p>
+        <p className="text-lg text-gray-600">Brand colors, typography, spacing, and shadows</p>
       </header>
 
       {/* Brand Colors */}
@@ -63,7 +61,9 @@ export default function StylesPage() {
             { name: '900', hex: '#00010d', class: 'bg-gray-900' },
           ].map((color) => (
             <div key={color.name}>
-              <div className={`${color.class} h-16 rounded-lg mb-2 ${color.border ? 'border border-gray-200' : ''}`}></div>
+              <div
+                className={`${color.class} h-16 rounded-lg mb-2 ${color.border ? 'border border-gray-200' : ''}`}
+              ></div>
               <p className="text-sm font-medium">Gray {color.name}</p>
               <code className="text-xs text-gray-500">{color.hex}</code>
             </div>
@@ -95,15 +95,21 @@ export default function StylesPage() {
             <code className="text-sm text-gray-400">text-xl font-semibold (20px)</code>
           </div>
           <div className="border-b border-gray-100 pb-6">
-            <p className="text-lg text-gray-600 mb-2">Body Large - For introductions and lead text.</p>
+            <p className="text-lg text-gray-600 mb-2">
+              Body Large - For introductions and lead text.
+            </p>
             <code className="text-sm text-gray-400">text-lg (18px)</code>
           </div>
           <div className="border-b border-gray-100 pb-6">
-            <p className="text-base text-gray-600 mb-2">Body - Default paragraph text for content.</p>
+            <p className="text-base text-gray-600 mb-2">
+              Body - Default paragraph text for content.
+            </p>
             <code className="text-sm text-gray-400">text-base (16px)</code>
           </div>
           <div>
-            <p className="text-sm text-gray-500 mb-2">Small - Captions, labels, and secondary text.</p>
+            <p className="text-sm text-gray-500 mb-2">
+              Small - Captions, labels, and secondary text.
+            </p>
             <code className="text-sm text-gray-400">text-sm (14px)</code>
           </div>
         </div>

@@ -7,12 +7,14 @@
 ## What We Discovered
 
 ### Assets Available
+
 - **Webflow CSS:** 282KB minified stylesheet with all brand tokens (challenging to parse)
 - **Google Fonts:** Inter, Manrope, Montserrat with full weight ranges
 - **Images:** 21 files including logos, illustrations, product screenshots, social icons
 - **Toolkit:** All assets downloaded and stored in `docs/agrello-css/` and `docs/agrello-images/`
 
 ### Current State Assessment
+
 - **Placeholder theme active:** Generic purple/teal colors not matching Agrello brand
 - **Wrong fonts loaded:** Space Grotesk + Sofia Sans instead of Agrello's Inter/Manrope
 - **Component library ready:** Button, Badge, Card, SectionHeader all functional but using wrong tokens
@@ -20,6 +22,7 @@
 - **Styleguide exists:** Perfect testing ground at `/styleguide` route
 
 ### Technical Foundation
+
 - **Next.js 15 + React 19:** Modern App Router architecture
 - **Tailwind CSS v4:** Using `@theme` syntax for custom properties
 - **No public folder:** Needs creation for logos, favicons, social images
@@ -28,23 +31,29 @@
 ## Key Findings
 
 ### Typography Requirements
+
 Agrello uses three Google Fonts:
+
 1. **Inter** (100-900) - Primary body font, UI text
 2. **Manrope** (200-800) - Display font for headlines
 3. **Montserrat** (100-900 + italic) - Optional accent font
 
 **Recommendation:**
+
 - **Display:** Manrope (bold, impactful headlines)
 - **Body:** Inter (clean, readable paragraphs)
 - **Accent:** Montserrat only if needed for special sections
 
 ### Color Extraction Challenge
+
 Minified CSS makes direct parsing impractical. We'll use:
+
 1. **Live site inspection** (browser DevTools) - PRIMARY METHOD
 2. **SVG logo analysis** (embedded colors in vector files)
 3. **Screenshot color picker** (visual validation)
 
 ### Missing Infrastructure
+
 1. **Public assets directory** - Needs creation
 2. **Favicon set** - Generate from logo
 3. **Social share images** - OG image for social media
@@ -53,13 +62,13 @@ Minified CSS makes direct parsing impractical. We'll use:
 
 ## Risks Identified
 
-| Risk | Impact | Mitigation |
-|------|--------|-----------|
-| Can't extract exact colors from minified CSS | High | Use browser DevTools on live site |
-| Font weights don't perfectly match Webflow | Medium | Test visually, get owner approval |
-| Analytics adds page load overhead | Low | Use async loading, test Lighthouse |
-| Logo SVGs have Webflow IDs | Low | Clean with SVGO or manual editing |
-| Wrong color choices affect brand consistency | High | Get owner visual approval before committing |
+| Risk                                         | Impact | Mitigation                                  |
+| -------------------------------------------- | ------ | ------------------------------------------- |
+| Can't extract exact colors from minified CSS | High   | Use browser DevTools on live site           |
+| Font weights don't perfectly match Webflow   | Medium | Test visually, get owner approval           |
+| Analytics adds page load overhead            | Low    | Use async loading, test Lighthouse          |
+| Logo SVGs have Webflow IDs                   | Low    | Clean with SVGO or manual editing           |
+| Wrong color choices affect brand consistency | High   | Get owner visual approval before committing |
 
 ## Decisions Needed from Owner
 
@@ -86,6 +95,7 @@ Before Phase 2 can begin, we need answers to:
 ## Next Phase Preview: What We'll Build
 
 Once approved, Phase 2 will deliver:
+
 1. **Real Agrello colors** in `globals.css` (extracted from live site)
 2. **Correct fonts** (Inter + Manrope replacing placeholder fonts)
 3. **Updated styleguide** showing actual brand tokens
@@ -107,6 +117,7 @@ docs/sprints/sprint-01-foundation/
 ## Timeline Estimate
 
 **Total sprint time:** ~8 hours
+
 - Phase 1 (Research): 1 hour ✓ COMPLETE
 - Phase 2 (Brand Implementation): 2 hours
 - Phase 3 (Assets): 1 hour
@@ -117,6 +128,7 @@ docs/sprints/sprint-01-foundation/
 ## Success Metrics
 
 We'll know Phase 2 is complete when:
+
 - [ ] Styleguide matches Agrello.io brand visually
 - [ ] All components use real brand colors
 - [ ] Fonts load correctly (no FOIT/FOUT)
@@ -136,6 +148,7 @@ We'll know Phase 2 is complete when:
    - "go ahead"
 
 **Sprint-manager will then:**
+
 1. Enter Phase 2 (DEVELOP)
 2. Extract brand tokens from live site
 3. Update `globals.css` with real colors

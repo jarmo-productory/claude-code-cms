@@ -35,6 +35,16 @@ export function Navigation({ isStatic = false }: { isStatic?: boolean }) {
     contact: string
     login: string
     signup: string
+    topicContractManagement: string
+    topicContractManagementDesc: string
+    topicESignatures: string
+    topicESignaturesDesc: string
+    topicDocAutomation: string
+    topicDocAutomationDesc: string
+    topicSecurityCompliance: string
+    topicSecurityComplianceDesc: string
+    topicAgrelloFeatures: string
+    topicAgrelloFeaturesDesc: string
   }
 
   const languages: Array<{ code: Lang; flag: string; label: string }> = [
@@ -45,8 +55,9 @@ export function Navigation({ isStatic = false }: { isStatic?: boolean }) {
   ]
 
   // Determine current language from path or default to English
-  const currentLangCode: Lang = languages.find(l => pathname?.startsWith(`/${l.code}`))?.code ?? 'en'
-  const currentLang = languages.find(l => l.code === currentLangCode) || languages[0]
+  const currentLangCode: Lang =
+    languages.find((l) => pathname?.startsWith(`/${l.code}`))?.code ?? 'en'
+  const currentLang = languages.find((l) => l.code === currentLangCode) || languages[0]
 
   const dictionaries: Record<Lang, Dictionary> = {
     en: {
@@ -59,6 +70,16 @@ export function Navigation({ isStatic = false }: { isStatic?: boolean }) {
       contact: 'Contact us',
       login: 'Log in',
       signup: 'Try for free',
+      topicContractManagement: 'Contract Management',
+      topicContractManagementDesc: 'Create, sign, and manage agreements',
+      topicESignatures: 'E-Signatures',
+      topicESignaturesDesc: 'Secure electronic signing solutions',
+      topicDocAutomation: 'Doc Automation',
+      topicDocAutomationDesc: 'Automate document workflows',
+      topicSecurityCompliance: 'Security & Compliance',
+      topicSecurityComplianceDesc: 'Enterprise-grade data protection',
+      topicAgrelloFeatures: 'Agrello Features',
+      topicAgrelloFeaturesDesc: 'Platform guides and tutorials',
     },
     et: {
       features: 'Funktsionaalsus',
@@ -70,6 +91,16 @@ export function Navigation({ isStatic = false }: { isStatic?: boolean }) {
       contact: 'Võta ühendust',
       login: 'Logi sisse',
       signup: 'Proovi tasuta',
+      topicContractManagement: 'Lepingute haldus',
+      topicContractManagementDesc: 'Loo, allkirjasta ja halda lepinguid',
+      topicESignatures: 'E-allkirjad',
+      topicESignaturesDesc: 'Turvaline elektrooniline allkirjastamine',
+      topicDocAutomation: 'Dokumendiautomaatika',
+      topicDocAutomationDesc: 'Automatiseeri dokumenditöövooge',
+      topicSecurityCompliance: 'Turvalisus ja vastavus',
+      topicSecurityComplianceDesc: 'Ettevõttetaseme andmekaitse',
+      topicAgrelloFeatures: 'Agrello funktsioonid',
+      topicAgrelloFeaturesDesc: 'Platvormi juhendid ja õpetused',
     },
     lv: {
       features: 'Funkcijas',
@@ -81,6 +112,16 @@ export function Navigation({ isStatic = false }: { isStatic?: boolean }) {
       contact: 'Sazināties',
       login: 'Pieteikties',
       signup: 'Izmēģināt bez maksas',
+      topicContractManagement: 'Līgumu pārvaldība',
+      topicContractManagementDesc: 'Izveidojiet, parakstiet un pārvaldiet līgumus',
+      topicESignatures: 'E-paraksti',
+      topicESignaturesDesc: 'Droši elektroniskie paraksti',
+      topicDocAutomation: 'Dokumentu automatizācija',
+      topicDocAutomationDesc: 'Automatizējiet dokumentu plūsmas',
+      topicSecurityCompliance: 'Drošība un atbilstība',
+      topicSecurityComplianceDesc: 'Uzņēmuma līmeņa datu aizsardzība',
+      topicAgrelloFeatures: 'Agrello funkcijas',
+      topicAgrelloFeaturesDesc: 'Platformas ceļveži un pamācības',
     },
     uk: {
       features: 'Функції',
@@ -89,9 +130,19 @@ export function Navigation({ isStatic = false }: { isStatic?: boolean }) {
       blog: 'Блог',
       help: 'Центр допомоги',
       api: 'API',
-      contact: 'Зв\'язатися',
+      contact: "Зв'язатися",
       login: 'Увійти',
       signup: 'Спробувати',
+      topicContractManagement: 'Управління контрактами',
+      topicContractManagementDesc: 'Створюйте, підписуйте та керуйте угодами',
+      topicESignatures: 'E-підписи',
+      topicESignaturesDesc: 'Безпечні електронні підписи',
+      topicDocAutomation: 'Автоматизація документів',
+      topicDocAutomationDesc: 'Автоматизуйте документообіг',
+      topicSecurityCompliance: 'Безпека та відповідність',
+      topicSecurityComplianceDesc: 'Захист даних корпоративного рівня',
+      topicAgrelloFeatures: 'Agrello можливості',
+      topicAgrelloFeaturesDesc: 'Посібники та навчальні матеріали',
     },
   }
 
@@ -103,9 +154,32 @@ export function Navigation({ isStatic = false }: { isStatic?: boolean }) {
   ]
 
   const resourcesItems = [
-    { href: `/${currentLangCode}/blog`, label: dictionary.blog },
-    { href: `/${currentLangCode}/help`, label: dictionary.help },
-    { href: `/${currentLangCode}/api`, label: dictionary.api },
+    {
+      href: `/${currentLangCode}/topics/contract-management`,
+      label: dictionary.topicContractManagement,
+      description: dictionary.topicContractManagementDesc,
+    },
+    {
+      href: `/${currentLangCode}/topics/e-signatures`,
+      label: dictionary.topicESignatures,
+      description: dictionary.topicESignaturesDesc,
+    },
+    {
+      href: `/${currentLangCode}/topics/doc-automation`,
+      label: dictionary.topicDocAutomation,
+      description: dictionary.topicDocAutomationDesc,
+    },
+    {
+      href: `/${currentLangCode}/topics/security-compliance`,
+      label: dictionary.topicSecurityCompliance,
+      description: dictionary.topicSecurityComplianceDesc,
+    },
+    {
+      href: `/${currentLangCode}/topics/agrello-features`,
+      label: dictionary.topicAgrelloFeatures,
+      description: dictionary.topicAgrelloFeaturesDesc,
+    },
+    { href: `/${currentLangCode}/blog`, label: dictionary.blog, description: '' },
   ]
 
   return (
@@ -136,7 +210,7 @@ export function Navigation({ isStatic = false }: { isStatic?: boolean }) {
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-gray-700 hover:text-brand-primary transition-colors text-sm font-medium cursor-pointer"
+                className="text-gray-700 hover:text-brand-primary transition-colors text-base font-medium cursor-pointer"
               >
                 {item.label}
               </Link>
@@ -150,7 +224,7 @@ export function Navigation({ isStatic = false }: { isStatic?: boolean }) {
                   setResourcesOpen(!resourcesOpen)
                 }}
                 onBlur={() => setTimeout(() => setResourcesOpen(false), 150)}
-                className="flex items-center gap-1 text-gray-700 hover:text-brand-primary transition-colors text-sm font-medium cursor-pointer"
+                className="flex items-center gap-1 text-gray-700 hover:text-brand-primary transition-colors text-base font-medium cursor-pointer"
               >
                 {dictionary.resources}
                 <svg
@@ -159,19 +233,31 @@ export function Navigation({ isStatic = false }: { isStatic?: boolean }) {
                   stroke="currentColor"
                   viewBox="0 0 24 24"
                 >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M19 9l-7 7-7-7"
+                  />
                 </svg>
               </button>
 
               {resourcesOpen && (
-                <div className="absolute top-full left-0 mt-2 w-48 bg-white rounded-xl shadow-lg border border-gray-100 py-2">
+                <div className="absolute top-full left-0 mt-2 w-72 bg-white rounded-xl shadow-lg border border-gray-100 py-2">
                   {resourcesItems.map((item) => (
                     <Link
                       key={item.href}
                       href={item.href}
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-brand-primary cursor-pointer"
+                      className="block px-4 py-2.5 hover:bg-gray-50 cursor-pointer"
                     >
-                      {item.label}
+                      <span className="text-sm font-medium text-gray-700 group-hover:text-brand-primary">
+                        {item.label}
+                      </span>
+                      {item.description && (
+                        <span className="block text-xs text-gray-500 mt-0.5">
+                          {item.description}
+                        </span>
+                      )}
                     </Link>
                   ))}
                 </div>
@@ -180,7 +266,7 @@ export function Navigation({ isStatic = false }: { isStatic?: boolean }) {
 
             <Link
               href={`/${currentLangCode}/contact`}
-              className="text-gray-700 hover:text-brand-primary transition-colors text-sm font-medium cursor-pointer"
+              className="text-gray-700 hover:text-brand-primary transition-colors text-base font-medium cursor-pointer"
             >
               {dictionary.contact}
             </Link>
@@ -205,14 +291,21 @@ export function Navigation({ isStatic = false }: { isStatic?: boolean }) {
                   height={15}
                   className="rounded-[2px]"
                 />
-                <span className="text-sm font-medium text-gray-700 uppercase">{currentLang.code}</span>
+                <span className="text-sm font-medium text-gray-700 uppercase">
+                  {currentLang.code}
+                </span>
                 <svg
                   className={`w-3.5 h-3.5 text-gray-500 transition-transform ${languageMenuOpen ? 'rotate-180' : ''}`}
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
                 >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M19 9l-7 7-7-7"
+                  />
                 </svg>
               </button>
 
@@ -223,7 +316,9 @@ export function Navigation({ isStatic = false }: { isStatic?: boolean }) {
                       key={lang.code}
                       href={`/${lang.code}`}
                       className={`flex items-center gap-3 px-4 py-2.5 text-sm hover:bg-gray-50 transition-colors cursor-pointer ${
-                        currentLang.code === lang.code ? 'bg-gray-50 font-medium text-brand-primary' : 'text-gray-700'
+                        currentLang.code === lang.code
+                          ? 'bg-gray-50 font-medium text-brand-primary'
+                          : 'text-gray-700'
                       }`}
                     >
                       <Image
@@ -242,14 +337,14 @@ export function Navigation({ isStatic = false }: { isStatic?: boolean }) {
 
             {/* Log in */}
             <Link
-              href="/login"
-              className="text-gray-700 hover:text-brand-primary transition-colors text-sm font-medium cursor-pointer"
+              href="https://docs.agrello.io/app/login?open_tab=sign_in"
+              className="text-gray-700 hover:text-brand-primary transition-colors text-base font-medium cursor-pointer"
             >
               {dictionary.login}
             </Link>
 
             {/* CTA Button */}
-            <Button as="a" href="/signup" size="md">
+            <Button as="a" href="https://docs.agrello.io/app/login?open_tab=sign_up" size="md">
               {dictionary.signup}
             </Button>
           </div>
@@ -262,9 +357,19 @@ export function Navigation({ isStatic = false }: { isStatic?: boolean }) {
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               {mobileMenuOpen ? (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
               ) : (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
               )}
             </svg>
           </button>
@@ -331,10 +436,21 @@ export function Navigation({ isStatic = false }: { isStatic?: boolean }) {
 
               {/* Mobile Auth */}
               <div className="flex flex-col gap-3 pt-4 border-t border-gray-100 mt-2">
-                <Button as="a" href="/login" variant="outline" size="md" onClick={() => setMobileMenuOpen(false)}>
+                <Button
+                  as="a"
+                  href="https://docs.agrello.io/app/login?open_tab=sign_in"
+                  variant="outline"
+                  size="md"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
                   {dictionary.login}
                 </Button>
-                <Button as="a" href="/signup" size="md" onClick={() => setMobileMenuOpen(false)}>
+                <Button
+                  as="a"
+                  href="https://docs.agrello.io/app/login?open_tab=sign_up"
+                  size="md"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
                   {dictionary.signup}
                 </Button>
               </div>

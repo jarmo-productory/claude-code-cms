@@ -21,10 +21,7 @@ export default function HeaderPreviewPage() {
             The header starts transparent and becomes white with a shadow when you scroll.
           </p>
           <div className="flex justify-center gap-4">
-            <Link
-              href="/styleguide/layouts"
-              className="text-brand-primary hover:underline"
-            >
+            <Link href="/styleguide/layouts" className="text-brand-primary hover:underline">
               ← Back to Layouts
             </Link>
           </div>
@@ -69,7 +66,7 @@ export default function HeaderPreviewPage() {
           <h2 className="text-2xl font-bold text-brand-dark mb-6">Navigation Structure</h2>
           <div className="bg-white rounded-xl p-6">
             <pre className="text-sm text-gray-600 overflow-x-auto">
-{`Left:    Logo (Agrello)
+              {`Left:    Logo (Agrello)
 Center:  Features | Pricing | Resources ▼ | Contact us
 Right:   🇬🇧 🇪🇪 🇱🇻 🇺🇦 | Log in | [Try for free]`}
             </pre>

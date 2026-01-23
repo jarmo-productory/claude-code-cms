@@ -20,15 +20,15 @@ import { Button, Badge, Card, Input, Icon, SectionHeader } from '@/components/ui
 
 ### Available Components
 
-| Component | Description | Key Props |
-|-----------|-------------|-----------|
-| `Button` | All button variants | `variant`, `size`, `onDark` |
-| `Badge` | Labels and status indicators | `variant`, `showDot`, `onDark` |
-| `Card` | Content containers | `variant`, `padding`, `hoverable` |
-| `Input` | Form inputs with labels | `type`, `label`, `error`, `helperText` |
-| `Icon` | Lucide icons integration | `name`, `size` |
+| Component       | Description                  | Key Props                                         |
+| --------------- | ---------------------------- | ------------------------------------------------- |
+| `Button`        | All button variants          | `variant`, `size`, `onDark`                       |
+| `Badge`         | Labels and status indicators | `variant`, `showDot`, `onDark`                    |
+| `Card`          | Content containers           | `variant`, `padding`, `hoverable`                 |
+| `Input`         | Form inputs with labels      | `type`, `label`, `error`, `helperText`            |
+| `Icon`          | Lucide icons integration     | `name`, `size`                                    |
 | `SectionHeader` | Section titles with overline | `overline`, `headline`, `body`, `align`, `onDark` |
-| `FadeInView` | Scroll-triggered animations | `direction`, `delay` |
+| `FadeInView`    | Scroll-triggered animations  | `direction`, `delay`                              |
 
 ---
 
@@ -99,9 +99,7 @@ Below are raw Tailwind patterns for cases where you need custom implementations.
 
 ```tsx
 <div className="space-y-2">
-  <label className="block text-sm font-medium text-slate-700">
-    Email Address
-  </label>
+  <label className="block text-sm font-medium text-slate-700">Email Address</label>
   <input
     type="email"
     placeholder="you@example.com"
@@ -130,12 +128,8 @@ Below are raw Tailwind patterns for cases where you need custom implementations.
 
 ```tsx
 <div className="bg-white rounded-2xl border border-slate-200 p-8">
-  <h3 className="text-xl font-display font-semibold text-slate-900 mb-3">
-    Card Title
-  </h3>
-  <p className="text-slate-600">
-    Card content goes here.
-  </p>
+  <h3 className="text-xl font-display font-semibold text-slate-900 mb-3">Card Title</h3>
+  <p className="text-slate-600">Card content goes here.</p>
 </div>
 ```
 
@@ -146,9 +140,7 @@ Below are raw Tailwind patterns for cases where you need custom implementations.
   <h3 className="text-xl font-display font-semibold text-slate-900 mb-3 group-hover:text-brand-primary transition-colors">
     Interactive Card
   </h3>
-  <p className="text-slate-600">
-    Hover to see the effect.
-  </p>
+  <p className="text-slate-600">Hover to see the effect.</p>
 </div>
 ```
 
@@ -157,16 +149,22 @@ Below are raw Tailwind patterns for cases where you need custom implementations.
 ```tsx
 <div className="bg-white rounded-2xl border border-slate-200 p-8 hover:border-brand-primary/50 hover:shadow-lg transition-all group">
   <div className="w-12 h-12 bg-brand-primary/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-brand-primary/20 transition-colors">
-    <svg className="w-6 h-6 text-brand-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+    <svg
+      className="w-6 h-6 text-brand-primary"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+        d="M13 10V3L4 14h7v7l9-11h-7z"
+      />
     </svg>
   </div>
-  <h3 className="text-xl font-display font-semibold text-slate-900 mb-3">
-    Feature Title
-  </h3>
-  <p className="text-slate-600">
-    Feature description text.
-  </p>
+  <h3 className="text-xl font-display font-semibold text-slate-900 mb-3">Feature Title</h3>
+  <p className="text-slate-600">Feature description text.</p>
 </div>
 ```
 
@@ -199,9 +197,25 @@ Below are raw Tailwind patterns for cases where you need custom implementations.
 ### Spinner
 
 ```tsx
-<svg className="animate-spin h-8 w-8 text-brand-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+<svg
+  className="animate-spin h-8 w-8 text-brand-primary"
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  viewBox="0 0 24 24"
+>
+  <circle
+    className="opacity-25"
+    cx="12"
+    cy="12"
+    r="10"
+    stroke="currentColor"
+    strokeWidth="4"
+  ></circle>
+  <path
+    className="opacity-75"
+    fill="currentColor"
+    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+  ></path>
 </svg>
 ```
 
@@ -218,6 +232,7 @@ Below are raw Tailwind patterns for cases where you need custom implementations.
 ## Usage Guidelines
 
 ### Do:
+
 - Use Primary button for main actions
 - Use Accent button for CTAs that need attention
 - Maintain consistent spacing (use spacing scale)
@@ -225,6 +240,7 @@ Below are raw Tailwind patterns for cases where you need custom implementations.
 - Use loading states for async operations
 
 ### Don't:
+
 - Mix button styles arbitrarily
 - Use more than one Accent button per section
 - Skip error/validation states on forms

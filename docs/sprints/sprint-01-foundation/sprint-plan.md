@@ -1,6 +1,7 @@
 # Sprint 01: Foundation (Brand Tokens & Component Library)
 
 ## Goal
+
 Extract Agrello's brand identity from Webflow assets and establish the foundational design system (colors, typography, spacing) for the Next.js migration.
 
 ## Status: COMPLETE
@@ -20,18 +21,19 @@ Extract Agrello's brand identity from Webflow assets and establish the foundatio
 
 ## Deliverables
 
-| Deliverable | Status | Location |
-|-------------|--------|----------|
-| Brand tokens in CSS | Done | `src/app/globals.css` |
-| Font configuration | Done | `src/app/layout.tsx` |
-| Styleguide page | Done | `/styleguide` |
-| Public assets | Done | `public/` (logos, flags, images) |
-| Component library | Done | `src/components/ui/` |
-| Analytics | Deferred | Move to Sprint 03 |
+| Deliverable         | Status   | Location                         |
+| ------------------- | -------- | -------------------------------- |
+| Brand tokens in CSS | Done     | `src/app/globals.css`            |
+| Font configuration  | Done     | `src/app/layout.tsx`             |
+| Styleguide page     | Done     | `/styleguide`                    |
+| Public assets       | Done     | `public/` (logos, flags, images) |
+| Component library   | Done     | `src/components/ui/`             |
+| Analytics           | Deferred | Move to Sprint 03                |
 
 ## What Was Built
 
 ### Brand System (`src/app/globals.css`)
+
 - `brand-dark` - Dark backgrounds
 - `brand-primary` - Primary blue (#3B82F6)
 - `brand-secondary` - Secondary color
@@ -41,10 +43,12 @@ Extract Agrello's brand identity from Webflow assets and establish the foundatio
 - `bg-brand-mesh` - Mesh background pattern
 
 ### Typography
+
 - `font-display` - Headlines
 - `font-sans` - Body text
 
 ### Component Library (`src/components/ui/`)
+
 - Button (variants: primary, secondary, outline, ghost)
 - Badge
 - Card (variants: default, highlight, frosted)
@@ -54,6 +58,7 @@ Extract Agrello's brand identity from Webflow assets and establish the foundatio
 - FadeInView
 
 ### Public Assets
+
 - `/public/logo.svg` - Main logo
 - `/public/logo-white.svg` - White variant
 - `/public/flags/` - Language flags (gb, ee, lv, ua)

@@ -48,9 +48,15 @@ export default function ElementsPage() {
           <div className="bg-brand-dark rounded-xl p-8">
             <h3 className="text-lg font-semibold mb-4 text-white">On Dark Background</h3>
             <div className="flex flex-wrap gap-4">
-              <Button variant="primary" onDark>Primary</Button>
-              <Button variant="secondary" onDark>Secondary</Button>
-              <Button variant="outline" onDark>Outline</Button>
+              <Button variant="primary" onDark>
+                Primary
+              </Button>
+              <Button variant="secondary" onDark>
+                Secondary
+              </Button>
+              <Button variant="outline" onDark>
+                Outline
+              </Button>
             </div>
           </div>
 
@@ -85,7 +91,9 @@ export default function ElementsPage() {
             <h3 className="text-lg font-semibold mb-4">With Status Dot</h3>
             <div className="flex flex-wrap gap-4">
               <Badge showDot>Active</Badge>
-              <Badge showDot variant="outline">Pending</Badge>
+              <Badge showDot variant="outline">
+                Pending
+              </Badge>
             </div>
           </div>
 
@@ -94,8 +102,12 @@ export default function ElementsPage() {
             <h3 className="text-lg font-semibold mb-4 text-white">On Dark Background</h3>
             <div className="flex flex-wrap gap-4">
               <Badge onDark>Default</Badge>
-              <Badge variant="outline" onDark>Outline</Badge>
-              <Badge variant="status" onDark>Status</Badge>
+              <Badge variant="outline" onDark>
+                Outline
+              </Badge>
+              <Badge variant="status" onDark>
+                Status
+              </Badge>
             </div>
           </div>
         </div>
@@ -111,7 +123,11 @@ export default function ElementsPage() {
             <div className="max-w-md space-y-4">
               <Input label="Email" type="email" placeholder="you@example.com" />
               <Input label="Password" type="password" placeholder="Enter password" />
-              <Input label="With Helper" placeholder="Type here..." helperText="This is helper text" />
+              <Input
+                label="With Helper"
+                placeholder="Type here..."
+                helperText="This is helper text"
+              />
               <Input label="Disabled" placeholder="Cannot edit" disabled />
             </div>
           </div>
@@ -125,13 +141,21 @@ export default function ElementsPage() {
         <div className="bg-white rounded-xl p-8">
           <div className="space-y-4">
             <p>
-              <a href="#" className="text-brand-primary hover:underline">Default link style</a>
+              <a href="#" className="text-brand-primary hover:underline">
+                Default link style
+              </a>
             </p>
             <p>
-              <a href="#" className="text-gray-600 hover:text-brand-primary transition-colors">Subtle link style</a>
+              <a href="#" className="text-gray-600 hover:text-brand-primary transition-colors">
+                Subtle link style
+              </a>
             </p>
             <p className="text-gray-600">
-              Inline link in <a href="#" className="text-brand-primary hover:underline">paragraph text</a> example.
+              Inline link in{' '}
+              <a href="#" className="text-brand-primary hover:underline">
+                paragraph text
+              </a>{' '}
+              example.
             </p>
           </div>
         </div>

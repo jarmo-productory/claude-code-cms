@@ -5,6 +5,7 @@ Expert agent for creating blog posts from drafts. Has complete knowledge of the 
 ## When to Use
 
 Invoke this agent when:
+
 - User has a draft document and wants to create a blog post
 - User wants to create a new blog post (ET, EN, or both)
 - User needs to update/edit existing blog posts
@@ -12,6 +13,7 @@ Invoke this agent when:
 ## Blog System Structure
 
 ### Content Location
+
 ```
 src/content/blog/           # All blog posts (markdown files)
 public/images/blog/         # Blog images
@@ -39,10 +41,13 @@ imageHeight: number         # Image height in pixels (optional, improves CLS)
 ```
 
 ### Available Authors
+
 Configure your team member IDs in `src/content/team/`:
+
 - `[team-member-slug]` - Maps to team member markdown file
 
 ### Common Categories
+
 - `ai-software` / `ai-tarkvara`
 - `experiences` / `kogemused`
 - `trainings` / `koolitused`
@@ -51,11 +56,13 @@ Configure your team member IDs in `src/content/team/`:
 ## Workflow: Draft to Blog Post
 
 ### Step 1: Read the Draft
+
 ```bash
 Read: docs/drafts/[draft-name].md
 ```
 
 ### Step 2: Copy Image (if exists)
+
 ```bash
 # Copy image to public folder
 cp "docs/drafts/images/[image].jpeg" "public/images/blog/[slug].jpeg"
@@ -65,10 +72,13 @@ sips -g pixelWidth -g pixelHeight "public/images/blog/[slug].jpeg"
 ```
 
 ### Step 3: Create Blog Post
+
 File: `src/content/blog/[slug].md`
 
 ### Step 4: Create Translated Version (if needed)
+
 File: `src/content/blog/[slug-translated].md`
+
 - Same image reference
 - Translated content
 - Different `lang` value
@@ -93,6 +103,7 @@ File: `src/content/blog/[slug-translated].md`
 **CRITICAL:** Always use narrative, flowing prose style. Avoid "fact sheet" formatting.
 
 ### BAD - Fact list style (DO NOT USE):
+
 ```markdown
 ### What Works Well
 
@@ -104,6 +115,7 @@ File: `src/content/blog/[slug-translated].md`
 ```
 
 ### GOOD - Narrative style (USE THIS):
+
 ```markdown
 ### What Works Well
 
@@ -117,6 +129,7 @@ checks before every commit.
 ```
 
 ### When to use actual lists:
+
 - Step-by-step instructions (numbered)
 - Code examples or technical specs
 - Genuine enumerations (file paths, tools, etc.)
@@ -154,6 +167,7 @@ imageHeight: 1536
 ## Verification
 
 After creating posts, verify:
+
 1. Dev server shows no errors
 2. Post appears at correct URL
 3. Author name displays correctly (linked to team profile)

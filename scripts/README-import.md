@@ -5,6 +5,7 @@ This guide explains how to import blog articles from Webflow CMS into the Next.j
 ## Overview
 
 The import script:
+
 - Parses Webflow CSV export (all locales in single file)
 - Downloads images from Webflow CDN
 - Converts HTML content to Markdown
@@ -14,6 +15,7 @@ The import script:
 ## Prerequisites
 
 1. **Install dependencies** (first time only):
+
 ```bash
 npm install
 ```
@@ -148,23 +150,23 @@ Each article is converted to markdown with YAML frontmatter:
 
 ```markdown
 ---
-title: "Article Title"
-slug: "article-slug"
-metaTitle: "SEO Title"
-description: "Meta description"
-keyword: "main keyword"
-image: "/images/blog-import/main-image.png"
-thumbnail: "/images/blog-import/thumbnail.png"
-lang: "en"
-topic: "Category"
-subTopic: "Subcategory"
-date: "2024-01-15"
-excerpt: "Article summary"
-readingTime: "5"
-author: "author-slug"
+title: 'Article Title'
+slug: 'article-slug'
+metaTitle: 'SEO Title'
+description: 'Meta description'
+keyword: 'main keyword'
+image: '/images/blog-import/main-image.png'
+thumbnail: '/images/blog-import/thumbnail.png'
+lang: 'en'
+topic: 'Category'
+subTopic: 'Subcategory'
+date: '2024-01-15'
+excerpt: 'Article summary'
+readingTime: '5'
+author: 'author-slug'
 supportOnly: false
 featured: false
-keywordCluster: "cluster name"
+keywordCluster: 'cluster name'
 tags:
   - tag1
   - tag2
@@ -177,28 +179,28 @@ Article content in markdown format...
 
 ## Frontmatter Field Mapping
 
-| CSV Column | Frontmatter Field | Notes |
-|------------|-------------------|-------|
-| Name | title | Direct copy |
-| Slug | slug | Direct copy |
-| Meta Title | metaTitle | SEO title |
-| Meta Description | description | SEO description |
-| Keyword | keyword | Main keyword |
-| Main Image (1200x630) | image | Downloaded → local path |
-| Thumbnail image (520x273) | thumbnail | Downloaded → local path |
-| Locale | lang | en, et, or lv |
-| Topic | topic | Category |
-| Sub-topic | subTopic | Subcategory |
-| Publish date | date | YYYY-MM-DD format |
-| Post Summary | excerpt | Article summary |
-| Reading time | readingTime | Reading time in minutes |
-| Post Body | *content* | HTML → Markdown |
-| Author | author | Author slug |
-| Support only | supportOnly | Boolean |
-| Featured on category page | featured | Boolean |
-| Keyword cluster | keywordCluster | Cluster name |
-| Tag | tags | Split by `;` → array |
-| Categories | categories | Split by `;` → array |
+| CSV Column                | Frontmatter Field | Notes                   |
+| ------------------------- | ----------------- | ----------------------- |
+| Name                      | title             | Direct copy             |
+| Slug                      | slug              | Direct copy             |
+| Meta Title                | metaTitle         | SEO title               |
+| Meta Description          | description       | SEO description         |
+| Keyword                   | keyword           | Main keyword            |
+| Main Image (1200x630)     | image             | Downloaded → local path |
+| Thumbnail image (520x273) | thumbnail         | Downloaded → local path |
+| Locale                    | lang              | en, et, or lv           |
+| Topic                     | topic             | Category                |
+| Sub-topic                 | subTopic          | Subcategory             |
+| Publish date              | date              | YYYY-MM-DD format       |
+| Post Summary              | excerpt           | Article summary         |
+| Reading time              | readingTime       | Reading time in minutes |
+| Post Body                 | _content_         | HTML → Markdown         |
+| Author                    | author            | Author slug             |
+| Support only              | supportOnly       | Boolean                 |
+| Featured on category page | featured          | Boolean                 |
+| Keyword cluster           | keywordCluster    | Cluster name            |
+| Tag                       | tags              | Split by `;` → array    |
+| Categories                | categories        | Split by `;` → array    |
 
 ## Features
 
@@ -219,6 +221,7 @@ Article content in markdown format...
 ### Filtering
 
 Automatically filters out:
+
 - Archived articles (`Archived: true`)
 - Draft articles (`Draft: true`)
 - Articles with missing Name or Slug
@@ -243,11 +246,13 @@ ls -la ./docs/webflow-migration/articles.csv
 ### "No articles imported"
 
 Possible reasons:
+
 - All articles are archived or draft
 - Locale filter doesn't match any articles
 - CSV format is different than expected
 
 Check CSV structure:
+
 ```bash
 head -n 1 ./articles.csv
 ```

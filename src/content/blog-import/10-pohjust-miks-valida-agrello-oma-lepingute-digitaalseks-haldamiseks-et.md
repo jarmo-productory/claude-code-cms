@@ -1,16 +1,16 @@
 ---
-title: "10 põhjust, miks valida Agrello oma lepingute digitaalseks haldamiseks"
-slug: "10-pohjust-miks-valida-agrello-oma-lepingute-digitaalseks-haldamiseks"
-metaTitle: "10 põhjust, miks valida Agrello lepinguhalduse platvorm"
-description: "Lepingute digitaalsel haldamisel on mitmeid boonuseid, siin on 10 põhjust miks just Agrello on sinu ettevõttele parim partner. "
-keyword: "lepinguhaldus, koostöö, digitaalne allkirjastamine, paindlikkus, mugav koostöö, turvalisus"
-image: "./images/62ecea1458b878e98e3b542d_why-agrello.png"
-thumbnail: "./images/62ecea1458b878e98e3b542d_why-agrello.png"
-lang: "et"
-date: "2022-08-05"
-excerpt: "Järgnevas artiklis tutvustame sulle põhjuseid, miks just Agrello võiks kõikides nendes dokumendihalduse aspektides olla sobilik partner sinu ettevõtte jaoks."
-readingTime: "10"
-author: "paula-sepp"
+title: '10 põhjust, miks valida Agrello oma lepingute digitaalseks haldamiseks'
+slug: '10-pohjust-miks-valida-agrello-oma-lepingute-digitaalseks-haldamiseks'
+metaTitle: '10 põhjust, miks valida Agrello lepinguhalduse platvorm'
+description: 'Lepingute digitaalsel haldamisel on mitmeid boonuseid, siin on 10 põhjust miks just Agrello on sinu ettevõttele parim partner. '
+keyword: 'lepinguhaldus, koostöö, digitaalne allkirjastamine, paindlikkus, mugav koostöö, turvalisus'
+image: './images/62ecea1458b878e98e3b542d_why-agrello.png'
+thumbnail: './images/62ecea1458b878e98e3b542d_why-agrello.png'
+lang: 'et'
+date: '2022-08-05'
+excerpt: 'Järgnevas artiklis tutvustame sulle põhjuseid, miks just Agrello võiks kõikides nendes dokumendihalduse aspektides olla sobilik partner sinu ettevõtte jaoks.'
+readingTime: '10'
+author: 'paula-sepp'
 supportOnly: false
 featured: false
 tags:
@@ -30,16 +30,17 @@ Tänapäeval mõeldakse igas ettevõttes paratamatult sellele, milline oleks kõ
 
 [YouTube Video](https://www.youtube.com/watch?v=-pB61XgekeA)
 
-‍  
-  
+‍
+
 Dokumentide haldamise all peame silmas kogu dokumendi elutsüklit, mis sisaldab endas dokumentide ettevalmistamist, redigeerimist, koostööd, osapooltele laiali saatmist, allkirjastamist ning ka sorteerimist ja hoiustamist. Lepingute ja ettevõtte dokumentide haldamiseks on turul väga palju erinevaid lahendusi. Samuti on palju platvorme digitaalseks allkirjastamiseks. Välismaisetest konkurentidest väärivad mainimist näiteks DocuSign, PandaDoc, Adobe, SignEasy, eSignGenie jpt ning kodumaistest on silmapaistvaim Dokobit. Järgnevas artiklis tutvustame sulle põhjuseid, miks just Agrello võiks kõikides nendes dokumendihalduse aspektides olla sobilik partner sinu ettevõtte jaoks ning kuidas on sul võimalik aega säästa, et keskenduda olulisematele ülesannetele kui “paberimajandus”.  
 ‍
 
-### ‍  
+### ‍
+
 1\. Teenuse kättesaadavus ja lihtsus
 
-Agrello on oma platvormi loomisel võtnud eesmärgiks teenuse võimalikult lihtsa ja kiire kättesaadavuse ilma ebavajalike piiranguteta. Seetõttu ei ole konto loomiseks ja sisselogimiseks vaja muud kui e-posti aadressi. Isegi parooli ei ole Agrello konto jaoks vaja - iga kord sisse logides saadame sinu e-posti aadressile unikaalse numbrikoodi, millega saad sisselogimise autoriseerida.  
-  
+Agrello on oma platvormi loomisel võtnud eesmärgiks teenuse võimalikult lihtsa ja kiire kättesaadavuse ilma ebavajalike piiranguteta. Seetõttu ei ole konto loomiseks ja sisselogimiseks vaja muud kui e-posti aadressi. Isegi parooli ei ole Agrello konto jaoks vaja - iga kord sisse logides saadame sinu e-posti aadressile unikaalse numbrikoodi, millega saad sisselogimise autoriseerida.
+
 Kuna allkirjastamisel on alati ka teine pool, kes ei pruugi sinu poolt valitud teenusega eelnevalt tuttav olla, siis on väga oluline kasutajamugavus. Agrellos oleme sellele palju rõhku pannud, et kõik saaks tehtud kiirelt, lihtsalt ja mugavalt.
 
 ‍
@@ -74,8 +75,8 @@ Et lepingu ettevalmistamisele kuluvat aega veelgi vähendada, saab Agrello platv
 
 ### 6\. Mugavad koostöövõimalused
 
-Kindlasti eeldab ühe lepingu sõlmimine mitmetasandilist koostööd, seda nii ettevõttesiseselt, kui ka väliste partneritega. Agrello platvormil on olemas jagatud kaustad ehk “space’id”, kuhu saab näiteks projektipõhiselt dokumente jagada ning vastavalt vajadusele kutsuda kolleege või partnereid sinna koostööd tegema. Kõigil kausta liikmetel on ligipääs dokumentidele ning vastavalt neile antud õigustele võimalus dokumente redigeerida ja allkirjastada.  
-  
+Kindlasti eeldab ühe lepingu sõlmimine mitmetasandilist koostööd, seda nii ettevõttesiseselt, kui ka väliste partneritega. Agrello platvormil on olemas jagatud kaustad ehk “space’id”, kuhu saab näiteks projektipõhiselt dokumente jagada ning vastavalt vajadusele kutsuda kolleege või partnereid sinna koostööd tegema. Kõigil kausta liikmetel on ligipääs dokumentidele ning vastavalt neile antud õigustele võimalus dokumente redigeerida ja allkirjastada.
+
 Lisaks koostööle kaustades on võimalik dünaamilisi välju oma välisele partnerile täitmiseks määrata. Nii saab ta platvormile tulles ise oma ettevõtte informatsiooni enne allkirjastamist sisestada. Samuti jääb allkirjastatud dokument ka temale platvormil tähtajatult kättesaadavaks ning puudub vajadus seda eraldi alla laadida või e-kirjaga saata.
 
 ‍

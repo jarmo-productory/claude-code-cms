@@ -4,7 +4,7 @@
 **Sprint:** 08 - Blog SEO Optimization  
 **Phase:** 1 - Research
 
-* * *
+---
 
 ## Content Inventory
 
@@ -14,12 +14,9 @@
 
 **Breakdown by Locale:**
 
--   English (en): ~137 articles
-    
--   Estonian (et): ~84 articles
-    
--   Latvian (lv): ~53 articles
-    
+- English (en): ~137 articles
+- Estonian (et): ~84 articles
+- Latvian (lv): ~53 articles
 
 **Sample Article Structure:**  
 \`\`\`markdown
@@ -30,16 +27,11 @@ x
 
 **Issues with Manual Approach:**
 
--   No validation of frontmatter
-    
--   No SEO quality check
-    
--   No tracking of what's been migrated
-    
--   Risk of breaking image paths
-    
--   No optimization before publishing
-    
+- No validation of frontmatter
+- No SEO quality check
+- No tracking of what's been migrated
+- Risk of breaking image paths
+- No optimization before publishing
 
 ### Proposed Workflow (Automated)
 
@@ -53,91 +45,65 @@ npm run migrate-blog -- --slugs=article-1,article-2 --optimize
 
 **Benefits:**
 
--   Validates frontmatter schema
-    
--   Audits SEO metadata quality
-    
--   Optionally optimizes titles/descriptions
-    
--   Logs migration for tracking
-    
--   Can rollback if needed
-    
+- Validates frontmatter schema
+- Audits SEO metadata quality
+- Optionally optimizes titles/descriptions
+- Logs migration for tracking
+- Can rollback if needed
 
-* * *
+---
 
 ## Data Needs for Phase 2
 
 ### Required from Owner
 
 1.  **Google Search Console Export**
-    
-    -   Performance → Pages → Last 12 months
-        
-    -   Must include: URL, Clicks, Impressions, CTR, Position
-        
-    -   Preferred format: CSV
-        
+    - Performance → Pages → Last 12 months
+    - Must include: URL, Clicks, Impressions, CTR, Position
+    - Preferred format: CSV
+
 2.  **Country Breakdown (Optional)**
-    
-    -   Separate exports for Estonia, Latvia, UK
-        
-    -   Same metrics
-        
+    - Separate exports for Estonia, Latvia, UK
+    - Same metrics
+
 3.  **Current Production URLs**
-    
-    -   List of any blog content already live
-        
-    -   To avoid duplicate migration
-        
+    - List of any blog content already live
+    - To avoid duplicate migration
 
 ### Questions for Owner
 
 1.  Should all locales be treated equally, or prioritize one?
-    
 2.  Any sensitive/outdated content that should NOT be migrated?
-    
 3.  Who should review content before it goes live?
-    
 4.  Are there specific keywords/topics we should prioritize?
-    
 
-* * *
+---
 
 ## Technical Risks
 
-| Risk | Likelihood | Impact | Mitigation |
-| --- | --- | --- | --- |
-| Webflow import had errors | Medium | High | Audit random sample of 10 articles |
-| Images missing or broken | Low | Medium | Validate image paths in migration script |
-| Markdown formatting issues | Medium | Low | Visual spot-check before migration |
-| Duplicate content (same slug different locales) | Low | Medium | Filename convention: `{slug}-{lang}.md` |
-| Old content references outdated features | Medium | Low | Manual review of high-traffic articles |
+| Risk                                            | Likelihood | Impact | Mitigation                               |
+| ----------------------------------------------- | ---------- | ------ | ---------------------------------------- |
+| Webflow import had errors                       | Medium     | High   | Audit random sample of 10 articles       |
+| Images missing or broken                        | Low        | Medium | Validate image paths in migration script |
+| Markdown formatting issues                      | Medium     | Low    | Visual spot-check before migration       |
+| Duplicate content (same slug different locales) | Low        | Medium | Filename convention: `{slug}-{lang}.md`  |
+| Old content references outdated features        | Medium     | Low    | Manual review of high-traffic articles   |
 
-* * *
+---
 
 ## Next Steps (Phase 1)
 
 1.  ✅ Document current state (this file)
-    
 2.  ⏳ Receive GSC data from owner
-    
 3.  ⏳ Analyze GSC data structure
-    
 4.  ⏳ Build content inventory spreadsheet
-    
 5.  ⏳ Categorize articles (winner/potential/long-tail/drop)
-    
 6.  ⏳ Count articles per category
-    
 7.  ⏳ Document findings and recommendations
-    
 8.  ⏳ Update sprint plan with actual numbers
-    
 9.  ⏳ Request Phase 2 approval
-    
 
-* * *
+---
 
 ## File Structure After Sprint
 
@@ -164,6 +130,6 @@ public/images/blog-content/   ← Shared by both folders
 └── image2.jpg
 ```
 
-* * *
+---
 
-*Research document - Will be updated as data becomes available*
+_Research document - Will be updated as data becomes available_

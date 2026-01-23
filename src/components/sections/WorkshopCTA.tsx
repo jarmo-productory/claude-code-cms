@@ -35,7 +35,6 @@ export function WorkshopCTA({
     <section className={`py-16 lg:py-24 bg-white overflow-hidden ${className || ''}`}>
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-
           {/* Content Column - Left */}
           <div className="flex flex-col">
             {/* Overline */}
@@ -49,9 +48,7 @@ export function WorkshopCTA({
             </h2>
 
             {/* Description */}
-            <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-              {description}
-            </p>
+            <p className="text-lg text-gray-600 mb-8 leading-relaxed">{description}</p>
 
             {/* Benefits List */}
             <ul className="space-y-4 mb-8">
@@ -96,7 +93,6 @@ export function WorkshopCTA({
               />
             </div>
           </div>
-
         </div>
       </div>
     </section>

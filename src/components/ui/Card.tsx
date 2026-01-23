@@ -59,17 +59,20 @@ export function Card({
       variantClasses = 'bg-slate-50 border border-slate-100'
       break
     case 'frosted': // For overlay on images/gradients (Stats, Hero)
-      variantClasses = 'bg-white/70 backdrop-blur-xl border border-white/50 shadow-lg supports-[backdrop-filter]:bg-white/60'
+      variantClasses =
+        'bg-white/70 backdrop-blur-xl border border-white/50 shadow-lg supports-[backdrop-filter]:bg-white/60'
       break
     case 'dark': // Dark mode card (e.g. Footer area or dark section)
       variantClasses = 'bg-brand-dark/95 border border-white/10 text-white shadow-xl'
       break
     case 'highlight': // Featured items
-      variantClasses = 'bg-gradient-to-br from-white to-brand-surface border border-brand-primary/20 shadow-lg shadow-brand-primary/5'
+      variantClasses =
+        'bg-gradient-to-br from-white to-brand-surface border border-brand-primary/20 shadow-lg shadow-brand-primary/5'
       break
     case 'glow': // Glowing border card for dark gradient backgrounds (Premium SaaS look)
       // Combines: subtle base border + bright top inset highlight + deep shadow
-      variantClasses = 'bg-brand-dark/95 text-white border border-white/[0.08] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.1),0_25px_50px_-12px_rgba(0,0,0,0.5)]'
+      variantClasses =
+        'bg-brand-dark/95 text-white border border-white/[0.08] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.1),0_25px_50px_-12px_rgba(0,0,0,0.5)]'
       break
   }
 
@@ -91,15 +94,13 @@ export function Card({
  * Specialized frosted glass card for client logos and similar sections.
  * @deprecated Use <Card variant="frosted" radius="3xl" padding="xl" /> instead.
  */
-export function FrostedCard({ children, className = '', ...props }: Omit<CardProps, 'variant' | 'padding' | 'radius'>) {
+export function FrostedCard({
+  children,
+  className = '',
+  ...props
+}: Omit<CardProps, 'variant' | 'padding' | 'radius'>) {
   return (
-    <Card
-      variant="frosted"
-      radius="3xl"
-      padding="xl"
-      className={className}
-      {...props}
-    >
+    <Card variant="frosted" radius="3xl" padding="xl" className={className} {...props}>
       {children}
     </Card>
   )

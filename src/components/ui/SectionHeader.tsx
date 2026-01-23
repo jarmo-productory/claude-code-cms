@@ -33,24 +33,18 @@ export function SectionHeader({
   return (
     <div className={`max-w-3xl ${alignClasses} ${className}`.trim()}>
       {overline && (
-        <Badge
-          showDot={showDot}
-          onDark={onDark}
-          className="mb-6"
-        >
+        <Badge showDot={showDot} onDark={onDark} className="mb-6">
           {overline}
         </Badge>
       )}
 
-      <h2 className={`font-display text-4xl sm:text-5xl lg:text-6xl font-bold ${headlineColor} mb-6`}>
+      <h2
+        className={`font-display text-4xl sm:text-5xl lg:text-6xl font-bold ${headlineColor} mb-6`}
+      >
         {headline}
       </h2>
 
-      {body && (
-        <div className={`text-lg ${bodyColor} leading-relaxed`}>
-          {body}
-        </div>
-      )}
+      {body && <div className={`text-lg ${bodyColor} leading-relaxed`}>{body}</div>}
     </div>
   )
 }

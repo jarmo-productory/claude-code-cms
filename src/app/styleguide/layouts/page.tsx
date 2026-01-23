@@ -15,9 +15,7 @@ export default function LayoutsPage() {
     <div className="space-y-16 relative">
       <header>
         <h1 className="text-4xl font-bold text-brand-dark mb-2">Layouts</h1>
-        <p className="text-lg text-gray-600">
-          Grid systems, containers, and responsive patterns
-        </p>
+        <p className="text-lg text-gray-600">Grid systems, containers, and responsive patterns</p>
       </header>
 
       {/* Header Component */}
@@ -48,14 +46,22 @@ export default function LayoutsPage() {
               >
                 View full preview with scroll
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                  />
                 </svg>
               </Link>
             </div>
           </div>
         </div>
         <p className="text-sm text-gray-500 mt-4">
-          Component: <code className="bg-gray-100 px-2 py-0.5 rounded">src/components/layout/Navigation.tsx</code>
+          Component:{' '}
+          <code className="bg-gray-100 px-2 py-0.5 rounded">
+            src/components/layout/Navigation.tsx
+          </code>
         </p>
       </section>
 
@@ -66,7 +72,10 @@ export default function LayoutsPage() {
           <BigHero />
         </div>
         <p className="text-sm text-gray-500 mt-4">
-          Component: <code className="bg-gray-100 px-2 py-0.5 rounded">src/components/sections/BigHero.tsx</code>
+          Component:{' '}
+          <code className="bg-gray-100 px-2 py-0.5 rounded">
+            src/components/sections/BigHero.tsx
+          </code>
         </p>
       </section>
 
@@ -79,10 +88,11 @@ export default function LayoutsPage() {
             headline="Tired of wasting time on printing, scanning, and posting contracts?"
             description={
               <p>
-                Say goodbye to the hassles of printing, scanning, and posting
-                contracts for signing. Agrello streamlines your entire contract
-                process, allowing you to <strong className="text-gray-900">create, sign, and track agreements with
-                just a few clicks.</strong>
+                Say goodbye to the hassles of printing, scanning, and posting contracts for signing.
+                Agrello streamlines your entire contract process, allowing you to{' '}
+                <strong className="text-gray-900">
+                  create, sign, and track agreements with just a few clicks.
+                </strong>
               </p>
             }
             imageSrc="/images/sections/macbook-screenshot.webp"
@@ -94,7 +104,10 @@ export default function LayoutsPage() {
           />
         </div>
         <p className="text-sm text-gray-500 mt-4">
-          Component: <code className="bg-gray-100 px-2 py-0.5 rounded">src/components/sections/TwoColumnSection.tsx</code>
+          Component:{' '}
+          <code className="bg-gray-100 px-2 py-0.5 rounded">
+            src/components/sections/TwoColumnSection.tsx
+          </code>
         </p>
       </section>
 
@@ -105,7 +118,10 @@ export default function LayoutsPage() {
           <CustomerLogos />
         </div>
         <p className="text-sm text-gray-500 mt-4">
-          Component: <code className="bg-gray-100 px-2 py-0.5 rounded">src/components/sections/CustomerLogos.tsx</code>
+          Component:{' '}
+          <code className="bg-gray-100 px-2 py-0.5 rounded">
+            src/components/sections/CustomerLogos.tsx
+          </code>
         </p>
       </section>
 
@@ -116,7 +132,8 @@ export default function LayoutsPage() {
           <Footer />
         </div>
         <p className="text-sm text-gray-500 mt-4">
-          Component: <code className="bg-gray-100 px-2 py-0.5 rounded">src/components/layout/Footer.tsx</code>
+          Component:{' '}
+          <code className="bg-gray-100 px-2 py-0.5 rounded">src/components/layout/Footer.tsx</code>
         </p>
       </section>
 
@@ -131,7 +148,9 @@ export default function LayoutsPage() {
             { name: 'max-w-7xl', width: '1280px', desc: 'Full-width sections' },
           ].map((container) => (
             <div key={container.name} className="bg-white rounded-lg p-4">
-              <div className={`${container.name} mx-auto bg-brand-primary/10 border-2 border-dashed border-brand-primary/30 rounded p-4`}>
+              <div
+                className={`${container.name} mx-auto bg-brand-primary/10 border-2 border-dashed border-brand-primary/30 rounded p-4`}
+              >
                 <div className="flex justify-between items-center">
                   <code className="text-sm font-medium">{container.name}</code>
                   <span className="text-sm text-gray-500">{container.width}</span>
@@ -172,7 +191,9 @@ export default function LayoutsPage() {
           {/* 4 Column */}
           <div className="bg-white rounded-xl p-8">
             <h3 className="text-lg font-semibold mb-4">4 Column Grid</h3>
-            <code className="text-sm text-gray-500 block mb-4">grid md:grid-cols-2 lg:grid-cols-4 gap-6</code>
+            <code className="text-sm text-gray-500 block mb-4">
+              grid md:grid-cols-2 lg:grid-cols-4 gap-6
+            </code>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
               <div className="bg-gray-100 rounded-lg p-6 text-center text-gray-500">1</div>
               <div className="bg-gray-100 rounded-lg p-6 text-center text-gray-500">2</div>
@@ -201,9 +222,7 @@ export default function LayoutsPage() {
       <section id="spacing" className="scroll-mt-40">
         <h2 className="text-2xl font-bold text-brand-dark mb-6">Section Spacing</h2>
         <div className="bg-white rounded-xl p-8">
-          <p className="text-gray-600 mb-6">
-            Consistent vertical rhythm between page sections.
-          </p>
+          <p className="text-gray-600 mb-6">Consistent vertical rhythm between page sections.</p>
           <div className="space-y-4">
             {[
               { name: 'py-12', pixels: '48px', use: 'Compact sections' },

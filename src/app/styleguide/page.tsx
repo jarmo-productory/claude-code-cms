@@ -38,12 +38,10 @@ export default function StyleguideOverview() {
   return (
     <div className="space-y-12">
       <header>
-        <h1 className="text-4xl font-bold text-brand-dark mb-4">
-          Agrello Design System
-        </h1>
+        <h1 className="text-4xl font-bold text-brand-dark mb-4">Agrello Design System</h1>
         <p className="text-lg text-gray-600 max-w-2xl">
-          A comprehensive library of styles, elements, components, and layouts
-          for building consistent Agrello experiences.
+          A comprehensive library of styles, elements, components, and layouts for building
+          consistent Agrello experiences.
         </p>
       </header>
 
@@ -72,12 +70,8 @@ export default function StyleguideOverview() {
         {sections.map((section) => (
           <Link key={section.href} href={section.href}>
             <Card hoverable padding="lg" className="h-full">
-              <h2 className="text-xl font-bold text-brand-dark mb-2">
-                {section.title}
-              </h2>
-              <p className="text-gray-600 mb-4">
-                {section.description}
-              </p>
+              <h2 className="text-xl font-bold text-brand-dark mb-2">{section.title}</h2>
+              <p className="text-gray-600 mb-4">{section.description}</p>
               <ul className="space-y-1">
                 {section.items.map((item) => (
                   <li key={item} className="text-sm text-gray-500 flex items-center gap-2">
@@ -105,7 +99,10 @@ export default function StyleguideOverview() {
                 <div className="w-12 h-12 rounded-lg bg-brand-dark" title="#272833"></div>
                 <div className="w-12 h-12 rounded-lg bg-brand-primary" title="#0d2ae6"></div>
                 <div className="w-12 h-12 rounded-lg bg-brand-secondary" title="#2ee0ab"></div>
-                <div className="w-12 h-12 rounded-lg bg-brand-surface border border-gray-200" title="#f5f6fa"></div>
+                <div
+                  className="w-12 h-12 rounded-lg bg-brand-surface border border-gray-200"
+                  title="#f5f6fa"
+                ></div>
               </div>
             </div>
             {/* Typography */}

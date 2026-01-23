@@ -6,6 +6,7 @@ allowed-tools: Bash(git:*)
 Review all changes, create a commit with a descriptive message, and push to the remote repository.
 
 Steps:
+
 1. Run `git status` to see all changes
 2. Run `git diff --staged` and `git diff` to understand what changed
 3. Run `git log -3 --oneline` to see recent commit style
@@ -14,6 +15,7 @@ Steps:
 6. Push to remote with `git push`
 
 Important:
+
 - Always include meaningful commit messages that describe WHAT changed and WHY
 - Follow the existing commit message style in the repository
 - If there are no changes to commit, inform the user

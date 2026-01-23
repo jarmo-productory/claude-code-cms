@@ -26,12 +26,12 @@ Import blog articles from Webflow CMS into Next.js, including images and content
 
 After researching both options, **CSV Import** was selected:
 
-| Criteria | CSV Import | Webflow API |
-|----------|-----------|-------------|
-| Implementation Time | 4.5 hours | 7 hours |
-| Complexity | Low-Medium | Medium-High |
-| Automation | Manual | Fully automated |
-| Best For | One-time migration | Ongoing sync |
+| Criteria            | CSV Import         | Webflow API     |
+| ------------------- | ------------------ | --------------- |
+| Implementation Time | 4.5 hours          | 7 hours         |
+| Complexity          | Low-Medium         | Medium-High     |
+| Automation          | Manual             | Fully automated |
+| Best For            | One-time migration | Ongoing sync    |
 
 **Chosen:** CSV Import (simpler, faster, perfect for migration)
 
@@ -65,16 +65,19 @@ After researching both options, **CSV Import** was selected:
 ## Current Status
 
 **Phase 1: RESEARCH ✅ COMPLETE**
+
 - Investigated Webflow API capabilities
 - Evaluated CSV export format
 - Compared both approaches
 - Made recommendation
 
 **Phase 2: PLAN 🚧 IN PROGRESS**
+
 - Sprint plan created
 - **Waiting for owner approval**
 
 **Phase 3: DEVELOP ⏸️ BLOCKED**
+
 - Cannot start implementation without approval
 - Requires owner to say "approved" or "proceed"
 
@@ -83,6 +86,7 @@ After researching both options, **CSV Import** was selected:
 ## How to Approve
 
 To proceed to implementation, respond with one of:
+
 - "approved"
 - "proceed"
 - "go ahead"
@@ -92,6 +96,7 @@ To proceed to implementation, respond with one of:
 ## Questions for Owner
 
 Before implementation:
+
 1. Can you export CSV from Webflow CMS?
 2. Which languages to prioritize? (EN first?)
 3. How many blog posts approximately?
@@ -124,4 +129,4 @@ docs/sprints/sprint-07-webflow-content-integration/
 
 ---
 
-*Ready for owner review and approval.*
+_Ready for owner review and approval._

@@ -47,8 +47,8 @@ export function generatePageMetadata(params: {
     alternates: {
       canonical: canonicalUrl,
       languages: {
-        'et': `${SITE_URL}/et/${path}`,
-        'en': `${SITE_URL}/en/${path}`,
+        et: `${SITE_URL}/et/${path}`,
+        en: `${SITE_URL}/en/${path}`,
       },
     },
     openGraph: {
@@ -87,8 +87,8 @@ export function generateBlogMetadata(post: BlogPost, locale: Locale): Metadata {
     alternates: {
       canonical: canonicalUrl,
       languages: {
-        'et': `${SITE_URL}/et/blog/${post.slug}`,
-        'en': `${SITE_URL}/en/blog/${post.slug}`,
+        et: `${SITE_URL}/et/blog/${post.slug}`,
+        en: `${SITE_URL}/en/blog/${post.slug}`,
       },
     },
     openGraph: {
@@ -160,15 +160,18 @@ export function buildArticleJsonLd(post: BlogPost, locale: Locale) {
  * CUSTOMIZE THIS with your site's actual content
  */
 export function getHomeMetadata(locale: Locale): Metadata {
-  const config = locale === 'et' ? {
-    title: 'Pealkiri eesti keeles',
-    description: 'Kirjeldus eesti keeles',
-    keywords: ['märksõna 1', 'märksõna 2'],
-  } : {
-    title: 'Title in English',
-    description: 'Description in English',
-    keywords: ['keyword 1', 'keyword 2'],
-  }
+  const config =
+    locale === 'et'
+      ? {
+          title: 'Pealkiri eesti keeles',
+          description: 'Kirjeldus eesti keeles',
+          keywords: ['märksõna 1', 'märksõna 2'],
+        }
+      : {
+          title: 'Title in English',
+          description: 'Description in English',
+          keywords: ['keyword 1', 'keyword 2'],
+        }
 
   return generatePageMetadata({
     ...config,
@@ -183,15 +186,18 @@ export function getHomeMetadata(locale: Locale): Metadata {
  * CUSTOMIZE THIS with your site's actual content
  */
 export function getAboutMetadata(locale: Locale): Metadata {
-  const config = locale === 'et' ? {
-    title: 'Meist',
-    description: 'Kes me oleme ja mida me teeme',
-    keywords: ['ettevõte', 'meeskond'],
-  } : {
-    title: 'About',
-    description: 'Who we are and what we do',
-    keywords: ['company', 'team'],
-  }
+  const config =
+    locale === 'et'
+      ? {
+          title: 'Meist',
+          description: 'Kes me oleme ja mida me teeme',
+          keywords: ['ettevõte', 'meeskond'],
+        }
+      : {
+          title: 'About',
+          description: 'Who we are and what we do',
+          keywords: ['company', 'team'],
+        }
 
   const path = locale === 'et' ? 'meist' : 'about'
   return generatePageMetadata({
@@ -205,15 +211,18 @@ export function getAboutMetadata(locale: Locale): Metadata {
  * Example: Get metadata for privacy page
  */
 export function getPrivacyMetadata(locale: Locale): Metadata {
-  const config = locale === 'et' ? {
-    title: 'Privaatsuspoliitika',
-    description: 'Kuidas me kogume, kasutame ja kaitseme teie isikuandmeid',
-    keywords: ['privaatsus', 'isikuandmed', 'GDPR'],
-  } : {
-    title: 'Privacy Policy',
-    description: 'How we collect, use, and protect your personal data',
-    keywords: ['privacy', 'personal data', 'GDPR'],
-  }
+  const config =
+    locale === 'et'
+      ? {
+          title: 'Privaatsuspoliitika',
+          description: 'Kuidas me kogume, kasutame ja kaitseme teie isikuandmeid',
+          keywords: ['privaatsus', 'isikuandmed', 'GDPR'],
+        }
+      : {
+          title: 'Privacy Policy',
+          description: 'How we collect, use, and protect your personal data',
+          keywords: ['privacy', 'personal data', 'GDPR'],
+        }
 
   const path = locale === 'et' ? 'privaatsus' : 'privacy'
   return generatePageMetadata({

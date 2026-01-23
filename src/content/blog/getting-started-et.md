@@ -21,7 +21,7 @@ See on n채idis blogipostitus, mis demonstreerib, kuidas markdown-p천hine sisu s�
 
 Saad kasutada k천iki tavalisi markdown formaate:
 
-- **Paks tekst** ja *kaldkiri*
+- **Paks tekst** ja _kaldkiri_
 - Nummerdatud ja t채pploendid
 - [Lingid](https://example.com)
 - Pealkirjad (H1-H6)
@@ -47,4 +47,4 @@ Pildid v천ivad olla suhtelise teega (`./images/`) v천i absoluutse teega (`/image
 
 ---
 
-*See on n채idis postitus. Kustuta see ja lisa oma sisu!*
+_See on n채idis postitus. Kustuta see ja lisa oma sisu!_

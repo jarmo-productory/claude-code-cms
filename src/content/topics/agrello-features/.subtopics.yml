@@ -1,0 +1,74 @@
+# Sub-topics for Agrello Features
+# This file defines the hierarchical sub-categories for articles within the Agrello Features topic
+# Format: internal-key -> language -> name/slug
+# All 4 languages (en, et, lv, ua) are required for each sub-topic
+
+getting-started:
+  en:
+    name: "Getting Started"
+    slug: "getting-started"
+  et:
+    name: "Alustamine"
+    slug: "alustamine"
+  lv:
+    name: "Darba Sākšana"
+    slug: "darba-saksana"
+  ua:
+    name: "Початок Роботи"
+    slug: "pochatok-roboty"
+
+documents:
+  en:
+    name: "Documents"
+    slug: "documents"
+  et:
+    name: "Dokumendid"
+    slug: "dokumendid"
+  lv:
+    name: "Dokumenti"
+    slug: "dokumenti"
+  ua:
+    name: "Документи"
+    slug: "dokumenty"
+
+templates:
+  en:
+    name: "Templates"
+    slug: "templates"
+  et:
+    name: "Mallid"
+    slug: "mallid"
+  lv:
+    name: "Veidnes"
+    slug: "veidnes"
+  ua:
+    name: "Шаблони"
+    slug: "shablony"
+
+signing-process:
+  en:
+    name: "Signing Process"
+    slug: "signing-process"
+  et:
+    name: "Allkirjastamine"
+    slug: "allkirjastamine"
+  lv:
+    name: "Parakstīšanas Process"
+    slug: "parakstisanas-process"
+  ua:
+    name: "Процес Підписання"
+    slug: "protses-pidpysannia"
+
+collaboration:
+  en:
+    name: "Collaboration"
+    slug: "collaboration"
+  et:
+    name: "Koostöö"
+    slug: "koostoo"
+  lv:
+    name: "Sadarbība"
+    slug: "sadarbiba"
+  ua:
+    name: "Співпраця"
+    slug: "spivpratsya"

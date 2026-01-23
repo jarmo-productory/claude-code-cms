@@ -15,9 +15,9 @@ interface PricingPlan {
 }
 
 interface PricingProps {
-  overline: string
-  headline: string
-  description: string
+  overline?: string
+  headline?: string
+  description?: string
   plans: PricingPlan[]
   contactCta?: {
     headline: string
@@ -25,6 +25,8 @@ interface PricingProps {
     buttonText: string
     buttonHref: string
   }
+  /** Hide the section header (useful when used on dedicated pricing page with PageHero) */
+  hideHeader?: boolean
   className?: string
 }
 
@@ -34,23 +36,24 @@ export function Pricing({
   description,
   plans,
   contactCta,
+  hideHeader = false,
   className,
 }: PricingProps) {
   return (
     <section className={`py-16 lg:py-24 bg-white ${className || ''}`}>
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center mb-16">
-          <p className="text-xs font-bold tracking-widest text-gray-900 uppercase mb-4">
-            {overline}
-          </p>
-          <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4 font-display">
-            {headline}
-          </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            {description}
-          </p>
-        </div>
+        {/* Header - can be hidden when used on dedicated pricing page */}
+        {!hideHeader && (
+          <div className="text-center mb-16">
+            <p className="text-xs font-bold tracking-widest text-gray-900 uppercase mb-4">
+              {overline}
+            </p>
+            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4 font-display">
+              {headline}
+            </h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">{description}</p>
+          </div>
+        )}
 
         {/* Pricing Cards */}
         <div className="grid md:grid-cols-3 gap-8 lg:gap-4 items-end">
@@ -67,21 +70,19 @@ export function Pricing({
               {plan.badge && (
                 <div className="absolute -top-6 -right-8 md:-top-4 md:-right-12 z-10">
                   <div className="bg-brand-primary text-white text-sm font-medium px-5 py-4 rounded-full rotate-[30deg] shadow-lg">
-                    <span className="block text-xs leading-tight whitespace-nowrap">{plan.badge}</span>
+                    <span className="block text-xs leading-tight whitespace-nowrap">
+                      {plan.badge}
+                    </span>
                   </div>
                 </div>
               )}
 
               {/* Plan Name */}
-              <h3 className="text-2xl font-bold text-gray-900 mb-6">
-                {plan.name}
-              </h3>
+              <h3 className="text-2xl font-bold text-gray-900 mb-6">{plan.name}</h3>
 
               {/* Price */}
               <div className="mb-2">
-                <span className="text-5xl lg:text-6xl font-light text-gray-900">
-                  {plan.price}
-                </span>
+                <span className="text-5xl lg:text-6xl font-light text-gray-900">{plan.price}</span>
               </div>
 
               {/* Period */}
@@ -95,9 +96,7 @@ export function Pricing({
               </p>
 
               {/* Description */}
-              <p className="text-gray-600 mb-8 max-w-xs">
-                {plan.description}
-              </p>
+              <p className="text-gray-600 mb-8 max-w-xs">{plan.description}</p>
 
               {/* CTA Button */}
               <Link
@@ -120,9 +119,7 @@ export function Pricing({
             <h3 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-3 font-display">
               {contactCta.headline}
             </h3>
-            <p className="text-gray-600 mb-6">
-              {contactCta.description}
-            </p>
+            <p className="text-gray-600 mb-6">{contactCta.description}</p>
             <Link
               href={contactCta.buttonHref}
               className="inline-flex items-center justify-center px-8 py-3 border-2 border-gray-300 text-gray-700 font-medium rounded-lg hover:border-gray-400 hover:bg-gray-50 transition-colors"

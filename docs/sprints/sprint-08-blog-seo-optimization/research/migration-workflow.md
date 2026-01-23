@@ -30,6 +30,7 @@ This workflow ensures only high-quality, SEO-performing content is published to 
 **Frequency:** Every 3 months or before major content pushes
 
 **Process:**
+
 1. Export GSC performance data (12-month period)
    - Go to GSC → Performance → Pages
    - Export CSV
@@ -45,6 +46,7 @@ This workflow ensures only high-quality, SEO-performing content is published to 
 **Tool:** Spreadsheet or custom analysis script
 
 **Process:**
+
 1. Import GSC data to spreadsheet
 2. Match URLs to article slugs in `blog-import/`
 3. Calculate performance scores:
@@ -57,6 +59,7 @@ This workflow ensures only high-quality, SEO-performing content is published to 
 **Deliverable:** Content inventory spreadsheet with categorization
 
 **Columns:**
+
 ```
 slug | locale | title | folder | position | clicks | impressions | ctr | category | status | notes
 ```
@@ -68,6 +71,7 @@ slug | locale | title | folder | position | clicks | impressions | ctr | categor
 **Tool:** `npm run audit-blog-seo`
 
 **Process:**
+
 1. Run audit on target articles:
    ```bash
    npm run audit-blog-seo -- --category=winner
@@ -84,6 +88,7 @@ slug | locale | title | folder | position | clicks | impressions | ctr | categor
 **Deliverable:** SEO audit report with pass/fail per article
 
 **Criteria:**
+
 - ✅ PASS: All required fields present, optimal lengths
 - ⚠️ WARNING: Some optimizations recommended
 - ❌ FAIL: Missing required fields, blocks migration
@@ -122,6 +127,7 @@ slug | locale | title | folder | position | clicks | impressions | ctr | categor
      - At least one H2 heading
 
 **Tools:**
+
 - Manual editing in markdown frontmatter
 - Optional: AI assistance for rewriting
 
@@ -136,21 +142,25 @@ slug | locale | title | folder | position | clicks | impressions | ctr | categor
 **Process:**
 
 **For Winner Articles (no optimization needed):**
+
 ```bash
 npm run migrate-blog -- --category=winner --locale=en
 ```
 
 **For Potential Articles (with optimization):**
+
 ```bash
 npm run migrate-blog -- --slugs=article-1,article-2 --optimize
 ```
 
 **For Selective Long-tail:**
+
 ```bash
 npm run migrate-blog -- --slugs=specific-article --locale=et
 ```
 
 **What the script does:**
+
 1. Validates source file exists in `blog-import/`
 2. Runs SEO audit
 3. Checks for duplicates in `blog/`
@@ -166,6 +176,7 @@ npm run migrate-blog -- --slugs=specific-article --locale=et
 ### Step 6: Testing
 
 **Process:**
+
 1. Start dev server:
    ```bash
    npm run dev
@@ -188,6 +199,7 @@ npm run migrate-blog -- --slugs=specific-article --locale=et
 ### Step 7: Production Deployment
 
 **Process:**
+
 1. Commit changes:
    ```bash
    git add src/content/blog/
@@ -213,11 +225,13 @@ npm run migrate-blog -- --slugs=specific-article --locale=et
 **Setup:** Create tracking spreadsheet
 
 **Columns:**
+
 ```
 migration_date | slug | locale | category | pre_clicks | pre_position | notes
 ```
 
 **Process:**
+
 1. Record baseline metrics before migration
 2. Wait 4-6 weeks for GSC to show results
 3. Export new GSC data
@@ -238,6 +252,7 @@ migration_date | slug | locale | category | pre_clicks | pre_position | notes
 ### Script: `scripts/migrate-blog-content.ts`
 
 **Usage:**
+
 ```bash
 # Migrate by category
 npm run migrate-blog -- --category=winner --locale=en
@@ -253,6 +268,7 @@ npm run migrate-blog -- --category=winner --dry-run
 ```
 
 **Options:**
+
 - `--category`: Filter by category (winner, potential, long-tail)
 - `--locale`: Filter by language (en, et, lv)
 - `--slugs`: Comma-separated list of specific articles
@@ -261,6 +277,7 @@ npm run migrate-blog -- --category=winner --dry-run
 - `--force`: Overwrite if file exists in destination
 
 **Output:**
+
 ```
 ✅ Migrated: article-1-en.md (winner)
 ✅ Migrated: article-2-en.md (winner)
@@ -282,6 +299,7 @@ Summary:
 ### Script: `scripts/audit-blog-seo.ts`
 
 **Usage:**
+
 ```bash
 # Audit all articles in staging
 npm run audit-blog-seo
@@ -302,6 +320,7 @@ npm run audit-blog-seo -- --format=json
 **Checks:**
 
 **ERRORS (blocks migration):**
+
 - ❌ Missing required field: `title`
 - ❌ Missing required field: `slug`
 - ❌ Missing required field: `description`
@@ -311,6 +330,7 @@ npm run audit-blog-seo -- --format=json
 - ❌ Image path doesn't exist
 
 **WARNINGS (should fix):**
+
 - ⚠️ Meta title too short (<40 chars)
 - ⚠️ Meta title too long (>70 chars)
 - ⚠️ Description too short (<120 chars)
@@ -320,6 +340,7 @@ npm run audit-blog-seo -- --format=json
 - ⚠️ No featured image
 
 **Output:**
+
 ```
 Auditing 137 articles in blog-import/en/...
 
@@ -342,15 +363,16 @@ Summary:
 
 Use this matrix to decide what to do with each article:
 
-| GSC Metrics | Category | Action | Priority |
-|-------------|----------|--------|----------|
-| Position 1-10, Clicks >50 | Winner | Migrate immediately | 1 |
-| Position 11-30, Impressions >500, CTR <3% | Potential | Optimize → Migrate | 2 |
-| Position 1-10, Clicks <50, Niche-relevant | Long-tail | Selective migrate | 3 |
-| Position >30, Impressions <100 | Drop | Do not migrate | N/A |
-| No GSC data | Unknown | Manual review required | ? |
+| GSC Metrics                               | Category  | Action                 | Priority |
+| ----------------------------------------- | --------- | ---------------------- | -------- |
+| Position 1-10, Clicks >50                 | Winner    | Migrate immediately    | 1        |
+| Position 11-30, Impressions >500, CTR <3% | Potential | Optimize → Migrate     | 2        |
+| Position 1-10, Clicks <50, Niche-relevant | Long-tail | Selective migrate      | 3        |
+| Position >30, Impressions <100            | Drop      | Do not migrate         | N/A      |
+| No GSC data                               | Unknown   | Manual review required | ?        |
 
 **Special Cases:**
+
 - **Seasonal content:** Migrate before relevant season
 - **Product updates:** Update content before migration
 - **Outdated features:** Archive or rewrite
@@ -376,6 +398,7 @@ git push
 ```
 
 **When to rollback:**
+
 - Content factually incorrect
 - Legal/compliance issue
 - Receives negative feedback
@@ -387,6 +410,7 @@ git push
 ## Best Practices
 
 ### Content Selection
+
 - ✅ Start with clear winners (high traffic)
 - ✅ Optimize "potential" articles before publishing
 - ✅ Be selective with long-tail content
@@ -394,6 +418,7 @@ git push
 - ❌ Don't publish content you wouldn't link to
 
 ### Metadata Optimization
+
 - ✅ Include target keyword in title
 - ✅ Use numbers in titles when possible ("10 Ways...")
 - ✅ Front-load important words in title
@@ -403,6 +428,7 @@ git push
 - ❌ Don't use clickbait that doesn't match content
 
 ### Testing
+
 - ✅ Test on dev before committing
 - ✅ Check all locales
 - ✅ Verify images load
@@ -411,6 +437,7 @@ git push
 - ❌ Don't deploy without QA check
 
 ### Monitoring
+
 - ✅ Track baseline metrics before migration
 - ✅ Check GSC monthly for changes
 - ✅ Document what works/doesn't work
@@ -425,12 +452,14 @@ git push
 ### Issue: Article doesn't appear on blog listing
 
 **Possible causes:**
+
 - File not in correct folder (`blog/` vs `blog-import/`)
 - Incorrect locale in frontmatter
 - Missing required fields
 - Build cache issue
 
 **Solutions:**
+
 1. Verify file location: `ls src/content/blog/article-name-en.md`
 2. Check frontmatter `lang` field matches locale folder
 3. Run SEO audit to check for missing fields
@@ -441,11 +470,13 @@ git push
 ### Issue: Images not loading
 
 **Possible causes:**
+
 - Image path still using `./images/` relative path
 - Image file doesn't exist in `public/images/blog-content/`
 - Incorrect image filename
 
 **Solutions:**
+
 1. Check frontmatter image path: should be `/images/blog-content/file.png`
 2. Verify image exists: `ls public/images/blog-content/file.png`
 3. Check content HTML for relative paths (should be transformed)
@@ -456,12 +487,14 @@ git push
 ### Issue: Migration script fails
 
 **Possible causes:**
+
 - Source file doesn't exist
 - Destination file already exists
 - Permission issues
 - Validation errors
 
 **Solutions:**
+
 1. Check error message for specific issue
 2. Verify source file: `ls src/content/blog-import/article-name.md`
 3. Use `--dry-run` flag to preview migration
@@ -475,6 +508,7 @@ git push
 **Cause:** Google hasn't re-crawled and re-indexed the page yet
 
 **Solutions:**
+
 1. Wait 1-2 weeks for natural re-crawling
 2. Request indexing via GSC:
    - Go to GSC → URL Inspection
@@ -550,4 +584,4 @@ Use this checklist before running migration script:
 
 ---
 
-*Living document - Update as workflow evolves*
+_Living document - Update as workflow evolves_

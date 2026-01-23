@@ -21,7 +21,7 @@ This is a sample blog post demonstrating how the markdown-based content system w
 
 You can use all standard markdown formatting:
 
-- **Bold text** and *italic text*
+- **Bold text** and _italic text_
 - Numbered and bullet lists
 - [Links](https://example.com)
 - Headers (H1-H6)
@@ -47,4 +47,4 @@ Images can be referenced with relative paths (`./images/`) or absolute paths (`/
 
 ---
 
-*This is a sample post. Delete it and add your own content!*
+_This is a sample post. Delete it and add your own content!_

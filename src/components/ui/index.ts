@@ -1,6 +1,13 @@
 export { Button, type ButtonProps } from './Button'
 export { Badge } from './Badge'
-export { Card, FrostedCard, type CardProps, type CardVariant, type CardPadding, type CardRadius } from './Card'
+export {
+  Card,
+  FrostedCard,
+  type CardProps,
+  type CardVariant,
+  type CardPadding,
+  type CardRadius,
+} from './Card'
 export { Icon, iconNames, type IconProps, type IconName } from './Icon'
 export { Input, type InputProps } from './Input'
 export { FadeInView } from './FadeInView'

@@ -25,6 +25,7 @@ npx ts-node scripts/generate-image.ts --prompt "$ARGUMENTS" --type [detected] --
 ## After Generation
 
 The image will be saved to:
+
 - `public/images/generated/[filename].png`
 - `public/images/generated/[filename].json` (metadata)
 

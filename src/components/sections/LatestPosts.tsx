@@ -20,67 +20,22 @@ export interface BlogPost {
 }
 
 interface LatestPostsProps {
-  overline?: string
-  headline?: string
-  description?: string
-  viewAllText?: string
-  viewAllHref?: string
-  posts?: BlogPost[]
+  overline: string
+  headline: string
+  description: string
+  viewAllText: string
+  viewAllHref: string
+  posts: BlogPost[]
 }
 
 export function LatestPosts({
-  overline = "OUR BLOG",
-  headline = "Latest blog posts",
-  description = "Tool and strategies modern teams need to help their companies grow.",
-  viewAllText = "View all posts",
-  viewAllHref = "/blog",
-  posts
+  overline,
+  headline,
+  description,
+  viewAllText,
+  viewAllHref,
+  posts,
 }: LatestPostsProps) {
-
-  const defaultPosts: BlogPost[] = [
-    {
-      id: '1',
-      title: "The Future of Office Work: Four Predictions for 2026",
-      excerpt: "The end of a year invites reflection, and perhaps a little prophecy. For office work, this is particularly fraught territory. The past few years have delivered more upheaval than the preceding decade.",
-      imageSrc: "/images/features/automation.webp", // Placeholder
-      href: "/blog/future-of-office-work",
-      author: {
-        name: "Jarmo Tuisk",
-        avatarSrc: "/images/hero/hero-woman.avif", // Placeholder
-        date: "December 19, 2025",
-        readTime: "5 min read"
-      }
-    },
-    {
-      id: '2',
-      title: "SME Digital Transformation: Practical Steps for European SMEs in 2025",
-      excerpt: "Small and mid-sized enterprises (SMEs) across Europe are at the heart of the economy, yet many still lag in digitalization. As we approach 2026, the pressure to digitize is growing.",
-      imageSrc: "/images/sections/macbook-screenshot.webp", // Placeholder
-      href: "/blog/sme-digital-transformation",
-      author: {
-        name: "Jarmo Tuisk",
-        avatarSrc: "/images/hero/hero-woman.avif", // Placeholder
-        date: "November 27, 2025",
-        readTime: "5 min read"
-      }
-    },
-    {
-      id: '3',
-      title: "Overview of Agrello's E-Signature Coverage",
-      excerpt: "Agrello provides a range of e-signing options that allow users to sign documents securely and in compliance with regional requirements. The platform supports several signature levels.",
-      imageSrc: "/images/sections/customers-cloud.webp", // Placeholder
-      href: "/blog/esignature-coverage",
-      author: {
-        name: "Jarmo Tuisk",
-        avatarSrc: "/images/hero/hero-woman.avif", // Placeholder
-        date: "November 14, 2025",
-        readTime: "5 min read"
-      }
-    }
-  ]
-
-  const activePosts = posts || defaultPosts
-
   return (
     <section className="py-24 bg-white">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -93,19 +48,26 @@ export function LatestPosts({
             <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4 font-display tracking-tight">
               {headline}
             </h2>
-            <p className="text-lg text-gray-600">
-              {description}
-            </p>
+            <p className="text-lg text-gray-600">{description}</p>
           </div>
-          <Button variant="outline" as="a" href={viewAllHref} className="hidden md:inline-flex shrink-0">
+          <Button
+            variant="outline"
+            as="a"
+            href={viewAllHref}
+            className="hidden md:inline-flex shrink-0"
+          >
             {viewAllText}
           </Button>
         </div>
 
         {/* Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
-          {activePosts.map((post) => (
-            <Link key={post.id} href={post.href} className="group block cursor-pointer h-full flex flex-col">
+          {posts.map((post) => (
+            <Link
+              key={post.id}
+              href={post.href}
+              className="group block cursor-pointer h-full flex flex-col"
+            >
               {/* Image Card */}
               <div className="relative aspect-[16/10] overflow-hidden rounded-2xl mb-6 bg-gray-100 border border-gray-100 shadow-sm transition-all duration-300 group-hover:shadow-md">
                 <Image
@@ -124,7 +86,7 @@ export function LatestPosts({
                   </h3>
                   <ArrowUpRight className="w-5 h-5 text-gray-400 shrink-0 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-brand-primary" />
                 </div>
-                
+
                 <p className="text-gray-600 mb-6 line-clamp-3 leading-relaxed flex-1">
                   {post.excerpt}
                 </p>

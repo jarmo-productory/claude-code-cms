@@ -12,11 +12,7 @@ const navItems = [
   { href: '/styleguide/layouts', label: 'Layouts' },
 ]
 
-export default function StyleguideLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function StyleguideLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
   const isLayoutsPage = pathname?.startsWith('/styleguide/layouts')
 
@@ -40,7 +36,8 @@ export default function StyleguideLayout({
           {/* Navigation Tabs */}
           <nav className="flex gap-1 -mb-px">
             {navItems.map((item) => {
-              const isActive = pathname === item.href ||
+              const isActive =
+                pathname === item.href ||
                 (item.href !== '/styleguide' && pathname.startsWith(item.href))
 
               return (
@@ -49,9 +46,10 @@ export default function StyleguideLayout({
                   href={item.href}
                   className={`
                     px-4 py-3 text-sm font-medium border-b-2 transition-colors
-                    ${isActive
-                      ? 'border-brand-primary text-brand-primary'
-                      : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                    ${
+                      isActive
+                        ? 'border-brand-primary text-brand-primary'
+                        : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
                     }
                   `}
                 >
@@ -61,16 +59,14 @@ export default function StyleguideLayout({
             })}
           </nav>
         </div>
-        
+
         {/* Secondary Navigation (only for Layouts) */}
         {isLayoutsPage && <StyleguideSubnav />}
       </header>
 
       {/* Content */}
       <main className="py-12 px-6">
-        <div className="max-w-7xl mx-auto">
-          {children}
-        </div>
+        <div className="max-w-7xl mx-auto">{children}</div>
       </main>
     </div>
   )

@@ -27,7 +27,7 @@ module.exports = {
           loc: `/${locale}${page}`,
           changefreq: 'weekly',
           priority: page === '/' ? 1.0 : 0.8,
-          alternateRefs: locales.map(l => ({
+          alternateRefs: locales.map((l) => ({
             href: `${config.siteUrl}/${l}${page}`,
             hreflang: l,
           })),

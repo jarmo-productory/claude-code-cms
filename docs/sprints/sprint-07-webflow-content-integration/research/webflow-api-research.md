@@ -9,6 +9,7 @@
 ## Webflow API Overview
 
 ### Current Webflow API Version (as of knowledge cutoff)
+
 - **Version:** Webflow Data API v2 (released 2023)
 - **Previous:** Legacy API v1 (deprecated in favor of v2)
 - **Base URL:** `https://api.webflow.com/v2/`
@@ -17,6 +18,7 @@
 ### Authentication
 
 **API Token Types:**
+
 1. **Site API Token** (full access to a specific site)
    - Generated in Webflow Site Settings → Integrations → API Access
    - Scoped to a single site
@@ -29,6 +31,7 @@
 **For our use case:** Site API Token is sufficient.
 
 **Environment Variable:**
+
 ```bash
 WEBFLOW_API_TOKEN=your_site_api_token_here
 WEBFLOW_SITE_ID=your_site_id_here
@@ -39,9 +42,11 @@ WEBFLOW_SITE_ID=your_site_id_here
 ## CMS Collections API
 
 ### 1. List Collections
+
 **Endpoint:** `GET /sites/{site_id}/collections`
 
 **Response:**
+
 ```json
 {
   "collections": [
@@ -70,13 +75,16 @@ WEBFLOW_SITE_ID=your_site_id_here
 ```
 
 ### 2. Get Collection Items
+
 **Endpoint:** `GET /collections/{collection_id}/items`
 
 **Query Parameters:**
+
 - `offset` - Pagination offset (default: 0)
 - `limit` - Items per page (default: 100, max: 100)
 
 **Response:**
+
 ```json
 {
   "items": [
@@ -105,6 +113,7 @@ WEBFLOW_SITE_ID=your_site_id_here
 ```
 
 ### 3. Get Single Item
+
 **Endpoint:** `GET /collections/{collection_id}/items/{item_id}`
 
 **Response:** Same structure as single item above.
@@ -114,10 +123,12 @@ WEBFLOW_SITE_ID=your_site_id_here
 ## Image Handling in Webflow API
 
 ### Image Field Types
+
 1. **ImageRef** - Single image field
 2. **FileRef** - Generic file (PDF, etc.)
 
 ### Image Data Structure
+
 ```json
 {
   "post-image": {
@@ -129,12 +140,15 @@ WEBFLOW_SITE_ID=your_site_id_here
 ```
 
 **Key Properties:**
+
 - `fileId` - Unique identifier for the asset
 - `url` - Full CDN URL (Webflow's CDN)
 - `alt` - Alt text (if set in Webflow CMS)
 
 ### Downloading Images
+
 Images must be downloaded separately via HTTP:
+
 ```typescript
 const response = await fetch(imageUrl)
 const buffer = await response.arrayBuffer()
@@ -146,6 +160,7 @@ const buffer = await response.arrayBuffer()
 ## Rate Limits
 
 **Webflow API v2 Rate Limits:**
+
 - **Standard Plan:** 60 requests/minute
 - **Higher Plans:** May have higher limits
 - **Headers:**
@@ -154,6 +169,7 @@ const buffer = await response.arrayBuffer()
   - `X-RateLimit-Reset` - Unix timestamp when limit resets
 
 **Strategy for batch import:**
+
 - Implement exponential backoff on 429 errors
 - Process items in batches with delays
 - Cache API responses to avoid repeated calls
@@ -163,6 +179,7 @@ const buffer = await response.arrayBuffer()
 ## Rich Text Content
 
 Webflow returns rich text fields as HTML:
+
 ```json
 {
   "post-body": "<p>This is <strong>bold</strong> text.</p><h2>Heading</h2>"
@@ -170,6 +187,7 @@ Webflow returns rich text fields as HTML:
 ```
 
 **Conversion Strategy:**
+
 1. **Option A:** Keep as HTML, convert to markdown
    - Use `turndown` package for HTML → Markdown conversion
    - Pros: Preserves formatting accurately
@@ -187,10 +205,12 @@ Webflow returns rich text fields as HTML:
 ## Localization/Multi-Language
 
 Webflow CMS items can have locale-specific fields:
+
 - Each item has a `locale` property (e.g., `"en-US"`, `"et"`)
 - Multi-locale sites require separate API calls per locale
 
 **Example:**
+
 ```bash
 GET /collections/{collection_id}/items?locale=en-US
 GET /collections/{collection_id}/items?locale=et
@@ -201,6 +221,7 @@ GET /collections/{collection_id}/items?locale=et
 ## API Implementation Plan
 
 ### Node.js Script Structure
+
 ```typescript
 // scripts/import-webflow-content.ts
 import fetch from 'node-fetch'
@@ -214,9 +235,9 @@ const API_BASE = 'https://api.webflow.com/v2'
 async function fetchCollections() {
   const response = await fetch(`${API_BASE}/sites/${WEBFLOW_SITE_ID}/collections`, {
     headers: {
-      'Authorization': `Bearer ${WEBFLOW_API_TOKEN}`,
-      'accept-version': '2.0.0'
-    }
+      Authorization: `Bearer ${WEBFLOW_API_TOKEN}`,
+      'accept-version': '2.0.0',
+    },
   })
   return await response.json()
 }
@@ -224,9 +245,9 @@ async function fetchCollections() {
 async function fetchCollectionItems(collectionId: string) {
   const response = await fetch(`${API_BASE}/collections/${collectionId}/items?limit=100`, {
     headers: {
-      'Authorization': `Bearer ${WEBFLOW_API_TOKEN}`,
-      'accept-version': '2.0.0'
-    }
+      Authorization: `Bearer ${WEBFLOW_API_TOKEN}`,
+      'accept-version': '2.0.0',
+    },
   })
   return await response.json()
 }
@@ -254,6 +275,7 @@ async function importWebflowContent() {
 ## Pros & Cons
 
 ### Pros
+
 - **Direct API access** - No manual export/import
 - **Real-time sync** - Can be run periodically to fetch new content
 - **Structured data** - JSON format is easy to parse
@@ -261,6 +283,7 @@ async function importWebflowContent() {
 - **Pagination support** - Can handle large collections
 
 ### Cons
+
 - **Rate limits** - Must handle throttling (60 req/min)
 - **API token security** - Must keep token in environment variables
 - **Network dependency** - Requires internet connection during import
@@ -302,28 +325,30 @@ async function importWebflowContent() {
 
 ## Estimated Complexity
 
-| Task | Complexity | Time Estimate |
-|------|------------|---------------|
-| Setup API authentication | Low | 30 min |
-| Fetch collections | Low | 30 min |
-| Fetch items with pagination | Medium | 1 hour |
-| Download images | Medium | 1 hour |
-| Convert HTML to markdown | Medium | 1-2 hours |
-| Generate frontmatter | Low | 30 min |
-| Error handling & retries | High | 2 hours |
-| **Total** | **Medium-High** | **6-7 hours** |
+| Task                        | Complexity      | Time Estimate |
+| --------------------------- | --------------- | ------------- |
+| Setup API authentication    | Low             | 30 min        |
+| Fetch collections           | Low             | 30 min        |
+| Fetch items with pagination | Medium          | 1 hour        |
+| Download images             | Medium          | 1 hour        |
+| Convert HTML to markdown    | Medium          | 1-2 hours     |
+| Generate frontmatter        | Low             | 30 min        |
+| Error handling & retries    | High            | 2 hours       |
+| **Total**                   | **Medium-High** | **6-7 hours** |
 
 ---
 
 ## Recommendation
 
 **Use Webflow API if:**
+
 - Need to sync content regularly (weekly/monthly)
 - Have Webflow plan with API access
 - Want automated, repeatable process
 - Comfortable with rate limiting and error handling
 
 **Use CSV import if:**
+
 - One-time migration
 - Simple, quick solution needed
 - Want manual control over data

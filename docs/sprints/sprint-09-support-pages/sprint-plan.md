@@ -15,6 +15,7 @@ Migrate ~80 existing support articles (20 per language) from agrello-content-mar
 ## Owner Decisions (Critical)
 
 **Confirmed:**
+
 1. **NO billing topic** - Exclude from initial launch
 2. **YES article search** - Client-side search across title, summary, and content
 3. **YES last-updated dates** - Show prominently on articles (use `date` field from frontmatter)
@@ -44,24 +45,25 @@ Migrate ~80 existing support articles (20 per language) from agrello-content-mar
 
 ## Deliverables
 
-| Deliverable | Description | Output Path |
-|-------------|-------------|-------------|
-| Migrated Content | ~80 articles organized by topic + language | `src/content/support/{locale}/{topic}/` |
-| Topic Metadata | `_index.md` for each topic in each language | `src/content/support/{locale}/{topic}/_index.md` |
-| Images | All article images from source repo | `public/images/support/` |
-| Content Types | TypeScript types for topics and articles | `src/lib/support.ts` |
-| Support Hub Page | Lists all available topics | `src/app/[locale]/support/page.tsx` |
-| Topic Index Page | Lists articles within a topic | `src/app/[locale]/support/[topic]/page.tsx` |
-| Article Page | Renders individual article with search | `src/app/[locale]/support/[topic]/[slug]/page.tsx` |
-| Search Component | Client-side search UI | `src/components/support/ArticleSearch.tsx` |
-| Support Layout | Shared layout with breadcrumbs | `src/app/[locale]/support/layout.tsx` |
-| Migration Script | Script to copy and organize content | `scripts/migrate-support-content.ts` |
+| Deliverable      | Description                                 | Output Path                                        |
+| ---------------- | ------------------------------------------- | -------------------------------------------------- |
+| Migrated Content | ~80 articles organized by topic + language  | `src/content/support/{locale}/{topic}/`            |
+| Topic Metadata   | `_index.md` for each topic in each language | `src/content/support/{locale}/{topic}/_index.md`   |
+| Images           | All article images from source repo         | `public/images/support/`                           |
+| Content Types    | TypeScript types for topics and articles    | `src/lib/support.ts`                               |
+| Support Hub Page | Lists all available topics                  | `src/app/[locale]/support/page.tsx`                |
+| Topic Index Page | Lists articles within a topic               | `src/app/[locale]/support/[topic]/page.tsx`        |
+| Article Page     | Renders individual article with search      | `src/app/[locale]/support/[topic]/[slug]/page.tsx` |
+| Search Component | Client-side search UI                       | `src/components/support/ArticleSearch.tsx`         |
+| Support Layout   | Shared layout with breadcrumbs              | `src/app/[locale]/support/layout.tsx`              |
+| Migration Script | Script to copy and organize content         | `scripts/migrate-support-content.ts`               |
 
 ---
 
 ## Implementation Checklist
 
 ### Phase 1: Research & Planning ✅
+
 - [x] Review existing content structure in agrello-content-marketing
 - [x] Analyze `.subtopics.yml` and article frontmatter format
 - [x] Confirm migration approach with owner
@@ -69,6 +71,7 @@ Migrate ~80 existing support articles (20 per language) from agrello-content-mar
 - [ ] **Owner approval required** ⚠️
 
 ### Phase 2: Content Structure Setup
+
 - [ ] Create target folder structure for 4 languages
 - [ ] Create TypeScript types for support content
 - [ ] Define topic `_index.md` schema (preserve existing where possible)
@@ -76,6 +79,7 @@ Migrate ~80 existing support articles (20 per language) from agrello-content-mar
 - [ ] Create content loading utilities
 
 ### Phase 3: Content Migration
+
 - [ ] Create migration script (`scripts/migrate-support-content.ts`)
 - [ ] Copy articles from source → target (organized by `sub_topic`)
 - [ ] Copy images from source → `public/images/support/`
@@ -84,6 +88,7 @@ Migrate ~80 existing support articles (20 per language) from agrello-content-mar
 - [ ] Verify frontmatter preserved correctly
 
 ### Phase 4: Routing Implementation
+
 - [ ] Create support hub page (`/[locale]/support/`)
 - [ ] Create topic index page (`/[locale]/support/[topic]/`)
 - [ ] Create article page (`/[locale]/support/[topic]/[slug]`)
@@ -92,6 +97,7 @@ Migrate ~80 existing support articles (20 per language) from agrello-content-mar
 - [ ] Handle 4 language codes (en, et, lv, ua)
 
 ### Phase 5: Search Implementation
+
 - [ ] Create search component with input UI
 - [ ] Implement client-side search logic (title + summary + content)
 - [ ] Add search results highlighting
@@ -99,6 +105,7 @@ Migrate ~80 existing support articles (20 per language) from agrello-content-mar
 - [ ] Test search performance with ~20 articles per language
 
 ### Phase 6: Article Display Components
+
 - [ ] Topic card component (for hub page)
 - [ ] Article list component (for topic index, sorted by `rank`)
 - [ ] Article page layout with "Last updated" date
@@ -107,6 +114,7 @@ Migrate ~80 existing support articles (20 per language) from agrello-content-mar
 - [ ] Markdown rendering with image support
 
 ### Phase 7: SEO & Metadata
+
 - [ ] Generate metadata for hub page (4 languages)
 - [ ] Generate metadata for topic pages (5 topics × 4 languages)
 - [ ] Generate metadata for article pages (~80 articles)
@@ -114,6 +122,7 @@ Migrate ~80 existing support articles (20 per language) from agrello-content-mar
 - [ ] Validate meta tags
 
 ### Phase 8: Testing
+
 - [ ] Test all three route levels work (4 languages)
 - [ ] Test locale switching preserves topic/article
 - [ ] Test search functionality
@@ -125,18 +134,21 @@ Migrate ~80 existing support articles (20 per language) from agrello-content-mar
 - [ ] Test responsive design
 
 ### Phase 9: Documentation
+
 - [ ] Document content structure
 - [ ] Document migration process
 - [ ] Create content authoring guide
 - [ ] Document search implementation
 
 ### Phase 10: Cleanup
+
 - [ ] Remove debug code
 - [ ] Code review and refactoring
 - [ ] Ensure TypeScript types are correct
 - [ ] Update imports
 
 ### Phase 11: Validation
+
 - [ ] Run qa-validator checks
 - [ ] Test production build
 - [ ] Verify no broken links
@@ -164,17 +176,18 @@ agrello-features/
 ```
 
 **Existing frontmatter format (PRESERVE THIS):**
+
 ```yaml
 author: jarmo-tuisk
-date: '2025-08-19'              # USE for "Last updated"
+date: '2025-08-19' # USE for "Last updated"
 image: ../../../assets/first-steps-hero.webp
-rank: 1                         # USE for ordering articles
+rank: 1 # USE for ordering articles
 seo_desc: ...
 seo_title: ...
 slug: first-steps-in-agrello
-sub_topic: getting-started      # THIS determines target folder
-summary: ...                    # USE in search
-title: First Steps in Agrello   # USE in search
+sub_topic: getting-started # THIS determines target folder
+summary: ... # USE in search
+title: First Steps in Agrello # USE in search
 ```
 
 ### Target Content Structure
@@ -220,24 +233,26 @@ src/content/support/
 ```
 
 **Key migration rules:**
+
 1. Article's `sub_topic` field → determines topic folder (e.g., `sub_topic: getting-started` → `getting-started/`)
 2. Keep consistent topic slugs across languages (use English keys: getting-started, documents, etc.)
 3. Preserve all existing frontmatter fields
 4. Copy images and update paths: `../../../assets/` → `/images/support/`
 
-### Topic _index.md Schema
+### Topic \_index.md Schema
 
 Generated from `.subtopics.yml`:
 
 ```yaml
-title: "Getting Started"      # From .subtopics.yml → {locale}.name
-description: "..."             # Manual or from existing _index.md
-slug: "getting-started"        # From .subtopics.yml → {locale}.slug (but use English key)
-icon: "rocket"                 # Map manually (getting-started → rocket, etc.)
-order: 1                       # Manual assignment
+title: 'Getting Started' # From .subtopics.yml → {locale}.name
+description: '...' # Manual or from existing _index.md
+slug: 'getting-started' # From .subtopics.yml → {locale}.slug (but use English key)
+icon: 'rocket' # Map manually (getting-started → rocket, etc.)
+order: 1 # Manual assignment
 ```
 
 **Icon mapping:**
+
 - getting-started → "rocket"
 - documents → "file-text"
 - templates → "layout-template"
@@ -250,15 +265,15 @@ No changes needed! Existing format is perfect:
 
 ```yaml
 author: jarmo-tuisk
-date: '2025-08-19'              # Display as "Last updated: Aug 19, 2025"
-image: /images/support/first-steps-hero.webp  # Updated path
-rank: 1                         # Use for ordering
-seo_desc: ...                   # Use for meta description
-seo_title: ...                  # Use for meta title
-slug: first-steps-in-agrello    # Use for URL
-sub_topic: getting-started      # Not needed after migration (implicit from folder)
-summary: ...                    # Display on lists, use in search
-title: First Steps in Agrello   # H1, use in search
+date: '2025-08-19' # Display as "Last updated: Aug 19, 2025"
+image: /images/support/first-steps-hero.webp # Updated path
+rank: 1 # Use for ordering
+seo_desc: ... # Use for meta description
+seo_title: ... # Use for meta title
+slug: first-steps-in-agrello # Use for URL
+sub_topic: getting-started # Not needed after migration (implicit from folder)
+summary: ... # Display on lists, use in search
+title: First Steps in Agrello # H1, use in search
 ```
 
 ### Route Structure
@@ -279,34 +294,34 @@ src/app/[locale]/support/
 // src/lib/support.ts
 
 export interface SupportTopic {
-  slug: string;                // 'getting-started', 'documents', etc.
-  title: string;               // Localized from .subtopics.yml
-  description: string;
-  icon: string;                // lucide-react icon name
-  order: number;
-  locale: string;              // 'en', 'et', 'lv', 'ua'
-  articleCount: number;
+  slug: string // 'getting-started', 'documents', etc.
+  title: string // Localized from .subtopics.yml
+  description: string
+  icon: string // lucide-react icon name
+  order: number
+  locale: string // 'en', 'et', 'lv', 'ua'
+  articleCount: number
 }
 
 export interface SupportArticle {
-  slug: string;
-  title: string;
-  summary: string;
-  content: string;             // For search
-  topic: string;               // Topic folder name
-  author: string;
-  date: string;                // ISO date, display as "Last updated"
-  image?: string;
-  rank: number;                // For ordering within topic
-  seoDesc: string;
-  seoTitle: string;
-  locale: string;
-  relatedArticles?: string[];  // Future enhancement
+  slug: string
+  title: string
+  summary: string
+  content: string // For search
+  topic: string // Topic folder name
+  author: string
+  date: string // ISO date, display as "Last updated"
+  image?: string
+  rank: number // For ordering within topic
+  seoDesc: string
+  seoTitle: string
+  locale: string
+  relatedArticles?: string[] // Future enhancement
 }
 
 export interface SupportBreadcrumb {
-  label: string;
-  href: string;
+  label: string
+  href: string
 }
 ```
 
@@ -318,9 +333,17 @@ export interface SupportBreadcrumb {
 export async function getAllTopics(locale: string): Promise<SupportTopic[]>
 export async function getTopic(locale: string, slug: string): Promise<SupportTopic>
 export async function getTopicArticles(locale: string, topic: string): Promise<SupportArticle[]>
-export async function getArticle(locale: string, topic: string, slug: string): Promise<SupportArticle>
+export async function getArticle(
+  locale: string,
+  topic: string,
+  slug: string
+): Promise<SupportArticle>
 export async function searchArticles(locale: string, query: string): Promise<SupportArticle[]>
-export function generateBreadcrumbs(locale: string, topic?: string, article?: string): SupportBreadcrumb[]
+export function generateBreadcrumbs(
+  locale: string,
+  topic?: string,
+  article?: string
+): SupportBreadcrumb[]
 ```
 
 ---
@@ -328,6 +351,7 @@ export function generateBreadcrumbs(locale: string, topic?: string, article?: st
 ## Search Implementation
 
 ### Requirements
+
 - Client-side search (no backend needed)
 - Search across: title, summary, content (markdown)
 - Real-time filtering as user types
@@ -414,6 +438,7 @@ npm run migrate-support
 ```
 
 **Script tasks:**
+
 1. Read `.subtopics.yml` to get topic mappings
 2. For each language (en, et, lv, ua):
    - Read all article `.md` files
@@ -428,11 +453,11 @@ npm run migrate-support
 
 ## URL Structure Examples
 
-| Page Type | EN URL | ET URL | LV URL | UA URL |
-|-----------|--------|--------|--------|--------|
-| Support Hub | `/en/support/` | `/et/support/` | `/lv/support/` | `/ua/support/` |
-| Topic Index | `/en/support/getting-started/` | `/et/support/getting-started/` | `/lv/support/getting-started/` | `/ua/support/getting-started/` |
-| Article | `/en/support/getting-started/first-steps-in-agrello` | `/et/support/getting-started/esimesed-sammud-agrellos` | `/lv/support/getting-started/pirmie-soli-agrello` | `/ua/support/getting-started/pershi-kroky-v-agrello` |
+| Page Type   | EN URL                                               | ET URL                                                 | LV URL                                            | UA URL                                               |
+| ----------- | ---------------------------------------------------- | ------------------------------------------------------ | ------------------------------------------------- | ---------------------------------------------------- |
+| Support Hub | `/en/support/`                                       | `/et/support/`                                         | `/lv/support/`                                    | `/ua/support/`                                       |
+| Topic Index | `/en/support/getting-started/`                       | `/et/support/getting-started/`                         | `/lv/support/getting-started/`                    | `/ua/support/getting-started/`                       |
+| Article     | `/en/support/getting-started/first-steps-in-agrello` | `/et/support/getting-started/esimesed-sammud-agrellos` | `/lv/support/getting-started/pirmie-soli-agrello` | `/ua/support/getting-started/pershi-kroky-v-agrello` |
 
 **Note:** Topic slugs stay consistent (English keys), article slugs are localized (from original filenames).
 
@@ -445,6 +470,7 @@ npm run migrate-support
 **Display format:** "Last updated: August 19, 2025"
 
 **Implementation:**
+
 ```typescript
 // In article page
 import { format } from 'date-fns'
@@ -464,17 +490,20 @@ const lastUpdated = format(new Date(article.date), 'MMMM dd, yyyy')
 ## SEO Strategy
 
 ### Hub Page (`/[locale]/support/`)
+
 - Title: "Support | Agrello"
 - Description: "Find help articles and guides for using Agrello"
 - H1: "How can we help you?"
 
 ### Topic Page (`/[locale]/support/[topic]/`)
+
 - Title: "[Topic Title] | Support | Agrello"
 - Description: "[Topic description from _index.md]"
 - H1: "[Topic Title]"
 - List articles with summaries
 
 ### Article Page (`/[locale]/support/[topic]/[slug]`)
+
 - Title: "[seo_title from frontmatter] | Agrello"
 - Description: "[seo_desc from frontmatter]"
 - H1: "[title from frontmatter]"
@@ -485,13 +514,13 @@ const lastUpdated = format(new Date(article.date), 'MMMM dd, yyyy')
 
 ## Risks & Mitigations
 
-| Risk | Impact | Mitigation |
-|------|--------|------------|
-| Image paths broken after migration | High | Test image rendering; update paths in migration script |
-| Missing articles in some languages | Medium | Validate all 4 languages have content; skip missing gracefully |
-| Search performance with 80 articles | Low | Client-side search is fast enough; monitor with real data |
-| Inconsistent topic slugs | Medium | Use .subtopics.yml as source of truth |
-| Complex markdown rendering | Low | Test with varied content from source repo |
+| Risk                                | Impact | Mitigation                                                     |
+| ----------------------------------- | ------ | -------------------------------------------------------------- |
+| Image paths broken after migration  | High   | Test image rendering; update paths in migration script         |
+| Missing articles in some languages  | Medium | Validate all 4 languages have content; skip missing gracefully |
+| Search performance with 80 articles | Low    | Client-side search is fast enough; monitor with real data      |
+| Inconsistent topic slugs            | Medium | Use .subtopics.yml as source of truth                          |
+| Complex markdown rendering          | Low    | Test with varied content from source repo                      |
 
 ---
 
@@ -511,6 +540,7 @@ const lastUpdated = format(new Date(article.date), 'MMMM dd, yyyy')
 ## Dependencies
 
 No new npm packages required. Uses existing:
+
 - `next` - Routing and pages
 - `react` - Components
 - `gray-matter` - Frontmatter parsing (already used for blog)
@@ -522,6 +552,7 @@ No new npm packages required. Uses existing:
 ## Testing Checklist
 
 ### Content Migration
+
 - [ ] All ~80 articles copied successfully
 - [ ] Frontmatter preserved correctly
 - [ ] Images copied and paths updated
@@ -529,6 +560,7 @@ No new npm packages required. Uses existing:
 - [ ] 5 topics × 4 languages = 20 topic folders created
 
 ### Content Loading
+
 - [ ] Topic `_index.md` files load correctly
 - [ ] Article markdown files load correctly
 - [ ] Images in articles render correctly
@@ -536,6 +568,7 @@ No new npm packages required. Uses existing:
 - [ ] Article ordering by `rank` works
 
 ### Routing (4 Languages)
+
 - [ ] Hub page loads at `/[locale]/support/`
 - [ ] Topic index loads at `/[locale]/support/[topic]/`
 - [ ] Article page loads at `/[locale]/support/[topic]/[slug]`
@@ -544,6 +577,7 @@ No new npm packages required. Uses existing:
 - [ ] All 4 language codes work (en, et, lv, ua)
 
 ### Search Functionality
+
 - [ ] Search input appears on hub/topic pages
 - [ ] Search filters by title correctly
 - [ ] Search filters by summary correctly
@@ -552,6 +586,7 @@ No new npm packages required. Uses existing:
 - [ ] Results link to correct articles
 
 ### UI Components
+
 - [ ] Topic cards display correctly (5 topics)
 - [ ] Article lists render properly (sorted by rank)
 - [ ] "Last updated" dates display correctly
@@ -560,6 +595,7 @@ No new npm packages required. Uses existing:
 - [ ] Responsive design works on mobile
 
 ### SEO
+
 - [ ] Meta tags present on all pages
 - [ ] seo_title and seo_desc used from frontmatter
 - [ ] Structured data validates
@@ -570,21 +606,21 @@ No new npm packages required. Uses existing:
 
 ## Timeline Estimate
 
-| Phase | Tasks | Estimated Time |
-|-------|-------|----------------|
-| Content Structure | Folders, types, schemas | 1 hour |
-| Migration Script | Automate content copy + images | 2 hours |
-| Run Migration | Execute script, validate output | 1 hour |
-| Routing | Hub, topic, article pages (4 languages) | 2.5 hours |
-| Search Implementation | Client-side search component | 1.5 hours |
-| Article Display | Cards, lists, breadcrumbs, last-updated | 2 hours |
-| Content Loading | Utilities and data fetching | 1.5 hours |
-| SEO & Metadata | Meta tags, structured data | 1 hour |
-| Testing | All routes, search, content, 4 languages | 2 hours |
-| Documentation | Migration process, content guide | 1 hour |
-| **Total** | | **16 hours (2 days)** |
-| Buffer | Testing & fixes | 0.5 day |
-| **Grand Total** | | **2.5 days** |
+| Phase                 | Tasks                                    | Estimated Time        |
+| --------------------- | ---------------------------------------- | --------------------- |
+| Content Structure     | Folders, types, schemas                  | 1 hour                |
+| Migration Script      | Automate content copy + images           | 2 hours               |
+| Run Migration         | Execute script, validate output          | 1 hour                |
+| Routing               | Hub, topic, article pages (4 languages)  | 2.5 hours             |
+| Search Implementation | Client-side search component             | 1.5 hours             |
+| Article Display       | Cards, lists, breadcrumbs, last-updated  | 2 hours               |
+| Content Loading       | Utilities and data fetching              | 1.5 hours             |
+| SEO & Metadata        | Meta tags, structured data               | 1 hour                |
+| Testing               | All routes, search, content, 4 languages | 2 hours               |
+| Documentation         | Migration process, content guide         | 1 hour                |
+| **Total**             |                                          | **16 hours (2 days)** |
+| Buffer                | Testing & fixes                          | 0.5 day               |
+| **Grand Total**       |                                          | **2.5 days**          |
 
 ---
 
@@ -593,6 +629,7 @@ No new npm packages required. Uses existing:
 **Phase 1 → 2 Gate:** Owner must approve this updated sprint plan
 
 **Approval confirms:**
+
 1. Migration approach is correct (preserve frontmatter, use sub_topic)
 2. Content structure with 5 topics makes sense
 3. Search implementation (client-side) is acceptable
@@ -602,6 +639,7 @@ No new npm packages required. Uses existing:
 7. NO billing topic confirmed for initial launch
 
 **Owner Questions:**
+
 1. ✅ Should we include a "Billing" topic in the initial launch? → **NO**
 2. ✅ Do you want article search functionality now or defer to future sprint? → **YES**
 3. ✅ Should articles show "Last updated" dates prominently? → **YES**
@@ -617,12 +655,14 @@ No new npm packages required. Uses existing:
 **Status:** UPDATED - AWAITING APPROVAL
 
 **Critical Decisions Received:**
+
 - ✅ NO billing topic
 - ✅ YES article search
 - ✅ YES last-updated dates
 - ✅ ALL 4 languages (en, et, lv, ua)
 
 **Next Actions:**
+
 1. Owner reviews updated sprint plan
 2. Owner confirms migration approach
 3. Owner provides approval phrase ("approved", "proceed", "go ahead")
@@ -641,4 +681,4 @@ No new npm packages required. Uses existing:
 
 ---
 
-*Phase 1: Planning - Awaiting Owner Approval*
+_Phase 1: Planning - Awaiting Owner Approval_

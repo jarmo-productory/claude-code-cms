@@ -27,7 +27,7 @@ function parseArgs(): {
     prompt: '',
     type: 'custom',
     aspect: '16:9',
-    output: ''
+    output: '',
   }
 
   for (let i = 0; i < args.length; i++) {
@@ -57,7 +57,7 @@ function getAspectRatio(aspect: string): { width: number; height: number } {
     '16:9': { width: 1536, height: 864 },
     '4:3': { width: 1024, height: 768 },
     '9:16': { width: 864, height: 1536 },
-    '21:9': { width: 1536, height: 640 }
+    '21:9': { width: 1536, height: 640 },
   }
   return ratios[aspect] || ratios['16:9']
 }
@@ -72,7 +72,7 @@ function enhancePrompt(prompt: string, type: string): string {
     icon: 'simple iconic design, minimal elements',
     social: 'engaging composition, social media friendly',
     banner: 'horizontal panoramic view',
-    custom: ''
+    custom: '',
   }
 
   return `${prompt}. ${brandContext}. ${typeContext[type] || ''}`
@@ -95,7 +95,9 @@ async function main() {
 
   if (!args.prompt) {
     console.error('Error: --prompt is required')
-    console.log('Usage: npx ts-node scripts/generate-image.ts --prompt "description" --type hero --aspect 16:9')
+    console.log(
+      'Usage: npx ts-node scripts/generate-image.ts --prompt "description" --type hero --aspect 16:9'
+    )
     process.exit(1)
   }
 
@@ -148,16 +150,16 @@ async function main() {
         body: JSON.stringify({
           instances: [
             {
-              prompt: enhancedPrompt
-            }
+              prompt: enhancedPrompt,
+            },
           ],
           parameters: {
             sampleCount: 1,
             aspectRatio: args.aspect.replace(':', ':'),
             personGeneration: 'ALLOW_ADULT',
-            safetySetting: 'BLOCK_MEDIUM_AND_ABOVE'
-          }
-        })
+            safetySetting: 'BLOCK_MEDIUM_AND_ABOVE',
+          },
+        }),
       }
     )
 
@@ -188,14 +190,13 @@ async function main() {
       dimensions,
       filename,
       generatedAt: new Date().toISOString(),
-      model: 'imagen-3.0-generate-002'
+      model: 'imagen-3.0-generate-002',
     }
     fs.writeFileSync(metadataPath, JSON.stringify(metadata, null, 2))
 
     console.log('\nSuccess!')
     console.log(`  Image: ${outputPath}`)
     console.log(`  Metadata: ${metadataPath}`)
-
   } catch (error) {
     console.error('\nGeneration failed:', error instanceof Error ? error.message : error)
     process.exit(1)

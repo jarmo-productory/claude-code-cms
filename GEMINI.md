@@ -12,14 +12,14 @@
 
 ## Architecture (Locked Decisions)
 
-| Component | Choice | Rationale |
-|-----------|--------|-----------|
-| Framework | Next.js 15 (App Router) | SEO-first, file-based routing, server components |
-| Components | React 19 | Familiar, reusable |
-| Styling | Tailwind CSS v4 | Utility-first, brand tokens |
-| Content | Markdown + frontmatter | Easy editing, git-based |
-| i18n | File-based (`/et/`, `/en/`) | SEO-friendly URLs |
-| Hosting | Vercel (Target) | Best performance for Next.js |
+| Component  | Choice                      | Rationale                                        |
+| ---------- | --------------------------- | ------------------------------------------------ |
+| Framework  | Next.js 15 (App Router)     | SEO-first, file-based routing, server components |
+| Components | React 19                    | Familiar, reusable                               |
+| Styling    | Tailwind CSS v4             | Utility-first, brand tokens                      |
+| Content    | Markdown + frontmatter      | Easy editing, git-based                          |
+| i18n       | File-based (`/et/`, `/en/`) | SEO-friendly URLs                                |
+| Hosting    | Vercel (Target)             | Best performance for Next.js                     |
 
 **Current state:** Next.js 15 + React 19 (App Router) - Migrating from Webflow.
 
@@ -72,15 +72,15 @@ agrello-web/
 I do NOT contain detailed technical knowledge in this file.
 I MUST consult the appropriate expert agent file in `.claude/agents/` to adopt the correct persona and follow specific procedures.
 
-| Domain | Agent File | Trigger Keywords |
-|--------|------------|------------------|
-| Sprint Workflow | `.claude/agents/sprint-manager.md` | sprint, phase, approved, start sprint |
-| Strategy & Planning | `.claude/agents/strategic-advisor.md` | plan content, evaluate, strategy, customer POV |
-| SEO & GEO | `.claude/agents/seo-specialist.md` | SEO, keywords, meta tags, ranking |
-| Implementation | `.claude/agents/frontend-expert.md` | build, create, implement, fix, component |
-| Quality Gates | `.claude/agents/qa-validator.md` | commit, push, done, ship, merge, PR |
-| Blog Content | `.claude/agents/blog-writer.md` | blog post, draft, write blog, create article |
-| Image Generation | `.claude/agents/image-generator.md` | generate image, create illustration, hero image, thumbnail |
+| Domain              | Agent File                            | Trigger Keywords                                           |
+| ------------------- | ------------------------------------- | ---------------------------------------------------------- |
+| Sprint Workflow     | `.claude/agents/sprint-manager.md`    | sprint, phase, approved, start sprint                      |
+| Strategy & Planning | `.claude/agents/strategic-advisor.md` | plan content, evaluate, strategy, customer POV             |
+| SEO & GEO           | `.claude/agents/seo-specialist.md`    | SEO, keywords, meta tags, ranking                          |
+| Implementation      | `.claude/agents/frontend-expert.md`   | build, create, implement, fix, component                   |
+| Quality Gates       | `.claude/agents/qa-validator.md`      | commit, push, done, ship, merge, PR                        |
+| Blog Content        | `.claude/agents/blog-writer.md`       | blog post, draft, write blog, create article               |
+| Image Generation    | `.claude/agents/image-generator.md`   | generate image, create illustration, hero image, thumbnail |
 
 ### Invocation Rule
 
@@ -90,10 +90,10 @@ When user input contains trigger keywords → **READ the agent file and adopt it
 
 ## Approval Gates (HARD Enforcement)
 
-| Gate | Condition | Release Phrase |
-|------|-----------|----------------|
-| Sprint Phase 2→3 | Cannot write implementation code | "approved", "proceed", "go ahead" |
-| Any commit | qa-validator must pass all checks | All checks green |
+| Gate             | Condition                         | Release Phrase                    |
+| ---------------- | --------------------------------- | --------------------------------- |
+| Sprint Phase 2→3 | Cannot write implementation code  | "approved", "proceed", "go ahead" |
+| Any commit       | qa-validator must pass all checks | All checks green                  |
 
 **These gates cannot be bypassed.** If blocked, wait for approval or fix issues.
 
@@ -119,6 +119,7 @@ Before EVERY response, ask:
 ## Quick Reference
 
 ### Commands
+
 ```bash
 npm run dev              # Start dev server (with Turbopack)
 npm run build            # Production build
@@ -135,11 +136,13 @@ npm run lint             # Run linter
 - Fast Refresh preserves component state
 
 **Before starting dev server, always kill port 3000 (or 3001 if configured):**
+
 ```bash
 lsof -ti:3000 | xargs kill -9 2>/dev/null; rm -rf .next && npm run dev
 ```
 
 ### UI Conventions
+
 - **Clickable Elements:** Always apply `cursor: pointer` (Tailwind `cursor-pointer`) to any element a user can interact with (buttons, tabs, custom links, etc.).
 
 ### Brand Tokens
@@ -161,12 +164,14 @@ import { Button, Badge, Card, Input, Icon, SectionHeader, FadeInView } from '@/c
 **Styleguide:** `npm run dev` then visit `http://localhost:3000/styleguide` (or port 3001)
 
 ### Skills Available
+
 - `generic-cvi` - Brand system and color tokens
 - `ui-components` - Component library patterns
 - `homepage-patterns` - Landing page sections
 - `seo-audit` - Lighthouse CLI audits
 
 ### Slash Commands (Simulated)
+
 - `/new-section [name]` - Create new section component
 - `/publish` - Commit and push changes
 - `/rundev` - Clean cache and restart dev server

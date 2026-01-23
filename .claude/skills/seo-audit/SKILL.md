@@ -18,12 +18,12 @@ Run technical SEO audits using Lighthouse CLI.
 
 ## What It Checks
 
-| Category | Metrics |
-|----------|---------|
-| **Performance** | LCP, FID, CLS, Speed Index, TTI |
-| **SEO** | Meta tags, crawlability, mobile-friendly |
-| **Accessibility** | ARIA, contrast, alt texts |
-| **Best Practices** | HTTPS, console errors, image formats |
+| Category           | Metrics                                  |
+| ------------------ | ---------------------------------------- |
+| **Performance**    | LCP, FID, CLS, Speed Index, TTI          |
+| **SEO**            | Meta tags, crawlability, mobile-friendly |
+| **Accessibility**  | ARIA, contrast, alt texts                |
+| **Best Practices** | HTTPS, console errors, image formats     |
 
 ---
 
@@ -47,13 +47,14 @@ npx lighthouse "https://yoursite.com/" \
 
 ## Score Interpretation
 
-| Score | Rating |
-|-------|--------|
-| 90-100 | Good (green) |
-| 50-89 | Needs improvement (orange) |
-| 0-49 | Poor (red) |
+| Score  | Rating                     |
+| ------ | -------------------------- |
+| 90-100 | Good (green)               |
+| 50-89  | Needs improvement (orange) |
+| 0-49   | Poor (red)                 |
 
 **Target Scores:**
+
 - Performance: 90+
 - SEO: 95+
 - Accessibility: 90+
@@ -76,17 +77,18 @@ npx lighthouse "https://yoursite.com/" \
 
 ## Core Web Vitals Thresholds
 
-| Metric | Good | Needs Improvement | Poor |
-|--------|------|-------------------|------|
-| **LCP** (Largest Contentful Paint) | ≤2.5s | 2.5-4s | >4s |
-| **FID** (First Input Delay) | ≤100ms | 100-300ms | >300ms |
-| **CLS** (Cumulative Layout Shift) | ≤0.1 | 0.1-0.25 | >0.25 |
+| Metric                             | Good   | Needs Improvement | Poor   |
+| ---------------------------------- | ------ | ----------------- | ------ |
+| **LCP** (Largest Contentful Paint) | ≤2.5s  | 2.5-4s            | >4s    |
+| **FID** (First Input Delay)        | ≤100ms | 100-300ms         | >300ms |
+| **CLS** (Cumulative Layout Shift)  | ≤0.1   | 0.1-0.25          | >0.25  |
 
 ---
 
 ## Troubleshooting
 
 ### "Chrome not found"
+
 ```bash
 # Ensure Chrome/Chromium is installed
 # On macOS:
@@ -97,12 +99,14 @@ npx lighthouse --chrome-flags="--headless" ...
 ```
 
 ### "Page load timeout"
+
 ```bash
 # Increase timeout (default is 30s)
 npx lighthouse "URL" --max-wait-for-load=60000
 ```
 
 ### Local Development
+
 ```bash
 # Start dev server first
 npm run dev
@@ -116,6 +120,7 @@ npx lighthouse "http://localhost:3000/en/" --chrome-flags="--headless"
 ## Integration with SEO Specialist Agent
 
 The `seo-specialist` agent uses this skill to:
+
 1. Audit pages before recommending fixes
 2. Verify fixes improved scores
 3. Generate baseline reports for tracking

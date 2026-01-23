@@ -3,12 +3,7 @@ import { Navigation } from '@/components/layout/Navigation'
 import { Footer } from '@/components/layout/Footer'
 
 export function generateStaticParams() {
-  return [
-    { locale: 'et' },
-    { locale: 'en' },
-    { locale: 'lv' },
-    { locale: 'uk' },
-  ]
+  return [{ locale: 'et' }, { locale: 'en' }, { locale: 'lv' }, { locale: 'uk' }]
 }
 
 export default async function LocaleLayout({

@@ -42,6 +42,7 @@ const bodyFont = Sofia_Sans({ ... })
 ### Logo
 
 Replace the placeholder logo in:
+
 - `src/components/layout/Navigation.tsx`
 - `src/components/layout/Footer.tsx`
 
@@ -51,21 +52,22 @@ Replace the placeholder logo in:
 
 Each section is a separate component in `src/components/sections/`:
 
-| File | Purpose |
-|------|---------|
-| `Hero.tsx` | Main hero section |
-| `LogoCloud.tsx` | "Trusted by" logos |
-| `Features.tsx` | Feature cards |
-| `HowItWorks.tsx` | Process steps |
-| `Pricing.tsx` | Pricing tiers |
-| `Testimonials.tsx` | Customer quotes |
-| `CTA.tsx` | Final call-to-action |
+| File               | Purpose              |
+| ------------------ | -------------------- |
+| `Hero.tsx`         | Main hero section    |
+| `LogoCloud.tsx`    | "Trusted by" logos   |
+| `Features.tsx`     | Feature cards        |
+| `HowItWorks.tsx`   | Process steps        |
+| `Pricing.tsx`      | Pricing tiers        |
+| `Testimonials.tsx` | Customer quotes      |
+| `CTA.tsx`          | Final call-to-action |
 
 Search for `[PLACEHOLDER]` in each file and replace with your content.
 
 ### Navigation
 
 Edit `src/components/layout/Navigation.tsx`:
+
 - Update `navItems` array with your pages
 - Change the logo and brand name
 
@@ -82,10 +84,9 @@ date: '2026-01-12'
 category: news
 image: /images/blog/image.jpg
 author: author-name
-lang: en  # or 'et'
+lang: en # or 'et'
 tags: [tag1, tag2]
 ---
-
 Your markdown content...
 ```
 
@@ -94,6 +95,7 @@ Your markdown content...
 ### CLAUDE.md
 
 Update the main project file with:
+
 - Your project name and description
 - Team members
 - Production URLs
@@ -103,11 +105,11 @@ Update the main project file with:
 
 Agents in `.claude/agents/` can be customized:
 
-| Agent | Customize |
-|-------|-----------|
+| Agent                  | Customize                                        |
+| ---------------------- | ------------------------------------------------ |
 | `strategic-advisor.md` | Add your company info, services, target audience |
-| `seo-specialist.md` | Add your target keywords |
-| `blog-writer.md` | Add your author IDs |
+| `seo-specialist.md`    | Add your target keywords                         |
+| `blog-writer.md`       | Add your author IDs                              |
 
 ### Skills
 
@@ -140,6 +142,7 @@ The project is configured for static export. Deploy to Netlify:
 ### Other Platforms
 
 Next.js static export works with any static hosting:
+
 - Vercel
 - Cloudflare Pages
 - GitHub Pages

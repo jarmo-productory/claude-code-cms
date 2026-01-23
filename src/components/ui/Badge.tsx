@@ -19,7 +19,8 @@ export function Badge({
   onDark = false,
   className = '',
 }: BadgeProps) {
-  const baseClasses = 'inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold uppercase tracking-wider'
+  const baseClasses =
+    'inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold uppercase tracking-wider'
 
   let variantClasses: string
   if (onDark) {
@@ -50,9 +51,7 @@ export function Badge({
 
   return (
     <span className={`${baseClasses} ${variantClasses} ${className}`.trim()}>
-      {showDot && (
-        <span className="w-2 h-2 rounded-full bg-brand-secondary animate-pulse" />
-      )}
+      {showDot && <span className="w-2 h-2 rounded-full bg-brand-secondary animate-pulse" />}
       {children}
     </span>
   )

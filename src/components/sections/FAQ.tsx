@@ -45,7 +45,6 @@ export function FAQ({
     <section className={`py-16 lg:py-24 bg-white ${className || ''}`}>
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
-
           {/* Left Column - Header + Image */}
           <div className="flex flex-col">
             {/* Header */}
@@ -55,9 +54,7 @@ export function FAQ({
             <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4 font-display">
               {headline}
             </h2>
-            <p className="text-lg text-gray-600 mb-8">
-              {description}
-            </p>
+            <p className="text-lg text-gray-600 mb-8">{description}</p>
 
             {/* Image with overlay */}
             <div className="relative mb-8">
@@ -70,9 +67,7 @@ export function FAQ({
               />
               {/* Blue overlay banner */}
               <div className="absolute bottom-8 left-4 right-4 max-w-sm bg-brand-primary text-white p-6 rounded-lg">
-                <p className="text-lg font-medium leading-snug">
-                  {imageOverlay}
-                </p>
+                <p className="text-lg font-medium leading-snug">{imageOverlay}</p>
               </div>
             </div>
 
@@ -90,18 +85,15 @@ export function FAQ({
           {/* Right Column - Accordion */}
           <div className="flex flex-col">
             {items.map((item, index) => (
-              <div
-                key={index}
-                className="border-b border-gray-200"
-              >
+              <div key={index} className="border-b border-gray-200">
                 <button
                   onClick={() => toggleItem(index)}
-                  className="w-full flex items-center justify-between py-5 text-left"
+                  className="w-full flex items-center justify-between py-5 text-left cursor-pointer"
                 >
-                  <span className="text-lg font-medium text-gray-900 pr-4">
-                    {item.question}
-                  </span>
-                  <span className={`flex-shrink-0 w-8 h-8 rounded-full border-2 border-gray-300 flex items-center justify-center transition-transform ${openIndex === index ? 'rotate-45' : ''}`}>
+                  <span className="text-lg font-medium text-gray-900 pr-4">{item.question}</span>
+                  <span
+                    className={`flex-shrink-0 w-8 h-8 rounded-full border-2 border-gray-300 flex items-center justify-center transition-transform ${openIndex === index ? 'rotate-45' : ''}`}
+                  >
                     <Plus className="w-4 h-4 text-gray-500" />
                   </span>
                 </button>
@@ -110,14 +102,11 @@ export function FAQ({
                     openIndex === index ? 'max-h-96 pb-5' : 'max-h-0'
                   }`}
                 >
-                  <p className="text-gray-600 leading-relaxed">
-                    {item.answer}
-                  </p>
+                  <p className="text-gray-600 leading-relaxed">{item.answer}</p>
                 </div>
               </div>
             ))}
           </div>
-
         </div>
       </div>
     </section>

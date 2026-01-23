@@ -29,6 +29,7 @@ When asked to generate an image:
 ### Step 1: Understand Requirements
 
 Ask clarifying questions if needed:
+
 - What is the image for? (hero, thumbnail, social, etc.)
 - Any specific elements to include?
 - Preferred aspect ratio?
@@ -37,6 +38,7 @@ Ask clarifying questions if needed:
 ### Step 2: Build Prompt
 
 Apply Agrello brand style:
+
 - Professional, trustworthy aesthetic
 - Clean blues and whites (brand-primary: #3B82F6)
 - Modern, minimal design
@@ -45,13 +47,13 @@ Apply Agrello brand style:
 
 ### Step 3: Select Settings
 
-| Use Case | Model | Aspect | Type |
-|----------|-------|--------|------|
-| Page hero | imagen-3.0-generate-002 | 16:9 | hero |
-| Blog thumbnail | imagen-3.0-generate-002 | 4:3 | thumbnail |
-| Social post | imagen-3.0-generate-002 | 1:1 | social |
-| Service icon | imagen-3.0-generate-002 | 1:1 | icon |
-| Wide banner | imagen-3.0-generate-002 | 21:9 | banner |
+| Use Case       | Model                   | Aspect | Type      |
+| -------------- | ----------------------- | ------ | --------- |
+| Page hero      | imagen-3.0-generate-002 | 16:9   | hero      |
+| Blog thumbnail | imagen-3.0-generate-002 | 4:3    | thumbnail |
+| Social post    | imagen-3.0-generate-002 | 1:1    | social    |
+| Service icon   | imagen-3.0-generate-002 | 1:1    | icon      |
+| Wide banner    | imagen-3.0-generate-002 | 21:9   | banner    |
 
 ### Step 4: Execute Generation
 
@@ -66,6 +68,7 @@ npx ts-node scripts/generate-image.ts \
 ### Step 5: Report Results
 
 After generation:
+
 - Confirm image saved location
 - Mention metadata file
 - Offer to generate variations if needed
@@ -77,6 +80,7 @@ Transform user descriptions into brand-aligned prompts:
 **User says:** "image for e-signing page"
 
 **You create:**
+
 ```
 Professional illustration of digital document signing,
 business professional using tablet to sign contract,
@@ -87,12 +91,14 @@ trustworthy and secure atmosphere, minimal design
 ## Brand Guidelines Reference
 
 **Colors (for prompt context):**
+
 - Primary: #3B82F6 (Blue)
 - Dark: #1E293B (Slate)
 - Surface: #F8FAFC (Light gray)
 - Accent: #10B981 (Green for success)
 
 **Style Keywords:**
+
 - Professional, trustworthy, secure
 - Modern, clean, minimal
 - Business-focused, corporate
@@ -105,6 +111,7 @@ trustworthy and secure atmosphere, minimal design
 **User:** "Create a hero image for the pricing page"
 
 **You:**
+
 ```bash
 npx ts-node scripts/generate-image.ts \
   --prompt "Professional business team reviewing pricing plans on digital dashboard, modern office setting, clean blue and white aesthetic, collaborative atmosphere" \
@@ -118,6 +125,7 @@ npx ts-node scripts/generate-image.ts \
 **User:** "I need a thumbnail for a blog post about e-signatures"
 
 **You:**
+
 ```bash
 npx ts-node scripts/generate-image.ts \
   --prompt "Digital signature on tablet screen with stylus, professional hand signing document, clean modern interface, blue accent colors" \
@@ -131,6 +139,7 @@ npx ts-node scripts/generate-image.ts \
 **User:** "Generate something for LinkedIn about contract management"
 
 **You:**
+
 ```bash
 npx ts-node scripts/generate-image.ts \
   --prompt "Organized digital contract dashboard, business professional managing documents efficiently, modern minimal design, blue corporate aesthetic" \
@@ -144,9 +153,11 @@ npx ts-node scripts/generate-image.ts \
 If generation fails:
 
 1. **API Key Missing:**
+
    > "The GEMINI_API_KEY is not configured. Please add it to .env.local"
 
 2. **Content Filtered:**
+
    > "The prompt was filtered. Let me rephrase..."
    > Then try with different wording
 
@@ -157,6 +168,7 @@ If generation fails:
 ## Output Location
 
 Generated images are saved to:
+
 ```
 public/images/generated/[filename].png
 public/images/generated/[filename].json  # metadata

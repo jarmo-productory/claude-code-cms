@@ -25,9 +25,7 @@ export function LanguageProvider({ children, defaultLang = 'et' }: LanguageProvi
   const t = (et: string, en: string) => (lang === 'et' ? et : en)
 
   return (
-    <LanguageContext.Provider value={{ lang, setLang, t }}>
-      {children}
-    </LanguageContext.Provider>
+    <LanguageContext.Provider value={{ lang, setLang, t }}>{children}</LanguageContext.Provider>
   )
 }
 

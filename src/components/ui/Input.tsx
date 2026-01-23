@@ -40,8 +40,8 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
 
     // Consistent spacing system: 36px / 44px / 52px
     const sizeClasses = {
-      sm: 'h-9 text-sm px-3',      // 36px height
-      md: 'h-11 text-base px-4',   // 44px height
+      sm: 'h-9 text-sm px-3', // 36px height
+      md: 'h-11 text-base px-4', // 44px height
       lg: 'h-[52px] text-lg px-5', // 52px height
     }
 
@@ -69,10 +69,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     return (
       <div className={`${fullWidth ? 'w-full' : ''}`}>
         {label && (
-          <label
-            htmlFor={inputId}
-            className="block text-sm font-medium text-brand-dark mb-1.5"
-          >
+          <label htmlFor={inputId} className="block text-sm font-medium text-brand-dark mb-1.5">
             {label}
           </label>
         )}

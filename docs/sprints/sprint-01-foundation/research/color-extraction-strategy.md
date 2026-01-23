@@ -11,6 +11,7 @@ The Webflow CSS (`agrello-web.shared.min.css`) is minified to a single 282KB lin
 **Target URL:** https://www.agrello.io
 
 **Key Elements to Inspect:**
+
 1. **Hero Section**
    - Background color/gradient
    - Headline color
@@ -40,6 +41,7 @@ The Webflow CSS (`agrello-web.shared.min.css`) is minified to a single 282KB lin
    - Disabled state
 
 **Browser DevTools Process:**
+
 ```
 1. Right-click element → Inspect
 2. In Styles panel, look for:
@@ -53,12 +55,14 @@ The Webflow CSS (`agrello-web.shared.min.css`) is minified to a single 282KB lin
 ### Method 2: SVG Logo Analysis
 
 **Files to inspect:**
+
 - `643ffb1cd99b572cc276a6c0_Agrello_logo.svg`
 - `5e73642ba2128c3459c6a635_logo.svg`
 
 SVG files often contain brand colors in `fill` or `stroke` attributes.
 
 **Process:**
+
 ```bash
 # Open SVG in text editor
 cat docs/agrello-images/643ffb1cd99b572cc276a6c0_Agrello_logo.svg
@@ -71,10 +75,12 @@ stroke="#XXXXXX"
 ### Method 3: Screenshot Color Picker
 
 **Tools:**
+
 - macOS: Digital Color Meter (built-in)
 - Browser extensions: ColorZilla, Eye Dropper
 
 **Process:**
+
 1. Take high-res screenshots of agrello.io
 2. Use color picker to sample exact colors
 3. Cross-reference with DevTools findings
@@ -85,12 +91,14 @@ stroke="#XXXXXX"
 Based on typical SaaS brand systems, Agrello likely has:
 
 ### Primary Colors
+
 - **Brand Primary** - Main CTA color, links, primary buttons
 - **Brand Secondary** - Accent elements, hover states
 - **Brand Dark** - Headers, navigation, footer background
 - **Brand Accent** - Highlights, badges, special callouts
 
 ### Neutral Colors
+
 - **Surface** - Page background (usually white or very light gray)
 - **Text Primary** - Body text (dark gray or black)
 - **Text Secondary** - Muted text, captions
@@ -98,6 +106,7 @@ Based on typical SaaS brand systems, Agrello likely has:
 - **Border** - Card borders, dividers
 
 ### Semantic Colors
+
 - **Success** - Confirmation messages (green)
 - **Error** - Error states (red)
 - **Warning** - Warnings (yellow/orange)
@@ -110,7 +119,7 @@ Once extracted, we'll map to Tailwind custom properties:
 ```css
 @theme {
   /* Primary Brand */
-  --color-brand-primary: #XXXXXX;       /* Main CTA color */
+  --color-brand-primary: #XXXXXX; /* Main CTA color */
   --color-brand-primary-hover: #XXXXXX; /* Hover state */
   --color-brand-primary-light: #XXXXXX; /* Lighter variant */
 
@@ -119,17 +128,17 @@ Once extracted, we'll map to Tailwind custom properties:
   --color-brand-secondary-hover: #XXXXXX;
 
   /* Neutrals */
-  --color-brand-dark: #XXXXXX;          /* Headers, dark sections */
-  --color-brand-surface: #XXXXXX;       /* Page background */
-  --color-brand-border: #XXXXXX;        /* Borders, dividers */
+  --color-brand-dark: #XXXXXX; /* Headers, dark sections */
+  --color-brand-surface: #XXXXXX; /* Page background */
+  --color-brand-border: #XXXXXX; /* Borders, dividers */
 
   /* Text Hierarchy */
-  --color-text-primary: #XXXXXX;        /* Body text */
-  --color-text-secondary: #XXXXXX;      /* Muted text */
-  --color-text-inverse: #FFFFFF;        /* Text on dark backgrounds */
+  --color-text-primary: #XXXXXX; /* Body text */
+  --color-text-secondary: #XXXXXX; /* Muted text */
+  --color-text-inverse: #ffffff; /* Text on dark backgrounds */
 
   /* Accent */
-  --color-brand-accent: #XXXXXX;        /* Highlights, badges */
+  --color-brand-accent: #XXXXXX; /* Highlights, badges */
 }
 ```
 
@@ -138,18 +147,21 @@ Once extracted, we'll map to Tailwind custom properties:
 While extracting colors, also document:
 
 ### Font Sizes
+
 - Display (hero headlines)
 - H1, H2, H3, H4, H5, H6
 - Body (paragraph text)
 - Small (captions, labels)
 
 ### Font Weights
+
 - Display: likely 700-800 (Manrope Bold/ExtraBold)
 - Headings: 600-700 (Manrope SemiBold/Bold)
 - Body: 400 (Inter Regular)
 - Bold: 500-600 (Inter Medium/SemiBold)
 
 ### Line Heights
+
 - Display: 1.1-1.2 (tight)
 - Headings: 1.2-1.3
 - Body: 1.5-1.6 (comfortable reading)
@@ -157,6 +169,7 @@ While extracting colors, also document:
 ## Validation Checklist
 
 After extraction, verify:
+
 - [ ] Colors match live site visually
 - [ ] Sufficient contrast ratios (WCAG AA minimum)
   - Normal text: 4.5:1

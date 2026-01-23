@@ -1,11 +1,11 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @theme {
   /* Agrello Brand Colors */
-  --color-brand-dark: #272833;        /* Main dark background */
-  --color-brand-primary: #0d2ae6;     /* Primary blue */
-  --color-brand-secondary: #2ee0ab;   /* Green accent */
-  --color-brand-surface: #f5f6fa;     /* Ghost white surface */
+  --color-brand-dark: #272833; /* Main dark background */
+  --color-brand-primary: #0d2ae6; /* Primary blue */
+  --color-brand-secondary: #2ee0ab; /* Green accent */
+  --color-brand-surface: #f5f6fa; /* Ghost white surface */
 
   /* Grey palette (from Webflow) */
   --color-gray-50: #f9fafb;
@@ -20,15 +20,21 @@
   --color-gray-900: #00010d;
 
   /* Semantic colors */
-  --color-brand-success: #5aca75;     /* Success green */
+  --color-brand-success: #5aca75; /* Success green */
 
   /* Typography - Montserrat only */
   --font-sans: var(--font-montserrat), system-ui, sans-serif;
   --font-display: var(--font-montserrat), system-ui, sans-serif;
 
   /* Gradients */
-  --background-image-brand-gradient: linear-gradient(135deg, var(--color-brand-secondary), var(--color-brand-primary));
-  --background-image-brand-mesh: radial-gradient(at 40% 20%, var(--color-brand-secondary) 0px, transparent 50%), radial-gradient(at 80% 0%, var(--color-brand-primary) 0px, transparent 50%);
+  --background-image-brand-gradient: linear-gradient(
+    135deg,
+    var(--color-brand-secondary),
+    var(--color-brand-primary)
+  );
+  --background-image-brand-mesh:
+    radial-gradient(at 40% 20%, var(--color-brand-secondary) 0px, transparent 50%),
+    radial-gradient(at 80% 0%, var(--color-brand-primary) 0px, transparent 50%);
 
   /* Shadows */
   --shadow-brand: 0 4px 14px 0 rgba(13, 42, 230, 0.25);
@@ -38,8 +44,14 @@
 }
 
 @keyframes fade-in {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Base styles */

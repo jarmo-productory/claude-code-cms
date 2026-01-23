@@ -12,20 +12,29 @@
 
 ## Architecture (Locked Decisions)
 
-| Component | Choice | Rationale |
-|-----------|--------|-----------|
-| Framework | Next.js 15 (App Router) | SEO-first, file-based routing, server components |
-| Components | React 19 | Familiar, reusable |
-| Styling | Tailwind CSS v4 | Utility-first, brand tokens |
-| Content | Markdown + frontmatter | Easy editing, git-based |
-| i18n | File-based (`/et/`, `/en/`) | SEO-friendly URLs |
-| Hosting | [HOSTING_PROVIDER] | [HOSTING_REASON] |
+| Component  | Choice                      | Rationale                                        |
+| ---------- | --------------------------- | ------------------------------------------------ |
+| Framework  | Next.js 15 (App Router)     | SEO-first, file-based routing, server components |
+| Components | React 19                    | Familiar, reusable                               |
+| Styling    | Tailwind CSS v4             | Utility-first, brand tokens                      |
+| Content    | Markdown + frontmatter      | Easy editing, git-based                          |
+| i18n       | File-based (`/et/`, `/en/`) | SEO-friendly URLs                                |
+| Hosting    | [HOSTING_PROVIDER]          | [HOSTING_REASON]                                 |
 
 **Current state:** Next.js 15 + React 19 (App Router)
 
 **Production URL:** [PRODUCTION_URL]
 **Staging URL:** [STAGING_URL]
 **Repository:** [REPOSITORY_URL]
+
+### Agrello App URLs (IMPORTANT)
+
+Always use these URLs for login/signup links:
+
+- **Login:** `https://docs.agrello.io/app/login?open_tab=sign_in`
+- **Signup:** `https://docs.agrello.io/app/login?open_tab=sign_up`
+
+Do NOT use `app.agrello.io` or `/login` or `/signup` - always use the full URLs above.
 
 ---
 
@@ -72,14 +81,14 @@
 I do NOT contain detailed technical knowledge in this file.
 I MUST delegate to the appropriate expert agent.
 
-| Domain | Agent | Trigger Keywords |
-|--------|-------|------------------|
-| Sprint Workflow | `sprint-manager` | sprint, phase, approved, start sprint |
+| Domain              | Agent               | Trigger Keywords                               |
+| ------------------- | ------------------- | ---------------------------------------------- |
+| Sprint Workflow     | `sprint-manager`    | sprint, phase, approved, start sprint          |
 | Strategy & Planning | `strategic-advisor` | plan content, evaluate, strategy, customer POV |
-| SEO & GEO | `seo-specialist` | SEO, keywords, meta tags, ranking |
-| Implementation | `frontend-expert` | build, create, implement, fix, component |
-| Quality Gates | `qa-validator` | commit, push, done, ship, merge, PR |
-| Blog Content | `blog-writer` | blog post, draft, write blog, create article |
+| SEO & GEO           | `seo-specialist`    | SEO, keywords, meta tags, ranking              |
+| Implementation      | `frontend-expert`   | build, create, implement, fix, component       |
+| Quality Gates       | `qa-validator`      | commit, push, done, ship, merge, PR            |
+| Blog Content        | `blog-writer`       | blog post, draft, write blog, create article   |
 
 ### Invocation Rule
 
@@ -89,10 +98,10 @@ When user input contains trigger keywords → **INVOKE agent BEFORE responding.*
 
 ## Approval Gates (HARD Enforcement)
 
-| Gate | Condition | Release Phrase |
-|------|-----------|----------------|
-| Sprint Phase 2→3 | Cannot write implementation code | "approved", "proceed", "go ahead" |
-| Any commit | qa-validator must pass all checks | All checks green |
+| Gate             | Condition                         | Release Phrase                    |
+| ---------------- | --------------------------------- | --------------------------------- |
+| Sprint Phase 2→3 | Cannot write implementation code  | "approved", "proceed", "go ahead" |
+| Any commit       | qa-validator must pass all checks | All checks green                  |
 
 **These gates cannot be bypassed.** If blocked, wait for approval or fix issues.
 
@@ -118,6 +127,7 @@ Before EVERY response, ask:
 ## Quick Reference
 
 ### Commands
+
 ```bash
 npm run dev              # Start dev server (with Turbopack)
 npm run build            # Production build
@@ -133,9 +143,10 @@ npm run lint             # Run linter
 - CSS changes apply without page refresh
 - Fast Refresh preserves component state
 
-**Before starting dev server, always kill port 3000:**
+**Before starting dev server, always kill port 3001:**
+
 ```bash
-lsof -ti:3000 | xargs kill -9 2>/dev/null; rm -rf .next && npm run dev
+lsof -ti:3001 | xargs kill -9 2>/dev/null; rm -rf .next && npm run dev -p 3001
 ```
 
 ### Brand Tokens
@@ -157,12 +168,14 @@ import { Button, Badge, Card, Input, Icon, SectionHeader, FadeInView } from '@/c
 **Styleguide:** `npm run dev` then visit `http://localhost:3000/styleguide`
 
 ### Skills Available
+
 - `generic-cvi` - Brand system and color tokens
 - `ui-components` - Component library patterns
 - `homepage-patterns` - Landing page sections
 - `seo-audit` - Lighthouse CLI audits
 
 ### Slash Commands
+
 - `/new-section [name]` - Create new section component
 - `/publish` - Commit and push changes
 - `/rundev` - Clean cache and restart dev server

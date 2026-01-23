@@ -123,7 +123,7 @@ function parseArgs(): ImportOptions {
 
   const options: ImportOptions = {
     csvPath: args[0],
-    locales: ['en', 'et', 'lv']
+    locales: ['en', 'et', 'lv'],
   }
 
   for (let i = 1; i < args.length; i++) {
@@ -160,7 +160,10 @@ function parseBoolean(value: string): boolean {
 
 function parseTags(value: string): string[] {
   if (!value) return []
-  return value.split(';').map(t => t.trim()).filter(Boolean)
+  return value
+    .split(';')
+    .map((t) => t.trim())
+    .filter(Boolean)
 }
 
 function slugify(text: string): string {
@@ -203,15 +206,17 @@ async function downloadImage(url: string, articleSlug: string): Promise<string> 
     const protocol = url.startsWith('https') ? https : http
 
     const buffer = await new Promise<Buffer>((resolve, reject) => {
-      protocol.get(url, (response) => {
-        if (response.statusCode === 200) {
-          const chunks: Buffer[] = []
-          response.on('data', (chunk) => chunks.push(chunk))
-          response.on('end', () => resolve(Buffer.concat(chunks)))
-        } else {
-          reject(new Error(`Failed to download: ${response.statusCode}`))
-        }
-      }).on('error', reject)
+      protocol
+        .get(url, (response) => {
+          if (response.statusCode === 200) {
+            const chunks: Buffer[] = []
+            response.on('data', (chunk) => chunks.push(chunk))
+            response.on('end', () => resolve(Buffer.concat(chunks)))
+          } else {
+            reject(new Error(`Failed to download: ${response.statusCode}`))
+          }
+        })
+        .on('error', reject)
     })
 
     // Write to both locations for Ritemark preview AND Next.js serving
@@ -221,7 +226,9 @@ async function downloadImage(url: string, articleSlug: string): Promise<string> 
     DOWNLOADED_IMAGES.set(url, relativePath)
     return relativePath
   } catch (error) {
-    console.warn(`    Warning: Failed to download image ${url}: ${error instanceof Error ? error.message : error}`)
+    console.warn(
+      `    Warning: Failed to download image ${url}: ${error instanceof Error ? error.message : error}`
+    )
     return '' // Return empty string on failure
   }
 }
@@ -235,7 +242,10 @@ async function downloadInlineImages(html: string, articleSlug: string): Promise<
     const cdnUrl = match[1]
 
     // Only process Webflow CDN URLs
-    if (cdnUrl.includes('cdn.prod.website-files.com') || cdnUrl.includes('uploads-ssl.webflow.com')) {
+    if (
+      cdnUrl.includes('cdn.prod.website-files.com') ||
+      cdnUrl.includes('uploads-ssl.webflow.com')
+    ) {
       const localPath = await downloadImage(cdnUrl, articleSlug)
       if (localPath) {
         modifiedHtml = modifiedHtml.replace(cdnUrl, localPath)
@@ -254,22 +264,19 @@ function initTurndown(): TurndownService {
   const turndown = new TurndownService({
     headingStyle: 'atx',
     codeBlockStyle: 'fenced',
-    bulletListMarker: '-'
+    bulletListMarker: '-',
   })
 
   // Preserve YouTube embeds
   turndown.addRule('youtube', {
     filter: (node) => {
-      return (
-        node.nodeName === 'IFRAME' &&
-        node.getAttribute('src')?.includes('youtube.com/embed')
-      )
+      return node.nodeName === 'IFRAME' && node.getAttribute('src')?.includes('youtube.com/embed')
     },
     replacement: (content, node) => {
       const src = (node as HTMLElement).getAttribute('src') || ''
       const videoId = src.match(/embed\/([^?]+)/)?.[1]
       return videoId ? `\n\n[YouTube Video](https://www.youtube.com/watch?v=${videoId})\n\n` : ''
-    }
+    },
   })
 
   return turndown
@@ -312,7 +319,7 @@ function mapArticleToFrontmatter(article: WebflowArticle): BlogFrontmatter {
     featured: parseBoolean(article['Featured on category page']),
     keywordCluster: article['Keyword cluster'],
     tags: parseTags(article.Tag),
-    categories: parseTags(article.Categories)
+    categories: parseTags(article.Categories),
   }
 }
 
@@ -330,7 +337,10 @@ async function processArticle(article: WebflowArticle, stats: ImportStats): Prom
     }
 
     if (article['Thumbnail image (520x273)']) {
-      frontmatter.thumbnail = await downloadImage(article['Thumbnail image (520x273)'], article.Slug)
+      frontmatter.thumbnail = await downloadImage(
+        article['Thumbnail image (520x273)'],
+        article.Slug
+      )
       if (frontmatter.thumbnail) stats.images++
     }
 
@@ -358,7 +368,6 @@ async function processArticle(article: WebflowArticle, stats: ImportStats): Prom
 
     stats.imported++
     log(`✓ Imported: ${filename}`, 2)
-
   } catch (error) {
     stats.failed++
     const errorMsg = `Failed to process ${article.Name}: ${error instanceof Error ? error.message : error}`
@@ -371,7 +380,7 @@ function generateMarkdown(frontmatter: BlogFrontmatter, content: string): string
   const fm = {
     ...frontmatter,
     tags: frontmatter.tags.length > 0 ? frontmatter.tags : undefined,
-    categories: frontmatter.categories.length > 0 ? frontmatter.categories : undefined
+    categories: frontmatter.categories.length > 0 ? frontmatter.categories : undefined,
   }
 
   // Build YAML frontmatter
@@ -381,7 +390,7 @@ function generateMarkdown(frontmatter: BlogFrontmatter, content: string): string
 
     if (Array.isArray(value)) {
       yaml += `${key}:\n`
-      value.forEach(item => {
+      value.forEach((item) => {
         yaml += `  - ${item}\n`
       })
     } else if (typeof value === 'boolean') {
@@ -431,13 +440,13 @@ async function importArticles(options: ImportOptions): Promise<void> {
   const records: WebflowArticle[] = parse(csvContent, {
     columns: true,
     skip_empty_lines: true,
-    trim: true
+    trim: true,
   })
 
   log(`Found ${records.length} articles\n`)
 
   // Filter articles
-  let articles = records.filter(article => {
+  let articles = records.filter((article) => {
     // Skip archived and draft posts
     if (parseBoolean(article.Archived) || parseBoolean(article.Draft)) {
       return false
@@ -471,12 +480,12 @@ async function importArticles(options: ImportOptions): Promise<void> {
     skipped: 0,
     failed: 0,
     images: 0,
-    errors: []
+    errors: [],
   }
 
   // Group by locale for better output
   const byLocale = new Map<string, WebflowArticle[]>()
-  articles.forEach(article => {
+  articles.forEach((article) => {
     const locale = article.Locale
     if (!byLocale.has(locale)) {
       byLocale.set(locale, [])
@@ -507,7 +516,7 @@ async function importArticles(options: ImportOptions): Promise<void> {
 
   if (stats.errors.length > 0) {
     console.log('\n⚠️  Errors:')
-    stats.errors.forEach(error => console.log(`  - ${error}`))
+    stats.errors.forEach((error) => console.log(`  - ${error}`))
   }
 
   console.log('\n' + '='.repeat(60))

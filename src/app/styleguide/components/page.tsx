@@ -14,9 +14,7 @@ export default function ComponentsPage() {
     <div className="space-y-16">
       <header>
         <h1 className="text-4xl font-bold text-brand-dark mb-2">Components</h1>
-        <p className="text-lg text-gray-600">
-          Composite components built from atomic elements
-        </p>
+        <p className="text-lg text-gray-600">Composite components built from atomic elements</p>
       </header>
 
       {/* Cards */}
@@ -36,15 +34,11 @@ export default function ComponentsPage() {
               </Card>
               <Card variant="highlight">
                 <h4 className="text-lg font-semibold mb-2">Highlight Card</h4>
-                <p className="text-gray-600 text-sm">
-                  Card with brand accent border for emphasis.
-                </p>
+                <p className="text-gray-600 text-sm">Card with brand accent border for emphasis.</p>
               </Card>
               <Card variant="frosted">
                 <h4 className="text-lg font-semibold mb-2">Frosted Card</h4>
-                <p className="text-gray-600 text-sm">
-                  Glassmorphism effect with backdrop blur.
-                </p>
+                <p className="text-gray-600 text-sm">Glassmorphism effect with backdrop blur.</p>
               </Card>
             </div>
           </div>
@@ -55,15 +49,11 @@ export default function ComponentsPage() {
             <div className="grid md:grid-cols-3 gap-6">
               <Card hoverable>
                 <h4 className="text-lg font-semibold mb-2">Hoverable</h4>
-                <p className="text-gray-600 text-sm">
-                  Hover to see the lift effect.
-                </p>
+                <p className="text-gray-600 text-sm">Hover to see the lift effect.</p>
               </Card>
               <Card hoverable variant="highlight">
                 <h4 className="text-lg font-semibold mb-2">Hoverable Highlight</h4>
-                <p className="text-gray-600 text-sm">
-                  Combined with highlight variant.
-                </p>
+                <p className="text-gray-600 text-sm">Combined with highlight variant.</p>
               </Card>
             </div>
           </div>
@@ -97,15 +87,21 @@ export default function ComponentsPage() {
                 <p className="text-gray-600 mb-4">
                   Automate your contract workflow with templates and bulk operations.
                 </p>
-                <Button variant="outline" size="sm">Learn more</Button>
+                <Button variant="outline" size="sm">
+                  Learn more
+                </Button>
               </Card>
               <Card hoverable padding="lg">
-                <Badge variant="status" showDot className="mb-4">Popular</Badge>
+                <Badge variant="status" showDot className="mb-4">
+                  Popular
+                </Badge>
                 <h4 className="text-xl font-semibold mb-2">E-Signatures</h4>
                 <p className="text-gray-600 mb-4">
                   Legally binding signatures that comply with eIDAS regulations.
                 </p>
-                <Button variant="outline" size="sm">Learn more</Button>
+                <Button variant="outline" size="sm">
+                  Learn more
+                </Button>
               </Card>
             </div>
           </div>

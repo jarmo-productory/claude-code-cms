@@ -40,28 +40,30 @@ Name,Slug,Published,Post Body,Featured Image,Author,Tags,_archived_,_draft_
 
 ### Field Mapping
 
-| Webflow Field | CSV Column | Type | Notes |
-|---------------|------------|------|-------|
-| Name | `Name` | Text | Required, used as title |
-| Slug | `Slug` | Text | URL-friendly identifier |
-| Published | `Published` | ISO Date | Publication date |
-| Post Body | `Post Body` | Rich Text | HTML content |
-| Featured Image | `Featured Image` | URL | Full CDN URL |
-| Author | `Author` | Text/Reference | May be ID or name |
-| Tags | `Tags` | Multi-select | Comma-separated list |
-| _archived_ | `_archived_` | Boolean | System field |
-| _draft_ | `_draft_` | Boolean | System field |
+| Webflow Field  | CSV Column       | Type           | Notes                   |
+| -------------- | ---------------- | -------------- | ----------------------- |
+| Name           | `Name`           | Text           | Required, used as title |
+| Slug           | `Slug`           | Text           | URL-friendly identifier |
+| Published      | `Published`      | ISO Date       | Publication date        |
+| Post Body      | `Post Body`      | Rich Text      | HTML content            |
+| Featured Image | `Featured Image` | URL            | Full CDN URL            |
+| Author         | `Author`         | Text/Reference | May be ID or name       |
+| Tags           | `Tags`           | Multi-select   | Comma-separated list    |
+| _archived_     | `_archived_`     | Boolean        | System field            |
+| _draft_        | `_draft_`        | Boolean        | System field            |
 
 ---
 
 ## Image Handling in CSV
 
 ### Image URL Format
+
 ```
 https://uploads-ssl.webflow.com/507f1f77bcf86cd799439011/507f191e810c19729de860ea_image-name.jpg
 ```
 
 **Key Observations:**
+
 - Images are NOT included in CSV
 - Only URLs are provided
 - Must download separately via HTTP
@@ -70,6 +72,7 @@ https://uploads-ssl.webflow.com/507f1f77bcf86cd799439011/507f191e810c19729de860e
 ### Downloading Images
 
 **Strategy:**
+
 1. Parse CSV to extract all image URLs
 2. Download each image via fetch/curl
 3. Save to `public/images/blog-import/`
@@ -77,6 +80,7 @@ https://uploads-ssl.webflow.com/507f1f77bcf86cd799439011/507f191e810c19729de860e
 5. Update markdown to reference local paths
 
 **Example Script:**
+
 ```typescript
 async function downloadImage(url: string, slug: string): Promise<string> {
   const response = await fetch(url)
@@ -105,19 +109,20 @@ npm install csv-parse
 ```
 
 **Usage:**
+
 ```typescript
 import { parse } from 'csv-parse/sync'
 import fs from 'fs'
 
 const csvContent = fs.readFileSync('webflow-export.csv', 'utf-8')
 const records = parse(csvContent, {
-  columns: true,  // Use first row as column names
+  columns: true, // Use first row as column names
   skip_empty_lines: true,
-  trim: true
+  trim: true,
 })
 
 // records is now an array of objects
-records.forEach(row => {
+records.forEach((row) => {
   console.log(row.Name, row.Slug, row['Featured Image'])
 })
 ```
@@ -127,6 +132,7 @@ records.forEach(row => {
 ## Rich Text Content
 
 Webflow exports rich text as HTML:
+
 ```html
 <p>This is a paragraph with <strong>bold</strong> text.</p>
 <h2>Subheading</h2>
@@ -139,18 +145,20 @@ Webflow exports rich text as HTML:
 ### Conversion Options
 
 **Option 1: HTML to Markdown (Recommended)**
+
 ```typescript
 import TurndownService from 'turndown'
 
 const turndownService = new TurndownService({
   headingStyle: 'atx',
-  codeBlockStyle: 'fenced'
+  codeBlockStyle: 'fenced',
 })
 
 const markdown = turndownService.turndown(htmlContent)
 ```
 
 **Option 2: Keep as HTML**
+
 - Store HTML in markdown file's content section
 - Use `dangerouslySetInnerHTML` in React component
 - Cons: Less maintainable, security risk
@@ -160,6 +168,7 @@ const markdown = turndownService.turndown(htmlContent)
 ## Frontmatter Generation
 
 ### Target Format (Our Current Blog Schema)
+
 ```yaml
 ---
 title: Article Title
@@ -178,6 +187,7 @@ tags:
 ```
 
 ### Mapping Logic
+
 ```typescript
 interface WebflowRow {
   Name: string
@@ -192,7 +202,7 @@ interface WebflowRow {
 }
 
 function generateFrontmatter(row: WebflowRow, lang: 'en' | 'et'): string {
-  const tags = row.Tags ? row.Tags.split(',').map(t => t.trim()) : []
+  const tags = row.Tags ? row.Tags.split(',').map((t) => t.trim()) : []
   const date = new Date(row.Published).toISOString().split('T')[0]
 
   return `---
@@ -206,7 +216,7 @@ author: ${row.Author}
 featured: false
 lang: ${lang}
 tags:
-${tags.map(tag => `  - ${tag}`).join('\n')}
+${tags.map((tag) => `  - ${tag}`).join('\n')}
 ---`
 }
 ```
@@ -277,7 +287,7 @@ async function importCSV() {
   const records = parse(csvContent, {
     columns: true,
     skip_empty_lines: true,
-    trim: true
+    trim: true,
   })
 
   console.log(`Found ${records.length} records`)
@@ -321,6 +331,7 @@ importCSV().catch(console.error)
 ```
 
 ### Usage
+
 ```bash
 # Export blog posts from Webflow as CSV
 # Save as webflow-export.csv in project root
@@ -337,6 +348,7 @@ npm run import-webflow webflow-export.csv et
 ## Pros & Cons
 
 ### Pros
+
 - **Simple & fast** - No API authentication needed
 - **One-time export** - Perfect for migration
 - **Manual control** - Review/edit CSV before import
@@ -345,6 +357,7 @@ npm run import-webflow webflow-export.csv et
 - **No API costs** - Free to use
 
 ### Cons
+
 - **Manual export** - Must download CSV from Webflow UI
 - **No automation** - Can't sync new content automatically
 - **Missing metadata** - Image alt text not included
@@ -373,6 +386,7 @@ npm run import-webflow webflow-export.csv et
 ## Missing Data Handling
 
 ### Image Alt Text
+
 - **Problem:** CSV doesn't include alt text
 - **Solution:**
   1. Use article title as fallback
@@ -380,6 +394,7 @@ npm run import-webflow webflow-export.csv et
   3. Fetch from Webflow API as secondary step
 
 ### Rich Text Embeds
+
 - **Problem:** YouTube embeds, custom widgets may not convert
 - **Solution:**
   1. Manual review after import
@@ -387,6 +402,7 @@ npm run import-webflow webflow-export.csv et
   3. Convert known patterns (YouTube URLs → shortcodes)
 
 ### References/Relations
+
 - **Problem:** Author/Category references may be IDs
 - **Solution:**
   1. Export related collections separately
@@ -397,26 +413,28 @@ npm run import-webflow webflow-export.csv et
 
 ## Estimated Complexity
 
-| Task | Complexity | Time Estimate |
-|------|------------|---------------|
-| CSV parsing | Low | 30 min |
-| Download images | Low | 30 min |
-| HTML to Markdown conversion | Medium | 1 hour |
-| Frontmatter generation | Low | 30 min |
-| Error handling | Medium | 1 hour |
-| Testing & validation | Medium | 1 hour |
-| **Total** | **Low-Medium** | **4.5 hours** |
+| Task                        | Complexity     | Time Estimate |
+| --------------------------- | -------------- | ------------- |
+| CSV parsing                 | Low            | 30 min        |
+| Download images             | Low            | 30 min        |
+| HTML to Markdown conversion | Medium         | 1 hour        |
+| Frontmatter generation      | Low            | 30 min        |
+| Error handling              | Medium         | 1 hour        |
+| Testing & validation        | Medium         | 1 hour        |
+| **Total**                   | **Low-Medium** | **4.5 hours** |
 
 ---
 
 ## Recommendation
 
 **Use CSV import for:**
+
 - **One-time migration** from Webflow to Next.js
 - **Quick proof-of-concept** to see content in new site
 - **Initial content population** before launch
 
 **Ideal workflow:**
+
 1. Export CSV from Webflow
 2. Run import script → `blog-import/` folder
 3. Review generated markdown files
@@ -425,6 +443,7 @@ npm run import-webflow webflow-export.csv et
 6. Commit to git
 
 **Comparison to API:**
+
 - CSV is **40% faster** to implement (4.5h vs 7h)
 - CSV is **simpler** (no auth, no rate limits)
 - CSV is **manual** (good for one-time, bad for ongoing sync)

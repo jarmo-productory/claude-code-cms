@@ -23,6 +23,7 @@ You can be bypassed ONLY with explicit "skip qa" - but you MUST log a warning.
 ## When to Run
 
 Invoke automatically when you detect:
+
 - User says: commit, push, done, ship, merge, PR, ready, complete, finished
 - Sprint transitioning to Phase 4, 5, or 6
 - User requests a release or build
@@ -39,6 +40,7 @@ npm run build
 ```
 
 **If fails:**
+
 ```
 FAILED: TypeScript/Build compilation
 
@@ -57,16 +59,57 @@ npm run lint
 ```
 
 **If fails:**
+
 ```
 FAILED: Lint check
 
 Linting errors found:
 [Show actual lint errors]
 
-FIX: Run `npm run lint` and fix reported issues.
+FIX: Run `npm run lint:fix` to auto-fix issues.
 ```
 
-### 3. Dev Server Starts (CRITICAL)
+### 3. Format Check (CRITICAL)
+
+**Check:** All code is properly formatted with Prettier
+
+```bash
+npm run format:check
+# Must exit 0 with "All matched files use Prettier code style!"
+```
+
+**If fails:**
+
+```
+FAILED: Format check
+
+Files not formatted correctly:
+[Show list of unformatted files]
+
+FIX: Run `npm run format` to auto-format all files.
+```
+
+### 4. TypeScript Check (CRITICAL)
+
+**Check:** TypeScript compiles without errors
+
+```bash
+npm run typecheck
+# Must exit 0 with no errors
+```
+
+**If fails:**
+
+```
+FAILED: TypeScript type check
+
+Type errors found:
+[Show actual type errors]
+
+FIX: Fix type errors before committing.
+```
+
+### 5. Dev Server Starts (CRITICAL)
 
 **Check:** Dev server starts without errors
 
@@ -76,6 +119,7 @@ npm run dev
 ```
 
 **If fails:**
+
 ```
 FAILED: Dev server startup
 
@@ -85,7 +129,7 @@ Server failed to start. Check for:
 - Port conflicts
 ```
 
-### 4. Debug Code Check (WARNING)
+### 6. Debug Code Check (WARNING)
 
 **Check:** No console.log or debugger statements in production code
 
@@ -94,6 +138,7 @@ grep -r "console\.log\|debugger" src/ --include="*.ts" --include="*.tsx" | grep 
 ```
 
 **If found:**
+
 ```
 WARNING: Debug code detected
 
@@ -103,11 +148,12 @@ Found console.log or debugger statements:
 Remove or mark with "// DEBUG" comment if intentional.
 ```
 
-### 5. Commit Message Format (WARNING)
+### 7. Commit Message Format (WARNING)
 
 **Check:** Follows conventional commit format
 
 Valid prefixes:
+
 - `feat:` - New feature
 - `fix:` - Bug fix
 - `docs:` - Documentation
@@ -117,6 +163,7 @@ Valid prefixes:
 - `style:` - Code style/formatting
 
 **If invalid:**
+
 ```
 WARNING: Commit message format
 
@@ -126,7 +173,7 @@ Use conventional commit format:
   docs: update README
 ```
 
-### 6. Brand Compliance (WARNING)
+### 8. Brand Compliance (WARNING)
 
 **Check:** No hardcoded colors outside brand palette
 
@@ -135,6 +182,7 @@ grep -r "#[0-9a-fA-F]\{6\}" src/ --include="*.tsx" --include="*.css" | grep -v "
 ```
 
 **If found:**
+
 ```
 WARNING: Non-brand colors detected
 
@@ -151,8 +199,10 @@ Use brand tokens: brand-dark, brand-primary, brand-secondary, brand-accent, bran
 QA VALIDATION REPORT
 ========================================
 
-[PASS] TypeScript/Build compilation
+[PASS] Build compilation
 [PASS] Lint check
+[PASS] Format check (Prettier)
+[PASS] TypeScript check
 [PASS] Dev server starts
 [WARN] Debug code (2 console.log found)
 [PASS] Commit format ready
@@ -170,8 +220,10 @@ Or if blocked:
 QA VALIDATION REPORT
 ========================================
 
-[FAIL] TypeScript/Build compilation - CRITICAL
-[SKIP] Lint check (blocked by above)
+[FAIL] TypeScript check - CRITICAL
+[SKIP] Build compilation
+[SKIP] Lint check
+[SKIP] Format check
 [SKIP] Dev server starts
 [SKIP] Debug code check
 [SKIP] Commit format
@@ -207,11 +259,15 @@ Recommendation: Run qa-validator after fixing issues.
 ## Quick Commands
 
 ```bash
-# Full validation sequence
-npm run build && npm run lint
+# Full validation (recommended before commit)
+npm run validate       # Runs typecheck + lint + format:check
 
-# Manual checks
-npm run build          # TypeScript/Build
+# Individual checks
+npm run typecheck      # TypeScript type check
 npm run lint           # Linting
+npm run lint:fix       # Auto-fix lint issues
+npm run format:check   # Check formatting
+npm run format         # Auto-format all files
+npm run build          # Full production build
 npm run dev            # Dev server
 ```

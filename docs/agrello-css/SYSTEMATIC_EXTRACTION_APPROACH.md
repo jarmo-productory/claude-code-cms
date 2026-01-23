@@ -1,11 +1,13 @@
 # Systematic CSS Extraction Approach for Agrello Website
 
 ## Overview
+
 This document outlines a comprehensive, systematic approach to extract CSS styling from the production Agrello website (agrello.io) for reference and potential migration to the Next.js project.
 
 ## Methodology
 
 ### Phase 1: Asset Collection ✅
+
 1. **Download CSS Files**
    - Main stylesheet: `agrello-web.shared.min.css` (~400KB, minified)
    - Google Fonts CSS
@@ -16,6 +18,7 @@ This document outlines a comprehensive, systematic approach to extract CSS styli
    - Location: `/tmp/agrello-images/`
 
 ### Phase 2: Token Extraction ✅
+
 Using automated scripts to extract design tokens:
 
 1. **Color Palette**
@@ -60,15 +63,18 @@ Using automated scripts to extract design tokens:
 ### Phase 3: Browser-Based Extraction (Recommended Next Steps)
 
 #### 3.1 Computed Styles from Key Elements
+
 Use browser DevTools to inspect:
 
 **Hero Section**
+
 - Background colors/gradients
 - Typography (font-size, line-height, font-weight)
 - Spacing (padding, margin)
 - Layout (flexbox/grid properties)
 
 **Navigation**
+
 - Background color
 - Text colors
 - Hover states
@@ -76,6 +82,7 @@ Use browser DevTools to inspect:
 - Spacing
 
 **Buttons**
+
 - Primary button styles
 - Secondary button styles
 - Hover/active states
@@ -84,6 +91,7 @@ Use browser DevTools to inspect:
 - Font properties
 
 **Cards**
+
 - Background colors
 - Border radius
 - Box shadows
@@ -91,18 +99,23 @@ Use browser DevTools to inspect:
 - Spacing between cards
 
 **Typography**
+
 - H1-H6 styles
 - Body text styles
 - Link styles
 - Font families per element
 
 #### 3.2 CSS Variables Extraction
+
 Extract all `--variable-name` declarations from:
+
 - `:root` selector
 - Component-specific scopes
 
 #### 3.3 Component-Specific Styles
+
 Document styles for:
+
 - Forms (inputs, selects, textareas)
 - Modals/dialogs
 - Dropdowns
@@ -114,6 +127,7 @@ Document styles for:
 ### Phase 4: Organization and Documentation
 
 #### 4.1 Create Design Token File Structure
+
 ```json
 {
   "colors": {
@@ -137,14 +151,18 @@ Document styles for:
 ```
 
 #### 4.2 Map to Tailwind CSS Configuration
+
 Convert extracted tokens to `tailwind.config.js` format:
+
 - Colors → `theme.colors`
 - Typography → `theme.fontFamily`, `theme.fontSize`
 - Spacing → `theme.spacing`
 - Breakpoints → `theme.screens`
 
 #### 4.3 Component Style Reference
+
 Create documentation for:
+
 - Button variants
 - Card styles
 - Form element styles
@@ -153,11 +171,13 @@ Create documentation for:
 ## Tools and Scripts
 
 ### Automated Extraction Scripts
+
 1. **`extract_css_tokens.js`** ✅
    - Extracts colors, variables, typography, spacing
    - Outputs JSON file
 
 ### Recommended Browser Tools
+
 1. **Chrome DevTools**
    - Computed styles panel
    - Styles panel
@@ -169,6 +189,7 @@ Create documentation for:
    - WhatFont
 
 ### Manual Extraction Steps
+
 1. Open browser DevTools (F12)
 2. Select element
 3. Copy computed styles
@@ -177,22 +198,26 @@ Create documentation for:
 ## Key Findings
 
 ### Color System
+
 - **Primary**: Blue (`#0d2ae6`, `#0b5fff`)
 - **Secondary**: Teal/Aquamarine (`#2ee0ab`, `#14b8a6`)
 - **Gray Scale**: Comprehensive `--untitled-ui--gray*` variables
 - **Accent**: Purple (`#720072`, `#9e77ed`)
 
 ### Typography
+
 - **Display Font**: "Red Hat Display"
 - **Body Font**: System stack (Montserrat fallback)
 - **Font Sizes**: 10px - 40px+ range
 - **Weights**: Multiple weights available
 
 ### Spacing Scale
+
 - Base unit appears to be 4px
 - Common increments: 4, 8, 12, 16, 24, 32, 40, 48, 60px
 
 ### Breakpoints
+
 - Mobile: < 480px
 - Tablet: 480px - 767px
 - Desktop: 768px - 991px
@@ -236,12 +261,14 @@ Create documentation for:
 ## Usage
 
 To extract tokens:
+
 ```bash
 cd /tmp/agrello-css
 node extract_css_tokens.js
 ```
 
 To view extracted tokens:
+
 ```bash
 cat extracted_tokens.json | jq
 ```

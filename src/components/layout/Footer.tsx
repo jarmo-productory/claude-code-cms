@@ -37,7 +37,8 @@ export function Footer() {
   ]
 
   // Determine current language
-  const currentLangCode: Lang = languages.find(l => pathname?.startsWith(`/${l.code}`))?.code ?? 'en'
+  const currentLangCode: Lang =
+    languages.find((l) => pathname?.startsWith(`/${l.code}`))?.code ?? 'en'
 
   // Translations
   const dictionaries: Record<Lang, Dictionary> = {
@@ -181,7 +182,7 @@ export function Footer() {
                     alt={item.name}
                     width={20}
                     height={20}
-                    className="opacity-80 group-hover:opacity-100 group-hover:brightness-0" 
+                    className="opacity-80 group-hover:opacity-100 group-hover:brightness-0"
                   />
                 </a>
               ))}
@@ -189,13 +190,13 @@ export function Footer() {
 
             <div className="flex flex-wrap items-center gap-6">
               <div className="inline-block">
-                 <Image 
-                   src="/images/footer/eidas.png"
-                   alt="eIDAS compliant e-signatures"
-                   width={160}
-                   height={60}
-                   className="h-12 w-auto"
-                 />
+                <Image
+                  src="/images/footer/eidas.png"
+                  alt="eIDAS compliant e-signatures"
+                  width={160}
+                  height={60}
+                  className="h-12 w-auto"
+                />
               </div>
               <Image
                 src="/images/footer/commerce.svg"
@@ -209,12 +210,14 @@ export function Footer() {
 
           {/* Column 2: Company */}
           <div>
-             <h3 className="text-white/80 font-bold uppercase tracking-wide text-sm mb-6">Company</h3>
+            <h3 className="text-white/80 font-bold uppercase tracking-wide text-sm mb-6">
+              Company
+            </h3>
             <ul className="space-y-4">
               {navigation.company.map((item) => (
                 <li key={item.name}>
-                  <Link 
-                    href={item.href} 
+                  <Link
+                    href={item.href}
                     className="text-white/80 font-bold uppercase tracking-wide hover:text-brand-primary transition-colors text-sm"
                   >
                     {item.name}
@@ -226,12 +229,14 @@ export function Footer() {
 
           {/* Column 3: Resources */}
           <div>
-            <h3 className="text-white/80 font-bold uppercase tracking-wide text-sm mb-6">{dictionary.resources}</h3>
+            <h3 className="text-white/80 font-bold uppercase tracking-wide text-sm mb-6">
+              {dictionary.resources}
+            </h3>
             <ul className="space-y-3">
               {navigation.resources.map((item) => (
                 <li key={item.name}>
-                  <Link 
-                    href={item.href} 
+                  <Link
+                    href={item.href}
                     className="text-gray-400 hover:text-white transition-colors"
                   >
                     {item.name}
@@ -245,9 +250,17 @@ export function Footer() {
         {/* Bottom Bar */}
         <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-500">
           <p>
-            Copyright © Agrello {currentYear}. {dictionary.copyright} <Link href={`/${currentLangCode}/terms`} className="underline hover:text-gray-300">{dictionary.terms}</Link>. <Link href={`/${currentLangCode}/privacy`} className="underline hover:text-gray-300">{dictionary.privacy}</Link>.
+            Copyright © Agrello {currentYear}. {dictionary.copyright}{' '}
+            <Link href={`/${currentLangCode}/terms`} className="underline hover:text-gray-300">
+              {dictionary.terms}
+            </Link>
+            .{' '}
+            <Link href={`/${currentLangCode}/privacy`} className="underline hover:text-gray-300">
+              {dictionary.privacy}
+            </Link>
+            .
           </p>
-          
+
           {/* Language Switcher */}
           <div className="flex items-center gap-4">
             {languages.map((lang, index) => (

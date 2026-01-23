@@ -17,6 +17,7 @@ Expand SEO footprint by analyzing Google Search Console data and strategically m
 **Primary Objective:** SEO footprint expansion through data-driven content selection
 
 **Target Markets:**
+
 - Estonia (et)
 - Latvia (lv)
 - UK (en)
@@ -30,6 +31,7 @@ Expand SEO footprint by analyzing Google Search Console data and strategically m
 ## Current Situation
 
 **Content Status:**
+
 - **Staging:** ~274 articles imported from Webflow in `src/content/blog-import/`
   - Estonian (et): ~84 articles
   - English (en): ~137 articles
@@ -38,11 +40,13 @@ Expand SEO footprint by analyzing Google Search Console data and strategically m
 - **No published blog content** from the import yet
 
 **Technical Setup:**
+
 - Blog infrastructure exists and works (`/[locale]/blog`, `/[locale]/blog/[slug]`)
 - Content loader supports both `blog/` and `blog-import/` folders
 - Images downloaded to `public/images/blog-content/`
 
 **Analytics Status:**
+
 - GA4 lacks proper conversion tracking
 - Google Search Console is primary data source
 - Need 12-month historical data for analysis
@@ -113,7 +117,9 @@ Optional - Country Filter:
 Based on GSC data, articles will be sorted into 4 buckets:
 
 ### 1. WINNERS (Priority 1 - Immediate Migration)
+
 **Criteria:**
+
 - Average position: 1-10 (first page)
 - Clicks: High volume (>50/month or top 20% of dataset)
 - Action: Migrate to production immediately
@@ -121,7 +127,9 @@ Based on GSC data, articles will be sorted into 4 buckets:
 **Why:** Already performing well, proven to attract traffic
 
 ### 2. POTENTIAL (Priority 2 - Optimize + Migrate)
+
 **Criteria:**
+
 - Average position: 11-30 (page 2-3)
 - Impressions: High (showing in search results often)
 - Low CTR: Not getting clicks despite visibility
@@ -130,7 +138,9 @@ Based on GSC data, articles will be sorted into 4 buckets:
 **Why:** Low-hanging fruit - already indexed, needs better presentation
 
 ### 3. LONG-TAIL (Priority 3 - Selective Migration)
+
 **Criteria:**
+
 - Average position: 1-10 (ranking well)
 - Low volume: <20 clicks/month
 - Action: Migrate for coverage if niche-relevant
@@ -138,7 +148,9 @@ Based on GSC data, articles will be sorted into 4 buckets:
 **Why:** May attract qualified leads even with low volume
 
 ### 4. DROP (No Migration)
+
 **Criteria:**
+
 - Average position: >30 (page 4+)
 - Low impressions: Not showing in search
 - Action: Do not migrate to production
@@ -149,20 +161,21 @@ Based on GSC data, articles will be sorted into 4 buckets:
 
 ## Deliverables
 
-| Deliverable | Description | Output Path |
-|-------------|-------------|-------------|
-| Data Analysis Report | GSC data analysis with content recommendations | `docs/sprints/sprint-08-.../research/gsc-analysis.md` |
-| Content Inventory | Spreadsheet mapping articles to categories | `docs/sprints/sprint-08-.../research/content-inventory.csv` |
-| Migration Script | Automated tool to move articles between folders | `scripts/migrate-blog-content.ts` |
-| SEO Audit Script | Validate metadata completeness on migrated content | `scripts/audit-blog-seo.ts` |
-| Migration Docs | Workflow for future content migrations | `docs/sprints/sprint-08-.../research/migration-workflow.md` |
-| Performance Baseline | Pre-migration GSC metrics snapshot | `docs/sprints/sprint-08-.../research/baseline-metrics.md` |
+| Deliverable          | Description                                        | Output Path                                                 |
+| -------------------- | -------------------------------------------------- | ----------------------------------------------------------- |
+| Data Analysis Report | GSC data analysis with content recommendations     | `docs/sprints/sprint-08-.../research/gsc-analysis.md`       |
+| Content Inventory    | Spreadsheet mapping articles to categories         | `docs/sprints/sprint-08-.../research/content-inventory.csv` |
+| Migration Script     | Automated tool to move articles between folders    | `scripts/migrate-blog-content.ts`                           |
+| SEO Audit Script     | Validate metadata completeness on migrated content | `scripts/audit-blog-seo.ts`                                 |
+| Migration Docs       | Workflow for future content migrations             | `docs/sprints/sprint-08-.../research/migration-workflow.md` |
+| Performance Baseline | Pre-migration GSC metrics snapshot                 | `docs/sprints/sprint-08-.../research/baseline-metrics.md`   |
 
 ---
 
 ## Implementation Checklist
 
 ### Phase 1: Research & Data Collection ⏳
+
 - [ ] Owner provides GSC performance data (12 months)
 - [ ] Owner provides country-specific data (optional)
 - [ ] Analyze GSC data structure
@@ -172,6 +185,7 @@ Based on GSC data, articles will be sorted into 4 buckets:
 - [ ] Document findings in research folder
 
 ### Phase 2: Planning (BLOCKED until data provided)
+
 - [ ] Finalize categorization thresholds based on actual data
 - [ ] Create prioritized migration list
 - [ ] Define metadata optimization strategy
@@ -180,12 +194,14 @@ Based on GSC data, articles will be sorted into 4 buckets:
 - [ ] **Owner approval required** ⏸️
 
 ### Phase 3: Setup & Tooling (After Approval)
+
 - [ ] Create migration script (`scripts/migrate-blog-content.ts`)
 - [ ] Create SEO audit script (`scripts/audit-blog-seo.ts`)
 - [ ] Create content inventory spreadsheet
 - [ ] Test scripts on 2-3 sample articles
 
 ### Phase 4: Winners Migration
+
 - [ ] Run SEO audit on winner articles
 - [ ] Fix any metadata issues
 - [ ] Migrate winner articles to production
@@ -194,6 +210,7 @@ Based on GSC data, articles will be sorted into 4 buckets:
 - [ ] Verify correct locale routing
 
 ### Phase 5: Potential Articles Optimization
+
 - [ ] Identify optimization needs per article
 - [ ] Improve meta titles (increase CTR)
 - [ ] Improve meta descriptions (increase CTR)
@@ -202,12 +219,14 @@ Based on GSC data, articles will be sorted into 4 buckets:
 - [ ] Test in production
 
 ### Phase 6: Long-Tail Migration (Selective)
+
 - [ ] Review long-tail articles for niche relevance
 - [ ] Select articles worth migrating
 - [ ] Migrate selected articles
 - [ ] Document rationale for selections
 
 ### Phase 7: Testing & Validation
+
 - [ ] Test blog listing page (all locales)
 - [ ] Test individual article pages
 - [ ] Verify image loading
@@ -217,18 +236,21 @@ Based on GSC data, articles will be sorted into 4 buckets:
 - [ ] Verify sitemap generation
 
 ### Phase 8: Documentation
+
 - [ ] Document migration workflow
 - [ ] Create ongoing content review process
 - [ ] Document GSC monitoring approach
 - [ ] Create runbook for future migrations
 
 ### Phase 9: Cleanup
+
 - [ ] Remove debug code
 - [ ] Clean up unused imports
 - [ ] Archive unused scripts
 - [ ] Update package.json scripts
 
 ### Phase 10: Validation
+
 - [ ] Run qa-validator checks
 - [ ] Test production build
 - [ ] Verify no broken links
@@ -245,9 +267,9 @@ Based on GSC data, articles will be sorted into 4 buckets:
 // scripts/migrate-blog-content.ts
 interface MigrationConfig {
   category: 'winner' | 'potential' | 'long-tail'
-  slugs: string[]  // List of articles to migrate
+  slugs: string[] // List of articles to migrate
   locale: 'en' | 'et' | 'lv'
-  optimize?: boolean  // Run SEO optimization
+  optimize?: boolean // Run SEO optimization
 }
 
 // Usage:
@@ -256,6 +278,7 @@ interface MigrationConfig {
 ```
 
 **Migration Process:**
+
 1. Read article from `blog-import/`
 2. Validate frontmatter schema
 3. Check for required fields (title, description, date, slug)
@@ -289,6 +312,7 @@ interface SEOIssue {
 ```
 
 **Audit Levels:**
+
 - **ERROR:** Blocks migration (missing required fields)
 - **WARNING:** Should be fixed but doesn't block (suboptimal lengths)
 
@@ -301,6 +325,7 @@ article-2,et,"Title",blog-import,15,20,800,2.5%,potential,pending,"Optimize titl
 ```
 
 **Columns:**
+
 - GSC metrics (position, clicks, impressions, CTR)
 - Categorization (winner/potential/long-tail/drop)
 - Migration tracking (pending/migrated/skipped)
@@ -313,27 +338,32 @@ article-2,et,"Title",blog-import,15,20,800,2.5%,potential,pending,"Optimize titl
 ### Metric Definitions
 
 **Position:** Average ranking in search results
+
 - 1-10: First page (highly visible)
 - 11-20: Second page (some visibility)
 - 21-30: Third page (low visibility)
 - 30+: Page 4+ (essentially invisible)
 
 **Clicks:** Actual traffic received
+
 - High volume = Working content
 - Low volume despite good position = CTR problem
 
 **Impressions:** How often page showed in search results
+
 - High impressions + low clicks = CTR optimization opportunity
 - Low impressions = Not ranking for valuable terms
 
 **CTR (Click-Through Rate):** Clicks / Impressions
+
 - Benchmark: 3-5% is average for organic results
 - <2% = Poor title/description
-- >5% = Good metadata
+- > 5% = Good metadata
 
 ### Country-Specific Analysis
 
 If country data available:
+
 1. Compare performance across Estonia, Latvia, UK
 2. Prioritize content performing well in target markets
 3. Identify localization opportunities
@@ -366,14 +396,14 @@ DROP:
 
 ## Risks & Mitigations
 
-| Risk | Impact | Mitigation |
-|------|--------|------------|
-| GSC data unavailable or incomplete | High | Work with owner to export data; use alternative metrics if needed |
-| Too many "winner" articles to migrate at once | Medium | Batch migration in groups of 10-15 |
-| Metadata missing or poor quality | Medium | SEO audit script catches issues; manual review required |
-| Image references break during migration | Low | Validation script checks image paths |
-| Duplicate content between staging and production | Medium | Migration script checks for existing files |
-| Performance degradation with more content | Low | Monitor build times; optimize if needed |
+| Risk                                             | Impact | Mitigation                                                        |
+| ------------------------------------------------ | ------ | ----------------------------------------------------------------- |
+| GSC data unavailable or incomplete               | High   | Work with owner to export data; use alternative metrics if needed |
+| Too many "winner" articles to migrate at once    | Medium | Batch migration in groups of 10-15                                |
+| Metadata missing or poor quality                 | Medium | SEO audit script catches issues; manual review required           |
+| Image references break during migration          | Low    | Validation script checks image paths                              |
+| Duplicate content between staging and production | Medium | Migration script checks for existing files                        |
+| Performance degradation with more content        | Low    | Monitor build times; optimize if needed                           |
 
 ---
 
@@ -393,11 +423,13 @@ DROP:
 ## Testing Strategy
 
 ### Pre-Migration Testing
+
 - [ ] Verify blog listing page shows all locales correctly
 - [ ] Test individual article rendering
 - [ ] Check image loading from `blog-import/`
 
 ### Post-Migration Testing
+
 - [ ] Verify migrated articles appear in listings
 - [ ] Test article detail pages
 - [ ] Check image paths resolve correctly
@@ -407,6 +439,7 @@ DROP:
 - [ ] Run Lighthouse audit
 
 ### SEO Validation
+
 - [ ] Meta titles present and optimal length
 - [ ] Meta descriptions present and optimal length
 - [ ] Open Graph images set
@@ -418,21 +451,21 @@ DROP:
 
 ## Timeline Estimate
 
-| Phase | Tasks | Estimated Time |
-|-------|-------|----------------|
-| **Phase 1: Research** | Data analysis, categorization | 3 hours |
-| **Phase 2: Planning** | Finalize approach, get approval | 1 hour |
-| **Phase 3: Setup** | Build migration & audit scripts | 3 hours |
-| **Phase 4: Winners** | Migrate high-performers | 2 hours |
-| **Phase 5: Potential** | Optimize & migrate | 4 hours |
-| **Phase 6: Long-Tail** | Selective migration | 2 hours |
-| **Phase 7: Testing** | Validation & QA | 2 hours |
-| **Phase 8: Documentation** | Workflow docs | 1 hour |
-| **Phase 9: Cleanup** | Code cleanup | 1 hour |
-| **Phase 10: Validation** | QA checks | 1 hour |
-| **Total** | | **20 hours (2.5 days)** |
-| **Buffer** | Edge cases, optimization | 0.5 day |
-| **Grand Total** | | **3 days** |
+| Phase                      | Tasks                           | Estimated Time          |
+| -------------------------- | ------------------------------- | ----------------------- |
+| **Phase 1: Research**      | Data analysis, categorization   | 3 hours                 |
+| **Phase 2: Planning**      | Finalize approach, get approval | 1 hour                  |
+| **Phase 3: Setup**         | Build migration & audit scripts | 3 hours                 |
+| **Phase 4: Winners**       | Migrate high-performers         | 2 hours                 |
+| **Phase 5: Potential**     | Optimize & migrate              | 4 hours                 |
+| **Phase 6: Long-Tail**     | Selective migration             | 2 hours                 |
+| **Phase 7: Testing**       | Validation & QA                 | 2 hours                 |
+| **Phase 8: Documentation** | Workflow docs                   | 1 hour                  |
+| **Phase 9: Cleanup**       | Code cleanup                    | 1 hour                  |
+| **Phase 10: Validation**   | QA checks                       | 1 hour                  |
+| **Total**                  |                                 | **20 hours (2.5 days)** |
+| **Buffer**                 | Edge cases, optimization        | 0.5 day                 |
+| **Grand Total**            |                                 | **3 days**              |
 
 **Note:** Timeline begins after GSC data is provided by owner.
 
@@ -441,10 +474,12 @@ DROP:
 ## Dependencies
 
 **Blocking:**
+
 - Google Search Console data export (owner responsibility)
 - Sprint 07 completion (Webflow import must be done)
 
 **Non-blocking:**
+
 - GA4 setup (nice-to-have, not required)
 - Country-specific GSC data (optional enhancement)
 
@@ -453,6 +488,7 @@ DROP:
 ## Metrics for Success
 
 ### Baseline Metrics (Before Migration)
+
 - Number of indexed blog pages in GSC
 - Total clicks to blog section (12-month)
 - Total impressions (12-month)
@@ -460,6 +496,7 @@ DROP:
 - Number of keywords ranking top 10
 
 ### Target Metrics (After Sprint)
+
 - +15-30 indexed blog pages (depending on winner count)
 - Foundation for ongoing SEO monitoring
 - Established workflow for data-driven content decisions
@@ -488,6 +525,7 @@ Before moving to Phase 2, we need answers to:
 **Status:** WAITING FOR DATA
 
 **Next Actions:**
+
 1. Owner exports GSC performance data (12 months)
 2. Owner provides country-specific data (optional)
 3. Analyze data and categorize content
@@ -497,9 +535,11 @@ Before moving to Phase 2, we need answers to:
 
 **Data Delivery:**
 Please place GSC export files in:
+
 - `/Users/jarmotuisk/Projects/agrello/agrello-web/docs/sprints/sprint-08-blog-seo-optimization/data/`
 
 Expected files:
+
 - `gsc-performance-pages-12m.csv`
 - `gsc-estonia-12m.csv` (optional)
 - `gsc-latvia-12m.csv` (optional)
@@ -518,4 +558,4 @@ Expected files:
 
 ---
 
-*Phase 1: Research - In Progress (Waiting for GSC data)*
+_Phase 1: Research - In Progress (Waiting for GSC data)_
