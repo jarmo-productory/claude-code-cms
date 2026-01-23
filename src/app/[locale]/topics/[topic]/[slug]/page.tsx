@@ -7,6 +7,8 @@ import {
 } from '@/lib/content'
 import { notFound } from 'next/navigation'
 import { ArticleDetailPage } from '@/components/content/ArticleDetailPage'
+import { resolveAuthor } from '@/lib/authors'
+import { calculateReadingTime, formatReadingTime } from '@/lib/reading-time'
 
 const SUPPORTED_LOCALES = ['en', 'et', 'lv', 'ua']
 
@@ -44,6 +46,24 @@ export async function generateMetadata({
   }
 }
 
+function resolveImage(image: string): string | undefined {
+  if (!image) return undefined
+  if (image.startsWith('http')) return image
+  if (image.startsWith('/')) return image
+
+  if (image.includes('/assets/')) {
+    const filename = image.split('/assets/').pop()
+    if (filename) return `/assets/${filename}`
+  }
+
+  const webflowMatch = image.match(/^[0-9a-f]{20,}_[0-9a-f]{20,}_(.+)$/i)
+  if (webflowMatch) {
+    return `/assets/${webflowMatch[1]}`
+  }
+
+  return undefined
+}
+
 export default async function TopicArticlePage({
   params,
 }: {
@@ -60,6 +80,10 @@ export default async function TopicArticlePage({
   const topicName = translations[locale]?.name || topic
 
   const backLabel = locale === 'et' ? `Tagasi: ${topicName}` : `Back to ${topicName}`
+  const author = resolveAuthor(article.author)
+  const image = resolveImage(article.image)
+  const minutes = calculateReadingTime(article.content)
+  const readingTime = formatReadingTime(minutes, locale as 'et' | 'en')
 
   return (
     <>
@@ -69,8 +93,13 @@ export default async function TopicArticlePage({
         backLabel={backLabel}
         title={article.title}
         date={article.date}
-        author={article.author}
+        author={author}
         content={article.content}
+        image={image || '/images/blog-content/default-article.webp'}
+        readingTime={readingTime}
+        description={article.summary}
+        category={topicName}
+        subcategory={article.subTopic}
       />
       {article.faqSchema && article.faqSchema.length > 0 && (
         <script
