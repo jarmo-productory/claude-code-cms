@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation'
 import { ArticleDetailPage } from '@/components/content/ArticleDetailPage'
 import { resolveAuthor } from '@/lib/authors'
 import { calculateReadingTime, formatReadingTime } from '@/lib/reading-time'
+import { resolveImage } from '@/lib/content-mappers'
 
 export async function generateStaticParams() {
   const etPosts = await getBlogPosts('et')
@@ -42,13 +43,6 @@ export async function generateMetadata({
   }
 }
 
-function resolveImage(image: string | undefined): string {
-  if (!image) return '/images/blog-content/default-article.webp'
-  if (image.startsWith('http')) return image
-  if (image.startsWith('/')) return image
-  return '/images/blog-content/default-article.webp'
-}
-
 export default async function BlogPostPage({
   params,
 }: {
@@ -69,7 +63,7 @@ export default async function BlogPostPage({
     slug: r.slug,
     title: r.title,
     description: r.description,
-    image: resolveImage(r.image),
+    image: resolveImage(r.image || '') || '/images/blog-content/default-article.webp',
     category: r.category,
   }))
 
@@ -82,7 +76,7 @@ export default async function BlogPostPage({
       date={post.date}
       author={resolveAuthor(post.author)}
       content={post.content}
-      image={resolveImage(post.image)}
+      image={resolveImage(post.image || '') || '/images/blog-content/default-article.webp'}
       readingTime={readingTime}
       description={post.description}
       category={post.category}

@@ -12,17 +12,24 @@ import { calculateReadingTime, formatReadingTime } from './reading-time'
  * - Webflow hash names: 68517e09..._684c10ec..._folders.webp → /assets/folders.webp
  * - Blog-style: ./images/filename.png → /images/blog-content/filename.png
  */
-function resolveImage(image: string): string {
+export function resolveImage(image: string): string {
   if (!image) return ''
   if (image.startsWith('http')) return image
   if (image.startsWith('/')) return image
 
   // Blog-style relative: ./images/filename → /images/blog-content/filename
+  // Handle URL-encoded characters from Webflow export:
+  // - %2520 = double-encoded space (%25 = %, then 20 = space)
+  // - %20 = space
+  // - %CC%XX = Unicode combining characters (diacritics)
   if (image.startsWith('./images/')) {
     return image
       .replace('./images/', '/images/blog-content/')
-      .replace(/%CC%[0-9a-fA-F]{2}/g, '')
-      .replace(/%25[0-9a-fA-F]{2}|%20/g, '-')
+      .replace(/%CC%[0-9a-fA-F]{2}/g, '') // Remove combining characters (ä → a)
+      .replace(/%2520/g, '-') // Double-encoded space → dash
+      .replace(/%20/g, '-') // Space → dash
+      .replace(/%25([0-9a-fA-F]{2})/g, '%$1') // Unescape double-encoding
+      .replace(/ /g, '-') // Any remaining spaces → dash
   }
 
   // Relative path containing /assets/: extract filename

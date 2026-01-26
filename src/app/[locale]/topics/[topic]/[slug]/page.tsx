@@ -9,6 +9,7 @@ import { notFound } from 'next/navigation'
 import { ArticleDetailPage } from '@/components/content/ArticleDetailPage'
 import { resolveAuthor } from '@/lib/authors'
 import { calculateReadingTime, formatReadingTime } from '@/lib/reading-time'
+import { resolveImage } from '@/lib/content-mappers'
 
 const SUPPORTED_LOCALES = ['en', 'et', 'lv', 'ua']
 
@@ -46,24 +47,6 @@ export async function generateMetadata({
   }
 }
 
-function resolveImage(image: string): string | undefined {
-  if (!image) return undefined
-  if (image.startsWith('http')) return image
-  if (image.startsWith('/')) return image
-
-  if (image.includes('/assets/')) {
-    const filename = image.split('/assets/').pop()
-    if (filename) return `/assets/${filename}`
-  }
-
-  const webflowMatch = image.match(/^[0-9a-f]{20,}_[0-9a-f]{20,}_(.+)$/i)
-  if (webflowMatch) {
-    return `/assets/${webflowMatch[1]}`
-  }
-
-  return undefined
-}
-
 export default async function TopicArticlePage({
   params,
 }: {
@@ -81,7 +64,7 @@ export default async function TopicArticlePage({
 
   const backLabel = locale === 'et' ? `Tagasi: ${topicName}` : `Back to ${topicName}`
   const author = resolveAuthor(article.author)
-  const image = resolveImage(article.image)
+  const image = resolveImage(article.image || '') || '/images/blog-content/default-article.webp'
   const minutes = calculateReadingTime(article.content)
   const readingTime = formatReadingTime(minutes, locale as 'et' | 'en')
 
@@ -95,7 +78,7 @@ export default async function TopicArticlePage({
         date={article.date}
         author={author}
         content={article.content}
-        image={image || '/images/blog-content/default-article.webp'}
+        image={image}
         readingTime={readingTime}
         description={article.summary}
         category={topicName}

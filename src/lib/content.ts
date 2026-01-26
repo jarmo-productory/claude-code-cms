@@ -94,11 +94,18 @@ function getMarkdownFiles(directory: string): string[] {
 
 /**
  * Transform frontmatter image path from relative to absolute
+ * Also handles URL-encoded characters from Webflow export
  */
 function transformFrontmatterImage(image: string | undefined): string {
   if (!image) return ''
   if (image.startsWith('./images/')) {
-    return image.replace('./images/', '/images/blog-content/')
+    return image
+      .replace('./images/', '/images/blog-content/')
+      .replace(/%CC%[0-9a-fA-F]{2}/g, '') // Remove combining characters (ä → a)
+      .replace(/%2520/g, '-') // Double-encoded space → dash
+      .replace(/%20/g, '-') // Space → dash
+      .replace(/%25([0-9a-fA-F]{2})/g, '%$1') // Unescape double-encoding
+      .replace(/ /g, '-') // Any remaining spaces → dash
   }
   return image
 }
