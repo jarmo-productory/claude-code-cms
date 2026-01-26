@@ -7,16 +7,38 @@
 
 ## Quick Test URLs
 
-Replace `YOUR_URL` with your deployment URL (e.g., `https://agrelloweb.netlify.app/en/`)
+**Staging URL:** https://agrelloweb.netlify.app
 
-### Instant Tests
+### Instant Tests - Homepage EN (Click to Run)
 
-| Test               | URL                                                           |
-| ------------------ | ------------------------------------------------------------- |
-| Rich Results       | `https://search.google.com/test/rich-results?url=YOUR_URL`    |
-| PageSpeed Insights | `https://pagespeed.web.dev/analysis?url=YOUR_URL`             |
-| Mobile-Friendly    | `https://search.google.com/test/mobile-friendly?url=YOUR_URL` |
-| Social Preview     | `https://opengraph.xyz/url/YOUR_URL`                          |
+| Test                       | Link                                                                                               |
+| -------------------------- | -------------------------------------------------------------------------------------------------- |
+| **PageSpeed Insights**     | [Run Test](https://pagespeed.web.dev/analysis?url=https://agrelloweb.netlify.app/en/)              |
+| **Rich Results (JSON-LD)** | [Run Test](https://search.google.com/test/rich-results?url=https://agrelloweb.netlify.app/en/)     |
+| **Mobile-Friendly**        | [Run Test](https://search.google.com/test/mobile-friendly?url=https://agrelloweb.netlify.app/en/)  |
+| **Social Preview (OG)**    | [Run Test](https://opengraph.xyz/url/https://agrelloweb.netlify.app/en/)                           |
+| **hreflang Checker**       | [Run Test](https://www.hreflang.org/hreflang-tags-checker/?url=https://agrelloweb.netlify.app/en/) |
+| **Schema Validator**       | [Run Test](https://validator.schema.org/#url=https://agrelloweb.netlify.app/en/)                   |
+| **Security Headers**       | [Run Test](https://securityheaders.com/?q=https://agrelloweb.netlify.app/en/)                      |
+| **SEOBility Audit**        | [Run Test](https://freetools.seobility.net/en/seocheck/https://agrelloweb.netlify.app/en/)         |
+
+### Instant Tests - Homepage ET
+
+| Test                       | Link                                                                                           |
+| -------------------------- | ---------------------------------------------------------------------------------------------- |
+| **PageSpeed Insights**     | [Run Test](https://pagespeed.web.dev/analysis?url=https://agrelloweb.netlify.app/et/)          |
+| **Rich Results (JSON-LD)** | [Run Test](https://search.google.com/test/rich-results?url=https://agrelloweb.netlify.app/et/) |
+| **Social Preview (OG)**    | [Run Test](https://opengraph.xyz/url/https://agrelloweb.netlify.app/et/)                       |
+
+### Instant Tests - Key Pages
+
+| Page      | PageSpeed                                                                                                    | Rich Results                                                                                                          | Social Preview                                                                                  |
+| --------- | ------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| Features  | [Test](https://pagespeed.web.dev/analysis?url=https://agrelloweb.netlify.app/en/features/)                   | [Test](https://search.google.com/test/rich-results?url=https://agrelloweb.netlify.app/en/features/)                   | [Test](https://opengraph.xyz/url/https://agrelloweb.netlify.app/en/features/)                   |
+| Pricing   | [Test](https://pagespeed.web.dev/analysis?url=https://agrelloweb.netlify.app/en/pricing/)                    | [Test](https://search.google.com/test/rich-results?url=https://agrelloweb.netlify.app/en/pricing/)                    | [Test](https://opengraph.xyz/url/https://agrelloweb.netlify.app/en/pricing/)                    |
+| Blog      | [Test](https://pagespeed.web.dev/analysis?url=https://agrelloweb.netlify.app/et/blog/)                       | [Test](https://search.google.com/test/rich-results?url=https://agrelloweb.netlify.app/et/blog/)                       | [Test](https://opengraph.xyz/url/https://agrelloweb.netlify.app/et/blog/)                       |
+| Blog Post | [Test](https://pagespeed.web.dev/analysis?url=https://agrelloweb.netlify.app/et/blog/frantsiisilepingutest/) | [Test](https://search.google.com/test/rich-results?url=https://agrelloweb.netlify.app/et/blog/frantsiisilepingutest/) | [Test](https://opengraph.xyz/url/https://agrelloweb.netlify.app/et/blog/frantsiisilepingutest/) |
+| Contact   | [Test](https://pagespeed.web.dev/analysis?url=https://agrelloweb.netlify.app/en/contact/)                    | [Test](https://search.google.com/test/rich-results?url=https://agrelloweb.netlify.app/en/contact/)                    | [Test](https://opengraph.xyz/url/https://agrelloweb.netlify.app/en/contact/)                    |
 
 ---
 
