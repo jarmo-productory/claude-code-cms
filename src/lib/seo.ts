@@ -16,7 +16,7 @@ import type { BlogPost } from './content'
  * Site URL - override via environment variable
  * Example: SITE_URL=https://yourdomain.com
  */
-export const SITE_URL = process.env.SITE_URL || 'https://agrello.io'
+export const SITE_URL = process.env.SITE_URL || 'https://www.agrello.io'
 
 export type Locale = 'et' | 'en' | 'lv' | 'uk'
 

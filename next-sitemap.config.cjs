@@ -1,6 +1,6 @@
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
-  siteUrl: process.env.SITE_URL || 'https://agrello.io',
+  siteUrl: process.env.SITE_URL || 'https://www.agrello.io',
   generateRobotsTxt: false, // We manage robots.txt manually
   outDir: 'out',
   exclude: ['/styleguide/*', '/styleguide'],
