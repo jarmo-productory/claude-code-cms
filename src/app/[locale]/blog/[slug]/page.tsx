@@ -5,6 +5,13 @@ import { ArticleDetailPage } from '@/components/content/ArticleDetailPage'
 import { resolveAuthor } from '@/lib/authors'
 import { calculateReadingTime, formatReadingTime } from '@/lib/reading-time'
 import { resolveImage } from '@/lib/content-mappers'
+import {
+  generateBlogMetadata,
+  buildArticleJsonLd,
+  type Locale,
+  SUPPORTED_LOCALES,
+  DEFAULT_LOCALE,
+} from '@/lib/seo'
 
 export async function generateStaticParams() {
   const etPosts = await getBlogPosts('et')
@@ -29,6 +36,9 @@ export async function generateMetadata({
   params: Promise<{ locale: string; slug: string }>
 }): Promise<Metadata> {
   const { locale, slug } = await params
+  const validLocale = SUPPORTED_LOCALES.includes(locale as Locale)
+    ? (locale as Locale)
+    : DEFAULT_LOCALE
   const post = await getBlogPost(slug, locale as 'et' | 'en')
 
   if (!post) {
@@ -37,10 +47,7 @@ export async function generateMetadata({
     }
   }
 
-  return {
-    title: post.seoTitle || post.title,
-    description: post.description || post.title,
-  }
+  return generateBlogMetadata(post, validLocale)
 }
 
 export default async function BlogPostPage({
@@ -67,21 +74,34 @@ export default async function BlogPostPage({
     category: r.category,
   }))
 
+  // Build Article JSON-LD schema
+  const validLocale = SUPPORTED_LOCALES.includes(locale as Locale)
+    ? (locale as Locale)
+    : DEFAULT_LOCALE
+  const articleJsonLd = buildArticleJsonLd(post, validLocale)
+
   return (
-    <ArticleDetailPage
-      locale={locale}
-      backHref={`/${locale}/blog`}
-      backLabel={locale === 'et' ? 'Tagasi blogisse' : 'Back to Blog'}
-      title={post.title}
-      date={post.date}
-      author={resolveAuthor(post.author)}
-      content={post.content}
-      image={resolveImage(post.image || '') || '/images/blog-content/default-article.webp'}
-      readingTime={readingTime}
-      description={post.description}
-      category={post.category}
-      relatedArticles={relatedArticles}
-      relatedBasePath={`/${locale}/blog`}
-    />
+    <>
+      {/* Article JSON-LD Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+      />
+      <ArticleDetailPage
+        locale={locale}
+        backHref={`/${locale}/blog`}
+        backLabel={locale === 'et' ? 'Tagasi blogisse' : 'Back to Blog'}
+        title={post.title}
+        date={post.date}
+        author={resolveAuthor(post.author)}
+        content={post.content}
+        image={resolveImage(post.image || '') || '/images/blog-content/default-article.webp'}
+        readingTime={readingTime}
+        description={post.description}
+        category={post.category}
+        relatedArticles={relatedArticles}
+        relatedBasePath={`/${locale}/blog`}
+      />
+    </>
   )
 }

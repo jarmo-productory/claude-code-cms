@@ -16,9 +16,28 @@ import type { BlogPost } from './content'
  * Site URL - override via environment variable
  * Example: SITE_URL=https://yourdomain.com
  */
-export const SITE_URL = process.env.SITE_URL || 'https://example.com'
+export const SITE_URL = process.env.SITE_URL || 'https://agrello.io'
 
-type Locale = 'et' | 'en'
+export type Locale = 'et' | 'en' | 'lv' | 'uk'
+
+export const SUPPORTED_LOCALES: Locale[] = ['en', 'et', 'lv', 'uk']
+export const DEFAULT_LOCALE: Locale = 'en'
+
+// Map locale codes to OpenGraph locale format
+export const OG_LOCALE_MAP: Record<Locale, string> = {
+  en: 'en_US',
+  et: 'et_EE',
+  lv: 'lv_LV',
+  uk: 'uk_UA',
+}
+
+// Map locale codes to language tags for hreflang
+export const HREFLANG_MAP: Record<Locale, string> = {
+  en: 'en',
+  et: 'et',
+  lv: 'lv',
+  uk: 'uk',
+}
 
 /**
  * Generate page metadata with SEO fields
@@ -37,8 +56,24 @@ export function generatePageMetadata(params: {
 }): Metadata {
   const { title, description, locale, path = '', keywords, image, type = 'website' } = params
 
-  const canonicalUrl = `${SITE_URL}/${locale}/${path}`
-  const alternateUrl = locale === 'et' ? `${SITE_URL}/en/${path}` : `${SITE_URL}/et/${path}`
+  // Normalize path - remove leading slash if present
+  const normalizedPath = path.replace(/^\//, '')
+  const canonicalUrl = normalizedPath
+    ? `${SITE_URL}/${locale}/${normalizedPath}`
+    : `${SITE_URL}/${locale}`
+
+  // Build alternates for all supported locales
+  const languages: Record<string, string> = {}
+  for (const loc of SUPPORTED_LOCALES) {
+    languages[loc] = normalizedPath ? `${SITE_URL}/${loc}/${normalizedPath}` : `${SITE_URL}/${loc}`
+  }
+  // Add x-default pointing to English version
+  languages['x-default'] = normalizedPath
+    ? `${SITE_URL}/${DEFAULT_LOCALE}/${normalizedPath}`
+    : `${SITE_URL}/${DEFAULT_LOCALE}`
+
+  // Use default OG image if none provided
+  const ogImage = image || `${SITE_URL}/images/og-default.jpg`
 
   return {
     title,
@@ -46,24 +81,22 @@ export function generatePageMetadata(params: {
     keywords: keywords?.join(', '),
     alternates: {
       canonical: canonicalUrl,
-      languages: {
-        et: `${SITE_URL}/et/${path}`,
-        en: `${SITE_URL}/en/${path}`,
-      },
+      languages,
     },
     openGraph: {
       title,
       description,
       url: canonicalUrl,
-      locale: locale === 'et' ? 'et_EE' : 'en_US',
+      locale: OG_LOCALE_MAP[locale],
       type,
-      ...(image && { images: [{ url: image }] }),
+      siteName: 'Agrello',
+      images: [{ url: ogImage, width: 1200, height: 630, alt: title }],
     },
     twitter: {
       card: 'summary_large_image',
       title,
       description,
-      ...(image && { images: [image] }),
+      images: [ogImage],
     },
   }
 }
@@ -77,7 +110,14 @@ export function generatePageMetadata(params: {
  */
 export function generateBlogMetadata(post: BlogPost, locale: Locale): Metadata {
   const canonicalUrl = `${SITE_URL}/${locale}/blog/${post.slug}`
-  const image = post.ogImage || post.image
+  const image = post.ogImage || post.image || `${SITE_URL}/images/og-default.jpg`
+
+  // Build alternates for all supported locales
+  const languages: Record<string, string> = {}
+  for (const loc of SUPPORTED_LOCALES) {
+    languages[loc] = `${SITE_URL}/${loc}/blog/${post.slug}`
+  }
+  languages['x-default'] = `${SITE_URL}/${DEFAULT_LOCALE}/blog/${post.slug}`
 
   return {
     title: post.seoTitle || post.title,
@@ -86,27 +126,25 @@ export function generateBlogMetadata(post: BlogPost, locale: Locale): Metadata {
     authors: post.author ? [{ name: post.author }] : undefined,
     alternates: {
       canonical: canonicalUrl,
-      languages: {
-        et: `${SITE_URL}/et/blog/${post.slug}`,
-        en: `${SITE_URL}/en/blog/${post.slug}`,
-      },
+      languages,
     },
     openGraph: {
       title: post.seoTitle || post.title,
       description: post.description,
       url: canonicalUrl,
-      locale: locale === 'et' ? 'et_EE' : 'en_US',
+      locale: OG_LOCALE_MAP[locale],
       type: 'article',
+      siteName: 'Agrello',
       publishedTime: post.date,
       authors: post.author ? [post.author] : undefined,
       tags: post.tags,
-      ...(image && { images: [{ url: image }] }),
+      images: [{ url: image, width: 1200, height: 630, alt: post.title }],
     },
     twitter: {
       card: 'summary_large_image',
       title: post.seoTitle || post.title,
       description: post.description,
-      ...(image && { images: [image] }),
+      images: [image],
     },
   }
 }
@@ -121,32 +159,88 @@ export function generateBlogMetadata(post: BlogPost, locale: Locale): Metadata {
  * @returns JSON-LD structured data object
  */
 export function buildArticleJsonLd(post: BlogPost, locale: Locale) {
+  const languageMap: Record<Locale, string> = {
+    en: 'en-US',
+    et: 'et-EE',
+    lv: 'lv-LV',
+    uk: 'uk-UA',
+  }
+
   return {
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: post.title,
     description: post.description,
-    image: post.image,
+    image: post.image || `${SITE_URL}/images/og-default.jpg`,
     datePublished: post.date,
-    dateModified: post.date, // TODO: Add dateModified field to BlogPost type if tracking updates
+    dateModified: post.date,
     author: {
       '@type': 'Person',
-      name: post.author || 'Your Organization Name', // Customize default author
+      name: post.author || 'Agrello Team',
     },
     publisher: {
       '@type': 'Organization',
       '@id': `${SITE_URL}/#organization`,
-      name: 'Your Organization Name', // REQUIRED: Update with your organization name
+      name: 'Agrello',
       logo: {
         '@type': 'ImageObject',
-        url: `${SITE_URL}/logo.svg`, // REQUIRED: Update with your logo path
+        url: `${SITE_URL}/images/agrello-logo.svg`,
       },
     },
     mainEntityOfPage: {
       '@type': 'WebPage',
       '@id': `${SITE_URL}/${locale}/blog/${post.slug}`,
     },
-    inLanguage: locale === 'et' ? 'et-EE' : 'en-US',
+    inLanguage: languageMap[locale] || 'en-US',
+  }
+}
+
+/**
+ * Build Organization JSON-LD schema
+ * For use on the homepage or root layout
+ */
+export function buildOrganizationJsonLd() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    '@id': `${SITE_URL}/#organization`,
+    name: 'Agrello',
+    url: SITE_URL,
+    logo: {
+      '@type': 'ImageObject',
+      url: `${SITE_URL}/images/agrello-logo.svg`,
+    },
+    description:
+      'Secure e-signatures and contract management platform for SMEs. Create, sign, and manage legally-binding agreements.',
+    sameAs: [
+      'https://www.linkedin.com/company/agrello',
+      'https://twitter.com/agraboratory',
+      'https://www.facebook.com/agrello.io',
+    ],
+    contactPoint: {
+      '@type': 'ContactPoint',
+      contactType: 'customer service',
+      email: 'support@agrello.io',
+    },
+  }
+}
+
+/**
+ * Build FAQ JSON-LD schema
+ * For use on pages with FAQ sections
+ */
+export function buildFaqJsonLd(items: Array<{ question: string; answer: string }>) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: items.map((item) => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.answer,
+      },
+    })),
   }
 }
 

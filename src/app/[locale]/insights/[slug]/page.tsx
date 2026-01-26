@@ -5,6 +5,14 @@ import Image from 'next/image'
 import { getInsight, getInsights } from '@/lib/content'
 import { Badge } from '@/components/ui'
 import { ArrowLeft, Calendar, User } from 'lucide-react'
+import {
+  generatePageMetadata,
+  SITE_URL,
+  type Locale,
+  SUPPORTED_LOCALES,
+  DEFAULT_LOCALE,
+  OG_LOCALE_MAP,
+} from '@/lib/seo'
 
 interface PageProps {
   params: Promise<{ locale: string; slug: string }>
@@ -12,6 +20,9 @@ interface PageProps {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { locale, slug } = await params
+  const validLocale = SUPPORTED_LOCALES.includes(locale as Locale)
+    ? (locale as Locale)
+    : DEFAULT_LOCALE
   const lang = locale === 'et' || locale === 'en' ? locale : 'en'
   const insight = await getInsight(slug, lang)
 
@@ -21,13 +32,37 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     }
   }
 
+  const canonicalUrl = `${SITE_URL}/${validLocale}/insights/${slug}`
+  const ogImage = insight.image || `${SITE_URL}/images/og-default.jpg`
+
+  // Build alternates for all supported locales
+  const languages: Record<string, string> = {}
+  for (const loc of SUPPORTED_LOCALES) {
+    languages[loc] = `${SITE_URL}/${loc}/insights/${slug}`
+  }
+  languages['x-default'] = `${SITE_URL}/${DEFAULT_LOCALE}/insights/${slug}`
+
   return {
-    title: `${insight.title} - Agrello Insights`,
+    title: `${insight.title} | Agrello Insights`,
     description: insight.description,
+    alternates: {
+      canonical: canonicalUrl,
+      languages,
+    },
     openGraph: {
       title: insight.title,
       description: insight.description,
-      images: insight.image ? [insight.image] : [],
+      url: canonicalUrl,
+      locale: OG_LOCALE_MAP[validLocale],
+      type: 'article',
+      siteName: 'Agrello',
+      images: [{ url: ogImage, width: 1200, height: 630, alt: insight.title }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: insight.title,
+      description: insight.description,
+      images: [ogImage],
     },
   }
 }

@@ -3,11 +3,53 @@ import Link from 'next/link'
 import { getSupportTopics } from '@/lib/content'
 import { Card } from '@/components/ui'
 import { Rocket, PenTool, FileText, Settings, HelpCircle } from 'lucide-react'
+import { generatePageMetadata, type Locale, SUPPORTED_LOCALES, DEFAULT_LOCALE } from '@/lib/seo'
 
-export const metadata: Metadata = {
-  title: 'Support - Agrello Help Center',
-  description:
-    'Find answers to your questions about Agrello. Browse our support topics for guides on e-signatures, templates, and more.',
+const pageMeta = {
+  en: {
+    title: 'Help Center - Support & Guides',
+    description:
+      'Find answers to your questions about Agrello. Browse our support topics for guides on e-signatures, templates, and contract management.',
+    keywords: ['help center', 'support', 'guides', 'e-signature help', 'FAQ'],
+  },
+  et: {
+    title: 'Abikeskus - Tugi ja juhendid',
+    description:
+      'Leia vastused oma küsimustele Agrello kohta. Sirvi tugiteemasid juhendite jaoks e-allkirjade, mallide ja lepinguhalduse kohta.',
+    keywords: ['abikeskus', 'tugi', 'juhendid', 'e-allkirja abi', 'KKK'],
+  },
+  lv: {
+    title: 'Palīdzības centrs - Atbalsts un ceļveži',
+    description:
+      'Atrodiet atbildes uz saviem jautājumiem par Agrello. Pārlūkojiet atbalsta tēmas, lai atrastu ceļvežus par e-parakstiem, veidnēm un līgumu pārvaldību.',
+    keywords: ['palīdzības centrs', 'atbalsts', 'ceļveži', 'e-paraksta palīdzība', 'BUJ'],
+  },
+  uk: {
+    title: 'Центр допомоги - Підтримка та посібники',
+    description:
+      'Знайдіть відповіді на ваші питання про Agrello. Перегляньте теми підтримки для посібників з е-підписів, шаблонів та управління контрактами.',
+    keywords: ['центр допомоги', 'підтримка', 'посібники', 'допомога з е-підписом', 'FAQ'],
+  },
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>
+}): Promise<Metadata> {
+  const { locale } = await params
+  const validLocale = SUPPORTED_LOCALES.includes(locale as Locale)
+    ? (locale as Locale)
+    : DEFAULT_LOCALE
+  const meta = pageMeta[validLocale] || pageMeta.en
+
+  return generatePageMetadata({
+    title: meta.title,
+    description: meta.description,
+    locale: validLocale,
+    path: 'support',
+    keywords: meta.keywords,
+  })
 }
 
 const iconMap: Record<string, React.ReactNode> = {

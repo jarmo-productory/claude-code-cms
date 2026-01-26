@@ -8,11 +8,53 @@ import {
 } from '@/components/sections'
 import { getBlogPosts } from '@/lib/content'
 import { mapBlogPostsToLatestPosts } from '@/lib/content-mappers'
+import { generatePageMetadata, type Locale, SUPPORTED_LOCALES, DEFAULT_LOCALE } from '@/lib/seo'
 
-export const metadata: Metadata = {
-  title: 'Contact Us - Agrello',
-  description:
-    "Get in touch with the Agrello team. We're here to help with your contract management and e-signing needs.",
+const pageMeta = {
+  en: {
+    title: 'Contact Us - Get in Touch',
+    description:
+      'Get in touch with the Agrello team. Book a demo, ask questions, or get support for your contract management and e-signing needs.',
+    keywords: ['contact', 'demo', 'support', 'sales', 'e-signature help'],
+  },
+  et: {
+    title: 'Võta ühendust',
+    description:
+      'Võta Agrello meeskonnaga ühendust. Broneeri demo, esita küsimusi või saa tuge lepinguhalduse ja e-allkirjastamise vajadustele.',
+    keywords: ['kontakt', 'demo', 'tugi', 'müük', 'e-allkirja abi'],
+  },
+  lv: {
+    title: 'Sazināties ar mums',
+    description:
+      'Sazinieties ar Agrello komandu. Rezervējiet demonstrāciju, uzdodiet jautājumus vai saņemiet atbalstu līgumu pārvaldības un e-parakstīšanas vajadzībām.',
+    keywords: ['kontakti', 'demonstrācija', 'atbalsts', 'pārdošana', 'e-paraksta palīdzība'],
+  },
+  uk: {
+    title: "Зв'яжіться з нами",
+    description:
+      "Зв'яжіться з командою Agrello. Забронюйте демо, поставте питання або отримайте підтримку для управління контрактами та е-підписання.",
+    keywords: ['контакт', 'демо', 'підтримка', 'продажі', 'допомога з е-підписом'],
+  },
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>
+}): Promise<Metadata> {
+  const { locale } = await params
+  const validLocale = SUPPORTED_LOCALES.includes(locale as Locale)
+    ? (locale as Locale)
+    : DEFAULT_LOCALE
+  const meta = pageMeta[validLocale] || pageMeta.en
+
+  return generatePageMetadata({
+    title: meta.title,
+    description: meta.description,
+    locale: validLocale,
+    path: 'contact',
+    keywords: meta.keywords,
+  })
 }
 
 export default async function ContactPage({ params }: { params: Promise<{ locale: string }> }) {

@@ -10,10 +10,58 @@ import {
 } from '@/components/sections'
 import { getBlogPosts } from '@/lib/content'
 import { mapBlogPostsToLatestPosts } from '@/lib/content-mappers'
+import { generatePageMetadata, type Locale, SUPPORTED_LOCALES, DEFAULT_LOCALE } from '@/lib/seo'
 
-export const metadata: Metadata = {
-  title: 'Pricing - Agrello',
-  description: 'Simple, transparent pricing for Agrello. Start free, upgrade when you need more.',
+const pageMeta = {
+  en: {
+    title: 'Pricing - Simple & Transparent',
+    description:
+      'Simple, transparent pricing for Agrello. Start free with a 14-day trial, upgrade when you need more. Plans from EUR 19.90/month.',
+    keywords: ['pricing', 'e-signature pricing', 'contract management cost', 'free trial'],
+  },
+  et: {
+    title: 'Hinnad - Lihtne ja läbipaistev',
+    description:
+      'Lihtne ja läbipaistev hinnastus Agrellole. Alusta 14-päevase tasuta prooviperioodiga, uuenda vastavalt vajadusele. Hinnad alates 19.90 EUR/kuu.',
+    keywords: ['hinnad', 'e-allkirja hinnad', 'lepinguhalduse maksumus', 'tasuta prooviperiood'],
+  },
+  lv: {
+    title: 'Cenas - Vienkārša un caurspīdīga',
+    description:
+      'Vienkārša, caurspīdīga cenu politika Agrello. Sāciet bez maksas ar 14 dienu izmēģinājumu, jauniniet, kad nepieciešams vairāk. Plāni no 19.90 EUR/mēnesī.',
+    keywords: [
+      'cenas',
+      'e-paraksta cenas',
+      'līgumu pārvaldības izmaksas',
+      'bezmaksas izmēģinājums',
+    ],
+  },
+  uk: {
+    title: 'Ціни - Просто і прозоро',
+    description:
+      'Проста, прозора цінова політика для Agrello. Почніть безкоштовно з 14-денним пробним періодом. Плани від 19.90 EUR/місяць.',
+    keywords: ['ціни', 'ціни е-підпису', 'вартість управління контрактами', 'безкоштовний період'],
+  },
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>
+}): Promise<Metadata> {
+  const { locale } = await params
+  const validLocale = SUPPORTED_LOCALES.includes(locale as Locale)
+    ? (locale as Locale)
+    : DEFAULT_LOCALE
+  const meta = pageMeta[validLocale] || pageMeta.en
+
+  return generatePageMetadata({
+    title: meta.title,
+    description: meta.description,
+    locale: validLocale,
+    path: 'pricing',
+    keywords: meta.keywords,
+  })
 }
 
 export default async function PricingPage({ params }: { params: Promise<{ locale: string }> }) {

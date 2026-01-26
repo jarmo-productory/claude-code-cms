@@ -13,10 +13,88 @@ import {
 import { getBlogPosts } from '@/lib/content'
 import { mapBlogPostsToLatestPosts } from '@/lib/content-mappers'
 import { Zap, FileText, PenTool } from 'lucide-react'
+import {
+  generatePageMetadata,
+  buildFaqJsonLd,
+  buildOrganizationJsonLd,
+  type Locale,
+  SUPPORTED_LOCALES,
+  DEFAULT_LOCALE,
+} from '@/lib/seo'
 
-export const metadata: Metadata = {
-  title: 'Home',
-  description: 'Welcome to Claude Code CMS - A modern Next.js starter with everything you need',
+const pageMeta = {
+  en: {
+    title: 'E-Signatures & Contract Management Platform',
+    description:
+      'Cut contract signing time by 60% with Agrello. Create, e-sign, and track legally-binding agreements. 14-day free trial, no credit card needed.',
+    keywords: [
+      'e-signature',
+      'contract management',
+      'digital signing',
+      'electronic signatures',
+      'CLM',
+      'eIDAS',
+    ],
+  },
+  et: {
+    title: 'E-allkirjastamine ja lepinguhaldus',
+    description:
+      'Vähenda lepingute allkirjastamise aega 60% Agrelloga. Loo, allkirjasta ja halda juriidiliselt siduvaid lepinguid. 14-päevane tasuta prooviperiood.',
+    keywords: [
+      'e-allkiri',
+      'lepinguhaldus',
+      'digitaalne allkirjastamine',
+      'elektrooniline allkiri',
+      'CLM',
+      'eIDAS',
+    ],
+  },
+  lv: {
+    title: 'E-parakstīšana un līgumu pārvaldība',
+    description:
+      'Samaziniet līgumu parakstīšanas laiku par 60% ar Agrello. Izveidojiet, e-parakstiet un izsekojiet juridiski saistošus līgumus. 14 dienu bezmaksas izmēģinājums.',
+    keywords: [
+      'e-paraksts',
+      'līgumu pārvaldība',
+      'digitālā parakstīšana',
+      'elektroniskais paraksts',
+      'CLM',
+      'eIDAS',
+    ],
+  },
+  uk: {
+    title: 'Е-підписання та управління контрактами',
+    description:
+      "Скоротіть час підписання контрактів на 60% з Agrello. Створюйте, е-підписуйте та відстежуйте юридично обов'язкові угоди. 14-денний безкоштовний період.",
+    keywords: [
+      'е-підпис',
+      'управління контрактами',
+      'цифровий підпис',
+      'електронний підпис',
+      'CLM',
+      'eIDAS',
+    ],
+  },
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>
+}): Promise<Metadata> {
+  const { locale } = await params
+  const validLocale = SUPPORTED_LOCALES.includes(locale as Locale)
+    ? (locale as Locale)
+    : DEFAULT_LOCALE
+  const meta = pageMeta[validLocale] || pageMeta.en
+
+  return generatePageMetadata({
+    title: meta.title,
+    description: meta.description,
+    locale: validLocale,
+    path: '',
+    keywords: meta.keywords,
+  })
 }
 
 export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
@@ -905,61 +983,76 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
     },
   }))
 
+  // Build JSON-LD schemas
+  const faqJsonLd = buildFaqJsonLd(t.faq.items)
+  const orgJsonLd = buildOrganizationJsonLd()
+
   return (
-    <main>
-      <BigHero
-        overline={t.hero.overline}
-        headline={t.hero.headline}
-        description={t.hero.description}
-        ctaText={t.hero.cta}
-        trustText={t.hero.trust}
+    <>
+      {/* JSON-LD Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }}
       />
-      <TwoColumnSection
-        overline={t.twoCol.overline}
-        headline={t.twoCol.headline}
-        description={t.twoCol.description}
-        imageSrc="/images/sections/macbook-screenshot.webp"
-        imageAlt="Agrello Dashboard"
-        overlayText={t.twoCol.overlay}
-        ctaText={t.twoCol.cta}
-        ctaHref={`/${lang}/features`}
-        imagePosition="right"
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
-      <CustomersSection locale={lang} />
-      <FeaturesTabs
-        overline={t.featuresTabs.overline}
-        headline={t.featuresTabs.headline}
-        description={t.featuresTabs.description}
-        tabs={featuresTabsData}
-      />
-      <SmartenStory locale={lang} />
-      <WorkshopSection locale={lang} />
-      <Pricing
-        overline={t.pricing.overline}
-        headline={t.pricing.headline}
-        description={t.pricing.description}
-        plans={t.pricing.plans}
-        contactCta={t.pricing.contactCta}
-      />
-      <FAQ
-        overline={t.faq.overline}
-        headline={t.faq.headline}
-        description={t.faq.description}
-        items={t.faq.items}
-        imageSrc="/images/sections/faq-illustration.webp"
-        imageAlt="FAQ illustration"
-        imageOverlay={t.faq.imageOverlay}
-        ctaText={t.faq.ctaText}
-        ctaHref={`/${lang}/contact`}
-      />
-      <LatestPosts
-        overline={t.latestPosts.overline}
-        headline={t.latestPosts.headline}
-        description={t.latestPosts.description}
-        viewAllText={t.latestPosts.viewAllText}
-        viewAllHref={`/${lang}/blog`}
-        posts={blogPosts}
-      />
-    </main>
+      <main>
+        <BigHero
+          overline={t.hero.overline}
+          headline={t.hero.headline}
+          description={t.hero.description}
+          ctaText={t.hero.cta}
+          trustText={t.hero.trust}
+        />
+        <TwoColumnSection
+          overline={t.twoCol.overline}
+          headline={t.twoCol.headline}
+          description={t.twoCol.description}
+          imageSrc="/images/sections/macbook-screenshot.webp"
+          imageAlt="Agrello Dashboard"
+          overlayText={t.twoCol.overlay}
+          ctaText={t.twoCol.cta}
+          ctaHref={`/${lang}/features`}
+          imagePosition="right"
+        />
+        <CustomersSection locale={lang} />
+        <FeaturesTabs
+          overline={t.featuresTabs.overline}
+          headline={t.featuresTabs.headline}
+          description={t.featuresTabs.description}
+          tabs={featuresTabsData}
+        />
+        <SmartenStory locale={lang} />
+        <WorkshopSection locale={lang} />
+        <Pricing
+          overline={t.pricing.overline}
+          headline={t.pricing.headline}
+          description={t.pricing.description}
+          plans={t.pricing.plans}
+          contactCta={t.pricing.contactCta}
+        />
+        <FAQ
+          overline={t.faq.overline}
+          headline={t.faq.headline}
+          description={t.faq.description}
+          items={t.faq.items}
+          imageSrc="/images/sections/faq-illustration.webp"
+          imageAlt="FAQ illustration"
+          imageOverlay={t.faq.imageOverlay}
+          ctaText={t.faq.ctaText}
+          ctaHref={`/${lang}/contact`}
+        />
+        <LatestPosts
+          overline={t.latestPosts.overline}
+          headline={t.latestPosts.headline}
+          description={t.latestPosts.description}
+          viewAllText={t.latestPosts.viewAllText}
+          viewAllHref={`/${lang}/blog`}
+          posts={blogPosts}
+        />
+      </main>
+    </>
   )
 }

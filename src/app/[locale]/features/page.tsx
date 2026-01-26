@@ -8,11 +8,71 @@ import {
   SmartenStory,
   WorkshopSection,
 } from '@/components/sections'
+import { generatePageMetadata, type Locale, SUPPORTED_LOCALES, DEFAULT_LOCALE } from '@/lib/seo'
 
-export const metadata: Metadata = {
-  title: 'Features - Agrello E-Signing Platform',
-  description:
-    'Effortless e-signing for your busy day. Cut signing time by 60% with templates, contract management, and qualified e-signatures.',
+const pageMeta = {
+  en: {
+    title: 'Features - E-Signing & Contract Management',
+    description:
+      'Effortless e-signing for your busy day. Cut signing time by 60% with templates, contract management, and qualified e-signatures.',
+    keywords: ['e-signing features', 'contract automation', 'bulk signing', 'templates', 'eIDAS'],
+  },
+  et: {
+    title: 'Funktsionaalsus - E-allkirjastamine ja lepinguhaldus',
+    description:
+      'Vaevatu e-allkirjastamine sinu kiirele päevale. Vähenda allkirjastamisele kuluvat aega 60% mallide, lepinguhalduse ja kvalifitseeritud e-allkirjadega.',
+    keywords: [
+      'e-allkirjastamise funktsioonid',
+      'lepingute automatiseerimine',
+      'hulgiallkirjastamine',
+      'mallid',
+      'eIDAS',
+    ],
+  },
+  lv: {
+    title: 'Funkcijas - E-parakstīšana un līgumu pārvaldība',
+    description:
+      'Viegla e-parakstīšana jūsu aizņemtajai dienai. Samaziniet parakstīšanas laiku par 60% ar veidnēm, līgumu pārvaldību un kvalificētiem e-parakstiem.',
+    keywords: [
+      'e-parakstīšanas funkcijas',
+      'līgumu automatizācija',
+      'masveida parakstīšana',
+      'veidnes',
+      'eIDAS',
+    ],
+  },
+  uk: {
+    title: 'Функції - Е-підписання та управління контрактами',
+    description:
+      'Легке е-підписання для вашого насиченого дня. Скоротіть час підписання на 60% з шаблонами, управлінням контрактами та кваліфікованими е-підписами.',
+    keywords: [
+      'функції е-підписання',
+      'автоматизація контрактів',
+      'масове підписання',
+      'шаблони',
+      'eIDAS',
+    ],
+  },
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>
+}): Promise<Metadata> {
+  const { locale } = await params
+  const validLocale = SUPPORTED_LOCALES.includes(locale as Locale)
+    ? (locale as Locale)
+    : DEFAULT_LOCALE
+  const meta = pageMeta[validLocale] || pageMeta.en
+
+  return generatePageMetadata({
+    title: meta.title,
+    description: meta.description,
+    locale: validLocale,
+    path: 'features',
+    keywords: meta.keywords,
+  })
 }
 
 export default async function FeaturesPage({ params }: { params: Promise<{ locale: string }> }) {

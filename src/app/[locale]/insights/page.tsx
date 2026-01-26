@@ -4,11 +4,58 @@ import Image from 'next/image'
 import { getInsights } from '@/lib/content'
 import { Card, Badge } from '@/components/ui'
 import { Calendar, ArrowRight } from 'lucide-react'
+import { generatePageMetadata, type Locale, SUPPORTED_LOCALES, DEFAULT_LOCALE } from '@/lib/seo'
 
-export const metadata: Metadata = {
-  title: 'Insights - Agrello',
-  description:
-    'Industry insights, trends, and expert analysis on e-signatures, contract management, and digital transformation.',
+const pageMeta = {
+  en: {
+    title: 'Insights - Industry Trends & Analysis',
+    description:
+      'Industry insights, trends, and expert analysis on e-signatures, contract management, and digital transformation for businesses.',
+    keywords: ['insights', 'industry trends', 'contract automation', 'digital transformation'],
+  },
+  et: {
+    title: 'Ülevaated - Valdkonna trendid ja analüüs',
+    description:
+      'Valdkonna ülevaated, trendid ja ekspertanalüüs e-allkirjade, lepinguhalduse ja digitaalse transformatsiooni kohta ettevõtetele.',
+    keywords: [
+      'ülevaated',
+      'valdkonna trendid',
+      'lepingute automatiseerimine',
+      'digitaalne transformatsioon',
+    ],
+  },
+  lv: {
+    title: 'Ieskati - Nozares tendences un analīze',
+    description:
+      'Nozares ieskati, tendences un ekspertu analīze par e-parakstiem, līgumu pārvaldību un digitālo transformāciju uzņēmumiem.',
+    keywords: ['ieskati', 'nozares tendences', 'līgumu automatizācija', 'digitālā transformācija'],
+  },
+  uk: {
+    title: 'Огляди - Галузеві тренди та аналіз',
+    description:
+      'Галузеві огляди, тренди та експертний аналіз е-підписів, управління контрактами та цифрової трансформації для бізнесу.',
+    keywords: ['огляди', 'галузеві тренди', 'автоматизація контрактів', 'цифрова трансформація'],
+  },
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>
+}): Promise<Metadata> {
+  const { locale } = await params
+  const validLocale = SUPPORTED_LOCALES.includes(locale as Locale)
+    ? (locale as Locale)
+    : DEFAULT_LOCALE
+  const meta = pageMeta[validLocale] || pageMeta.en
+
+  return generatePageMetadata({
+    title: meta.title,
+    description: meta.description,
+    locale: validLocale,
+    path: 'insights',
+    keywords: meta.keywords,
+  })
 }
 
 const translations = {

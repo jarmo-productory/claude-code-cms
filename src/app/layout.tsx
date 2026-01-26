@@ -9,6 +9,7 @@ const montserrat = Montserrat({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.SITE_URL || 'https://agrello.io'),
   title: {
     default: 'Agrello - E-Signatures & Contract Management',
     template: '%s | Agrello',
@@ -22,6 +23,22 @@ export const metadata: Metadata = {
       { url: '/images/agrello_fav_icon.png', sizes: '192x192', type: 'image/png' },
     ],
     apple: '/images/agrello_fav_icon.png',
+  },
+  openGraph: {
+    type: 'website',
+    siteName: 'Agrello',
+    images: [
+      {
+        url: '/images/og-default.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Agrello - E-Signatures & Contract Management',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    images: ['/images/og-default.jpg'],
   },
 }
 
