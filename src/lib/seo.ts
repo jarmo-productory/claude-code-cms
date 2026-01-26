@@ -184,7 +184,7 @@ export function buildArticleJsonLd(post: BlogPost, locale: Locale) {
       name: 'Agrello',
       logo: {
         '@type': 'ImageObject',
-        url: `${SITE_URL}/images/agrello-logo.svg`,
+        url: `${SITE_URL}/logo.svg`,
       },
     },
     mainEntityOfPage: {
@@ -208,14 +208,14 @@ export function buildOrganizationJsonLd() {
     url: SITE_URL,
     logo: {
       '@type': 'ImageObject',
-      url: `${SITE_URL}/images/agrello-logo.svg`,
+      url: `${SITE_URL}/logo.svg`,
     },
     description:
       'Secure e-signatures and contract management platform for SMEs. Create, sign, and manage legally-binding agreements.',
     sameAs: [
-      'https://www.linkedin.com/company/agrello',
-      'https://twitter.com/agraboratory',
-      'https://www.facebook.com/agrello.io',
+      'https://www.linkedin.com/company/agrelloapp',
+      'https://x.com/agrelloapp',
+      'https://www.facebook.com/agrelloapp',
     ],
     contactPoint: {
       '@type': 'ContactPoint',
