@@ -5,6 +5,25 @@ import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { useState, useEffect } from 'react'
 import { Button } from '@/components/ui/Button'
+import { useTopics } from '@/context/TopicsContext'
+import {
+  FileText,
+  PenTool,
+  Workflow,
+  ShieldCheck,
+  Sparkles,
+  Newspaper,
+  type LucideIcon,
+} from 'lucide-react'
+
+// Icon mapping for topic slugs
+const topicIcons: Record<string, LucideIcon> = {
+  'contract-management': FileText,
+  'e-signatures': PenTool,
+  'doc-automation': Workflow,
+  'security-compliance': ShieldCheck,
+  'agrello-features': Sparkles,
+}
 
 export function Navigation({ isStatic = false }: { isStatic?: boolean }) {
   const pathname = usePathname()
@@ -35,16 +54,6 @@ export function Navigation({ isStatic = false }: { isStatic?: boolean }) {
     contact: string
     login: string
     signup: string
-    topicContractManagement: string
-    topicContractManagementDesc: string
-    topicESignatures: string
-    topicESignaturesDesc: string
-    topicDocAutomation: string
-    topicDocAutomationDesc: string
-    topicSecurityCompliance: string
-    topicSecurityComplianceDesc: string
-    topicAgrelloFeatures: string
-    topicAgrelloFeaturesDesc: string
   }
 
   const languages: Array<{ code: Lang; flag: string; label: string }> = [
@@ -70,16 +79,6 @@ export function Navigation({ isStatic = false }: { isStatic?: boolean }) {
       contact: 'Contact us',
       login: 'Log in',
       signup: 'Try for free',
-      topicContractManagement: 'Contract Management',
-      topicContractManagementDesc: 'Create, sign, and manage agreements',
-      topicESignatures: 'E-Signatures',
-      topicESignaturesDesc: 'Secure electronic signing solutions',
-      topicDocAutomation: 'Doc Automation',
-      topicDocAutomationDesc: 'Automate document workflows',
-      topicSecurityCompliance: 'Security & Compliance',
-      topicSecurityComplianceDesc: 'Enterprise-grade data protection',
-      topicAgrelloFeatures: 'Agrello Features',
-      topicAgrelloFeaturesDesc: 'Platform guides and tutorials',
     },
     et: {
       features: 'Funktsionaalsus',
@@ -91,16 +90,6 @@ export function Navigation({ isStatic = false }: { isStatic?: boolean }) {
       contact: 'Võta ühendust',
       login: 'Logi sisse',
       signup: 'Proovi tasuta',
-      topicContractManagement: 'Lepingute haldus',
-      topicContractManagementDesc: 'Loo, allkirjasta ja halda lepinguid',
-      topicESignatures: 'E-allkirjad',
-      topicESignaturesDesc: 'Turvaline elektrooniline allkirjastamine',
-      topicDocAutomation: 'Dokumendiautomaatika',
-      topicDocAutomationDesc: 'Automatiseeri dokumenditöövooge',
-      topicSecurityCompliance: 'Turvalisus ja vastavus',
-      topicSecurityComplianceDesc: 'Ettevõttetaseme andmekaitse',
-      topicAgrelloFeatures: 'Agrello funktsioonid',
-      topicAgrelloFeaturesDesc: 'Platvormi juhendid ja õpetused',
     },
     lv: {
       features: 'Funkcijas',
@@ -112,16 +101,6 @@ export function Navigation({ isStatic = false }: { isStatic?: boolean }) {
       contact: 'Sazināties',
       login: 'Pieteikties',
       signup: 'Izmēģināt bez maksas',
-      topicContractManagement: 'Līgumu pārvaldība',
-      topicContractManagementDesc: 'Izveidojiet, parakstiet un pārvaldiet līgumus',
-      topicESignatures: 'E-paraksti',
-      topicESignaturesDesc: 'Droši elektroniskie paraksti',
-      topicDocAutomation: 'Dokumentu automatizācija',
-      topicDocAutomationDesc: 'Automatizējiet dokumentu plūsmas',
-      topicSecurityCompliance: 'Drošība un atbilstība',
-      topicSecurityComplianceDesc: 'Uzņēmuma līmeņa datu aizsardzība',
-      topicAgrelloFeatures: 'Agrello funkcijas',
-      topicAgrelloFeaturesDesc: 'Platformas ceļveži un pamācības',
     },
     uk: {
       features: 'Функції',
@@ -133,53 +112,27 @@ export function Navigation({ isStatic = false }: { isStatic?: boolean }) {
       contact: "Зв'язатися",
       login: 'Увійти',
       signup: 'Спробувати',
-      topicContractManagement: 'Управління контрактами',
-      topicContractManagementDesc: 'Створюйте, підписуйте та керуйте угодами',
-      topicESignatures: 'E-підписи',
-      topicESignaturesDesc: 'Безпечні електронні підписи',
-      topicDocAutomation: 'Автоматизація документів',
-      topicDocAutomationDesc: 'Автоматизуйте документообіг',
-      topicSecurityCompliance: 'Безпека та відповідність',
-      topicSecurityComplianceDesc: 'Захист даних корпоративного рівня',
-      topicAgrelloFeatures: 'Agrello можливості',
-      topicAgrelloFeaturesDesc: 'Посібники та навчальні матеріали',
     },
   }
 
   const dictionary = dictionaries[currentLangCode] ?? dictionaries.en
+
+  // Get topics from context (dynamically loaded from /content/topics/)
+  const topics = useTopics()
 
   const navItems = [
     { href: `/${currentLangCode}/features`, label: dictionary.features },
     { href: `/${currentLangCode}/pricing`, label: dictionary.pricing },
   ]
 
+  // Build resourcesItems from dynamic topics + blog
   const resourcesItems = [
-    {
-      href: `/${currentLangCode}/topics/contract-management`,
-      label: dictionary.topicContractManagement,
-      description: dictionary.topicContractManagementDesc,
-    },
-    {
-      href: `/${currentLangCode}/topics/e-signatures`,
-      label: dictionary.topicESignatures,
-      description: dictionary.topicESignaturesDesc,
-    },
-    {
-      href: `/${currentLangCode}/topics/doc-automation`,
-      label: dictionary.topicDocAutomation,
-      description: dictionary.topicDocAutomationDesc,
-    },
-    {
-      href: `/${currentLangCode}/topics/security-compliance`,
-      label: dictionary.topicSecurityCompliance,
-      description: dictionary.topicSecurityComplianceDesc,
-    },
-    {
-      href: `/${currentLangCode}/topics/agrello-features`,
-      label: dictionary.topicAgrelloFeatures,
-      description: dictionary.topicAgrelloFeaturesDesc,
-    },
-    { href: `/${currentLangCode}/blog`, label: dictionary.blog, description: '' },
+    ...topics.map((topic) => ({
+      href: topic.href,
+      label: topic.name,
+      slug: topic.slug,
+    })),
+    { href: `/${currentLangCode}/blog`, label: dictionary.blog, slug: 'blog' },
   ]
 
   return (
@@ -243,23 +196,23 @@ export function Navigation({ isStatic = false }: { isStatic?: boolean }) {
               </button>
 
               {resourcesOpen && (
-                <div className="absolute top-full left-0 mt-2 w-72 bg-white rounded-xl shadow-lg border border-gray-100 py-2">
-                  {resourcesItems.map((item) => (
-                    <Link
-                      key={item.href}
-                      href={item.href}
-                      className="block px-4 py-2.5 hover:bg-gray-50 cursor-pointer"
-                    >
-                      <span className="text-sm font-medium text-gray-700 group-hover:text-brand-primary">
-                        {item.label}
-                      </span>
-                      {item.description && (
-                        <span className="block text-xs text-gray-500 mt-0.5">
-                          {item.description}
+                <div className="absolute top-full left-0 mt-2 w-64 bg-white rounded-xl shadow-lg border border-gray-100 py-2">
+                  {resourcesItems.map((item) => {
+                    const Icon =
+                      item.slug === 'blog' ? Newspaper : topicIcons[item.slug] || FileText
+                    return (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        className="flex items-center gap-3 px-4 py-2.5 hover:bg-gray-50 cursor-pointer group"
+                      >
+                        <Icon className="w-5 h-5 text-gray-400 group-hover:text-brand-primary transition-colors" />
+                        <span className="text-sm font-medium text-gray-700 group-hover:text-brand-primary transition-colors">
+                          {item.label}
                         </span>
-                      )}
-                    </Link>
-                  ))}
+                      </Link>
+                    )
+                  })}
                 </div>
               )}
             </div>

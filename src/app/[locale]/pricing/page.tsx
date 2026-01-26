@@ -9,6 +9,7 @@ import {
   LatestPosts,
 } from '@/components/sections'
 import { getBlogPosts } from '@/lib/content'
+import { mapBlogPostsToLatestPosts } from '@/lib/content-mappers'
 
 export const metadata: Metadata = {
   title: 'Pricing - Agrello',
@@ -641,28 +642,7 @@ export default async function PricingPage({ params }: { params: Promise<{ locale
   // Fetch actual blog posts - fallback to 'en' for lv/uk since content only supports et/en
   const blogLang = lang === 'et' || lang === 'en' ? lang : 'en'
   const rawPosts = await getBlogPosts(blogLang)
-
-  // Transform to LatestPosts format and take first 3
-  const blogPosts = rawPosts.slice(0, 3).map((post) => ({
-    id: post.slug,
-    title: post.title,
-    excerpt: post.description,
-    imageSrc: post.image || '/images/blog/placeholder.jpg',
-    href: `/${lang}/blog/${post.slug}`,
-    author: {
-      name: post.author === 'team' ? 'Agrello Team' : post.author,
-      avatarSrc: '/images/team/default-avatar.jpg',
-      date: new Date(post.date).toLocaleDateString(
-        lang === 'et' ? 'et-EE' : lang === 'lv' ? 'lv-LV' : lang === 'uk' ? 'uk-UA' : 'en-US',
-        {
-          year: 'numeric',
-          month: 'long',
-          day: 'numeric',
-        }
-      ),
-      readTime: '5 min read',
-    },
-  }))
+  const blogPosts = mapBlogPostsToLatestPosts(rawPosts, lang, 3)
 
   return (
     <main>

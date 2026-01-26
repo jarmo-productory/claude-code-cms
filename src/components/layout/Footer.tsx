@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
+import { useTopics } from '@/context/TopicsContext'
 
 export function Footer() {
   const pathname = usePathname()
@@ -12,16 +13,12 @@ export function Footer() {
   type Lang = 'en' | 'et' | 'lv' | 'uk'
   type Dictionary = {
     madeIn: string
+    company: string
     home: string
     pricing: string
     contact: string
     resources: string
-    gettingStarted: string
-    knowledgeBase: string
     blog: string
-    caseStudies: string
-    signingGuide: string
-    automationGuide: string
     articles: string
     language: string
     copyright: string
@@ -44,16 +41,12 @@ export function Footer() {
   const dictionaries: Record<Lang, Dictionary> = {
     en: {
       madeIn: 'Made in Estonia',
+      company: 'Company',
       home: 'HOME',
       pricing: 'PRICING',
       contact: 'CONTACT US',
       resources: 'Resources',
-      gettingStarted: 'Getting started',
-      knowledgeBase: 'Knowledge base',
       blog: 'Blog',
-      caseStudies: 'Case studies',
-      signingGuide: 'Electronic signing guide',
-      automationGuide: 'Document and process automation guide',
       articles: 'Articles',
       language: 'Language',
       copyright: 'All rights reserved.',
@@ -62,16 +55,12 @@ export function Footer() {
     },
     et: {
       madeIn: 'Tehtud Eestis',
+      company: 'Ettevõte',
       home: 'AVALEHT',
       pricing: 'HINNAD',
       contact: 'VÕTA ÜHENDUST',
       resources: 'Ressursid',
-      gettingStarted: 'Alustamine',
-      knowledgeBase: 'Teadmistebaas',
       blog: 'Blogi',
-      caseStudies: 'Edulood',
-      signingGuide: 'Elektroonilise allkirjastamise juhend',
-      automationGuide: 'Dokumentide ja protsesside automatiseerimise juhend',
       articles: 'Artiklid',
       language: 'Keel',
       copyright: 'Kõik õigused kaitstud.',
@@ -80,16 +69,12 @@ export function Footer() {
     },
     lv: {
       madeIn: 'Ražots Igaunijā',
+      company: 'Uzņēmums',
       home: 'SĀKUMS',
       pricing: 'CENAS',
       contact: 'SAZINĀTIES',
       resources: 'Resursi',
-      gettingStarted: 'Darba sākšana',
-      knowledgeBase: 'Zināšanu bāze',
       blog: 'Blogs',
-      caseStudies: 'Veiksmes stāsti',
-      signingGuide: 'Elektroniskās parakstīšanas ceļvedis',
-      automationGuide: 'Dokumentu un procesu automatizācijas ceļvedis',
       articles: 'Raksti',
       language: 'Valoda',
       copyright: 'Visas tiesības aizsargātas.',
@@ -98,16 +83,12 @@ export function Footer() {
     },
     uk: {
       madeIn: 'Зроблено в Естонії',
+      company: 'Компанія',
       home: 'ГОЛОВНА',
       pricing: 'ЦІНИ',
       contact: 'КОНТАКТИ',
       resources: 'Ресурси',
-      gettingStarted: 'Початок роботи',
-      knowledgeBase: 'База знань',
       blog: 'Блог',
-      caseStudies: 'Історії успіху',
-      signingGuide: 'Посібник з електронного підпису',
-      automationGuide: 'Посібник з автоматизації документів',
       articles: 'Статті',
       language: 'Мова',
       copyright: 'Всі права захищені.',
@@ -117,6 +98,9 @@ export function Footer() {
   }
 
   const dictionary = dictionaries[currentLangCode] ?? dictionaries.en
+
+  // Get topics from context (dynamically loaded from /content/topics/)
+  const topics = useTopics()
 
   // Social Links
   const socialLinks = [
@@ -133,13 +117,11 @@ export function Footer() {
       { name: dictionary.contact, href: `/${currentLangCode}/contact` },
       { name: dictionary.blog, href: `/${currentLangCode}/blog` },
     ],
+    // Resources from dynamic topics + blog + articles
     resources: [
-      { name: dictionary.gettingStarted, href: `/${currentLangCode}/resources/getting-started` },
-      { name: dictionary.knowledgeBase, href: `/${currentLangCode}/help` },
-      { name: dictionary.caseStudies, href: `/${currentLangCode}/case-studies` },
-      { name: dictionary.signingGuide, href: `/${currentLangCode}/guides/signing` },
-      { name: dictionary.automationGuide, href: `/${currentLangCode}/guides/automation` },
-      { name: dictionary.articles, href: `/${currentLangCode}/articles` },
+      ...topics.map((topic) => ({ name: topic.name, href: topic.href })),
+      { name: dictionary.blog, href: `/${currentLangCode}/blog` },
+      { name: dictionary.articles, href: '/articles' },
     ],
   }
 
@@ -211,7 +193,7 @@ export function Footer() {
           {/* Column 2: Company */}
           <div>
             <h3 className="text-white/80 font-bold uppercase tracking-wide text-sm mb-6">
-              Company
+              {dictionary.company}
             </h3>
             <ul className="space-y-4">
               {navigation.company.map((item) => (

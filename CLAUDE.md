@@ -122,6 +122,57 @@ Before EVERY response, ask:
 3. **Uncertainty check:** Am I unsure about the right approach?
    - Yes → **Ask [OWNER_NAME] before proceeding.**
 
+4. **DRY check:** Am I about to write new code?
+   - Yes → **STOP. First analyze existing codebase for reusable solutions.**
+
+---
+
+## DRY Principle (MANDATORY)
+
+**Before writing ANY new code, ALWAYS search the codebase first.**
+
+### Pre-Implementation Checklist
+
+1. **Search for existing utilities:** Check `src/lib/` for helper functions
+2. **Search for existing components:** Check `src/components/` for reusable UI
+3. **Search for existing patterns:** How do other pages solve similar problems?
+4. **Search for existing mappers:** Check `src/lib/content-mappers.ts` for data transformations
+
+### Key Utility Files
+
+| File                            | Purpose                               |
+| ------------------------------- | ------------------------------------- |
+| `src/lib/content.ts`            | Content fetching (blog, topics, etc.) |
+| `src/lib/content-mappers.ts`    | Data transformation helpers           |
+| `src/lib/content-types.ts`      | Shared TypeScript interfaces          |
+| `src/lib/authors.ts`            | Author resolution with avatars        |
+| `src/lib/reading-time.ts`       | Reading time calculation              |
+| `src/context/TopicsContext.tsx` | Dynamic topics for nav/footer         |
+
+### Anti-Pattern Example
+
+```typescript
+// ❌ BAD: Inline data transformation duplicated across pages
+const blogPosts = rawPosts.slice(0, 3).map((post) => ({
+  id: post.slug,
+  title: post.title,
+  // ... 20 more lines copied to each page
+}))
+
+// ✅ GOOD: Use shared utility function
+const blogPosts = mapBlogPostsToLatestPosts(rawPosts, lang, 3)
+```
+
+### Rule
+
+If you find yourself writing similar code that exists elsewhere:
+
+1. **STOP** - Do not duplicate
+2. **EXTRACT** - Create/use shared utility in `src/lib/`
+3. **REUSE** - Import and use across all locations
+
+**One source of truth = easier maintenance.**
+
 ---
 
 ## Quick Reference

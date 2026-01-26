@@ -81,3 +81,60 @@ export function mapBlogPostToContentItem(post: BlogPost, locale: string): Conten
     category: post.category,
   }
 }
+
+// ============================================================================
+// LATEST POSTS SECTION HELPERS
+// ============================================================================
+
+export interface LatestPostItem {
+  id: string
+  title: string
+  excerpt: string
+  imageSrc: string
+  href: string
+  author: {
+    name: string
+    avatarSrc: string
+    date: string
+    readTime: string
+  }
+}
+
+/**
+ * Map blog posts to the format expected by LatestPosts component
+ * Use this in all pages that display the LatestPosts section for DRY code
+ */
+export function mapBlogPostsToLatestPosts(
+  posts: BlogPost[],
+  locale: string,
+  limit: number = 3
+): LatestPostItem[] {
+  return posts.slice(0, limit).map((post) => {
+    const author = resolveAuthor(post.author)
+    const minutes = calculateReadingTime(post.content)
+    const readingTime = formatReadingTime(minutes, locale as 'et' | 'en')
+
+    return {
+      id: post.slug,
+      title: post.title,
+      excerpt: post.description,
+      imageSrc: resolveImage(post.image),
+      href: `/${locale}/blog/${post.slug}`,
+      author: {
+        name: author.name,
+        avatarSrc: author.avatarSrc || '',
+        date: new Date(post.date).toLocaleDateString(
+          locale === 'et'
+            ? 'et-EE'
+            : locale === 'lv'
+              ? 'lv-LV'
+              : locale === 'uk'
+                ? 'uk-UA'
+                : 'en-US',
+          { year: 'numeric', month: 'long', day: 'numeric' }
+        ),
+        readTime: readingTime,
+      },
+    }
+  })
+}

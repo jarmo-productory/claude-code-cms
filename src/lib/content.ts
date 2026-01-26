@@ -457,3 +457,48 @@ export async function getTopicArticle(
   const articles = await getTopicArticles(topicSlug, lang)
   return articles.find((a) => a.slug === articleSlug) || null
 }
+
+// ============================================================================
+// PUBLIC API - TOPICS FOR NAVIGATION
+// ============================================================================
+
+export interface NavTopic {
+  slug: string
+  name: string
+  description: string
+  href: string
+}
+
+/**
+ * Get all topics formatted for navigation (Nav + Footer)
+ * Combines .translations.yml (name, slug) with _index.md (seo_description)
+ *
+ * @param lang - Locale ('et', 'en', 'lv', 'uk')
+ * @returns Array of topics with name, description, and href
+ */
+export async function getTopicsForNav(lang: string): Promise<NavTopic[]> {
+  const topicSlugs = getTopicSlugs()
+
+  const topics = await Promise.all(
+    topicSlugs.map(async (topicSlug) => {
+      // Get translations (name, slug)
+      const translations = getTopicTranslations(topicSlug)
+      const translation = translations[lang] || translations['en']
+
+      // Get index page for description
+      const index = await getTopicIndex(topicSlug, lang)
+
+      if (!translation) return null
+
+      return {
+        slug: topicSlug,
+        name: translation.name,
+        description: index?.seoDescription || '',
+        href: `/${lang}/topics/${topicSlug}`,
+      }
+    })
+  )
+
+  // Filter out nulls and return
+  return topics.filter((t): t is NavTopic => t !== null)
+}
